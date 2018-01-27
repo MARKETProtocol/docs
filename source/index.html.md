@@ -27,7 +27,7 @@ search: true
 
 Welcome to MARKET! Here you will find documentation for our protocol and APIs.
 ## Documentation
-* [Background](#background): the rationale behind the Oraclize's Oracle Model
+* [Background](#background): high level explanation of our protocol
 * [Smart Contracts](#smartcontracts): the underlying MARKET smart contracts
 * [API](#api):  Typescript API documentation
 * [DApp](#dapp): Decentralized applcation allow for easy MARKET contract deployment and exploration
