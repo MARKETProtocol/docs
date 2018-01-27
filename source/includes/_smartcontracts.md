@@ -159,4 +159,3 @@ Registry containing all currently tradeable MARKET contracts
 ## MKT Tokens
 
 Currency driving the protocol
-
