@@ -340,7 +340,7 @@ to trade against (taking liquidity).
 Parameter | Description
 --------- |  -----------
 maker | address of user who originated and signed this order 
-taker | address of counterparty to fill order or `null` to allow any counterparty 
+taker | address of counter-party to fill order or `null` to allow any counter-party 
 feeRecipient | address of fee recipient node, if any (MARKET does not charge any fees, but nodes may)
 makerFee | fee to paid by the maker in MKT tokens to the `feeRecipient`
 takerFee | fee to paid by the taker in MKT tokens to the `feeRecipient`
