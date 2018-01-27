@@ -151,6 +151,116 @@ oracleQueryRepeatSeconds | how often to repeat the query and check for settlemen
     }
 ```
 
+The `MarketCollateralPool` is a contract controlled by a specific `MarketContract`.  It holds users balances, 
+locked collateral balances and open positions accounting.  These balances and positions are unique the linked 
+`MarketContract` and a user must deposit funds for each `MarketContract` they intend to trade.  The ERC20 Token
+specified are the only accepted form of funding or collateralization.
+
+### Depositing funds for trading
+
+> depositTokensForTrading function
+
+```javascript
+    /// @notice deposits tokens to the smart contract to fund the user account and provide needed tokens for collateral
+    /// pool upon trade matching.
+    /// @param depositAmount qty of ERC20 tokens to deposit to the smart contract to cover open orders and collateral
+    function depositTokensForTrading(uint256 depositAmount) external {
+        // user must call approve!
+        require(MKT_TOKEN.isUserEnabledForContract(MKT_CONTRACT, msg.sender));
+        uint256 balanceAfterDeposit = userAddressToAccountBalance[msg.sender].add(depositAmount);
+        ERC20(MKT_CONTRACT.BASE_TOKEN_ADDRESS()).safeTransferFrom(msg.sender, this, depositAmount);
+        userAddressToAccountBalance[msg.sender] = balanceAfterDeposit;
+        UpdatedUserBalance(msg.sender, balanceAfterDeposit);
+    }
+```
+
+Funds deposited by a user a allocated to there address's account balance until a point at which a new position is 
+opened and the funds then become allocated to `collateralPoolBalance` and are locked until the user exits their
+position or the contract expires.  In this way, all open positions are always fully collateralized eliminating any
+counter party risk and ensuring the solvency of the contract.
+
+### Calculating needed collateral and maximum possible loss
+
+> calculateNeededCollateral function
+
+```javascript
+    /// @notice determines the amount of needed collateral for a given position (qty and price)
+    /// @param priceFloor lowest price the contract is allowed to trade before expiration
+    /// @param priceCap highest price the contract is allowed to trade before expiration
+    /// @param qtyDecimalPlaces number of decimal places in traded quantity.
+    /// @param qty signed integer corresponding to the traded quantity
+    /// @param price of the trade
+    function calculateNeededCollateral(
+        uint priceFloor,
+        uint priceCap,
+        uint qtyDecimalPlaces,
+        int qty,
+        uint price
+    ) pure internal returns (uint neededCollateral)
+    {
+
+        uint maxLoss;
+        if (qty > 0) {   // this qty is long, calculate max loss from entry price to floor
+            if (price <= priceFloor) {
+                maxLoss = 0;
+            } else {
+                maxLoss = subtract(price, priceFloor);
+            }
+        } else { // this qty is short, calculate max loss from entry price to ceiling;
+            if (price >= priceCap) {
+                maxLoss = 0;
+            } else {
+                maxLoss = subtract(priceCap, price);
+            }
+        }
+        neededCollateral = maxLoss * abs(qty) * qtyDecimalPlaces;
+    }
+``` 
+
+The amount of funds that are allocated to the `collateralPoolBalance` upon entering a trade is defined by that positions
+maximum possible loss.  
+
+All positions are always fully collateralized, meaning the maximum possible loss for a position is the required 
+amount of collateral to open that position. This can be calculated from the `price` and `qty` of the 
+position and the defined specifications of the `MarketContract`.  
+
+For a buyer, the maximum possible loss is calculated as the `price` of the 
+trade minus the `priceFloor` times the qty transacted. Conversely, if you are opening a short position the maximum 
+loss is calculated as `priceCap` minus the price of the trade, multiplied by the `qty` transacted. Upon filling an order 
+both parties commit their respective maximum loss to the collateral pool.
+
+
+Parameter | Description
+--------- |  -----------
+priceFloor | as defined in the `MarketContract` 
+priceCap | as defined in the `MarketContract` 
+qtyDecimalPlaces | as defined in the `MarketContract`
+qty | signed integer corresponding to the traded quantity
+price | agreed upon execution price
+
+### Withdrawing funds 
+
+> withdrawTokens function
+
+```javascript
+    /// @notice removes token from users trading account
+    /// @param withdrawAmount qty of token to attempt to withdraw
+    function withdrawTokens(uint256 withdrawAmount) public {
+        //require(userAddressToAccountBalance[msg.sender] >= withdrawAmount);  subtract call below will enforce this
+        uint256 balanceAfterWithdrawal = userAddressToAccountBalance[msg.sender].subtract(withdrawAmount);
+        userAddressToAccountBalance[msg.sender] = balanceAfterWithdrawal;   // update balance before external call!
+        ERC20(MKT_CONTRACT.BASE_TOKEN_ADDRESS()).safeTransfer(msg.sender, withdrawAmount);
+        UpdatedUserBalance(msg.sender, balanceAfterWithdrawal);
+    }
+```
+
+At any time, tokens that are not allocated to an open position held by the user, are able to withdrawn.
+
+Upon exiting a position funds are returned to the user's account balance, net of any profit or loss.  Similarly,
+if the contract expires with the user maintaining an open position, their position settles to the final settlement
+price of the contract and funds are then eligible for immediate withdraw.
+ 
+
 ## Market Contract Registry
 
 Registry containing all currently tradeable MARKET contracts
