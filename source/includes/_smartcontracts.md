@@ -474,7 +474,7 @@ such matters.
 
 ## MKT Tokens
 
-MKT Tokens are the lifeblood of the MARKET ecosystem.  All fees chared by nodes will be transacted in MKT and additionally
+MKT Tokens are the lifeblood of the MARKET ecosystem.  All fees charged by nodes will be transacted in MKT and additionally
 anyone who wishes to create a new `MarketContract` will be forced to have some minimum balance of MKT. Finally, for ever
 `MarketContract` a user desires to trade, some amount of MKT must be locked to enable access to that contract.  These
 can be unlocked at any time the user wishes to stop trading that `MarketContract`.   
