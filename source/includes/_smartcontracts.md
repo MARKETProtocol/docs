@@ -48,19 +48,34 @@ combining needed functionality for trading, settlement and position management. 
 must be paired with a unique `MarketCollateralPool` ([see below](#collateral-pool)) after instantiation in order to allow trading to become
 enabled.  
 
-`MarketContract` represents an abstract contract that will allow for implementing 
+`MarketContract` is an abstract contract that will allow for implementing 
 classes such as `MarketContractOraclize` to complete the needed top level functionality around oracle solutions.
 We intend to expand our offering of oracle solutions offered in the near future.  If there are oracle services that
 you would like to submit for possible inclusion in these future plans, please [contact](mailto:info@marketprotocol.io) us
 
+### Oracle Pre-Funding
 
 The `Creator` of the `MarketContract` must pre-fund the contract with enough ETH in order to pay for the gas costs
 associated with future oracle queries.  We intend to provide tools to help with this process, and in addition any
 unused, pre-funded ETH can be reclaimed by the `Creator` upon contract expiration.
 
+<aside class="notice">
+After linking of the <code>MarketContract</code> and the <code>MarketCollateralPool</code> is completed, the contract also must be added to 
+the <code>MarketContractRegistry</code> in order to be fully functional for trading.
+</aside>
 
-After linking of the `MarketContract` and the `MarketCollateralPool` is completed, the contract also must be added to 
-the `MarketContractRegistry` in order to be fully functional for trading.
+Parameter | Description
+--------- |  -----------
+contractName | viewable name of this contract, in the future we will implement suggested naming conventions 
+marketTokenAddress | address of the MKT deployed ERC20 token
+baseTokenAddress | address of the ERC20 token that will be used for collateral
+contractSpecs | array of unsigned integers including the below parameters
+floorPrice | minimum tradeable price of this contract
+capPrice | maximum tradeable price of this contract
+expirationTimeStamp |  seconds from epoch that this contract expires and enters settlement
+
+
+## Market Contract Oraclize
 
 > MarketContractOraclize constructor:
 
@@ -104,6 +119,22 @@ the `MarketContractRegistry` in order to be fully functional for trading.
     }
 ```
 
+`MarketContractOraclize` is the first fully implemented `MarketContract` that has been built out.  Using 
+[Oraclize.it](http://www.oraclize.it/) allows for several different sources of truth in order to settle contracts.
+More information on forming correct queries can 
+be found in their [documentation](http://docs.oraclize.it/#ethereum-quick-start-simple-query).
+
+Our [DApp](https://app.marketprotocol.io) additionally has some help in formatting your queries correctly
+and a test environment to ensure the queries are correct prior to contract deployment.
+
+### Additional parameters 
+
+Parameter | Description
+--------- |  -----------
+oracleDataSource | a data-source such as "URL", "WolframAlpha", "IPFS" 
+oracleQuery | properly formatted Oraclize.it query 
+oracleQueryRepeatSeconds | how often to repeat the query and check for settlement, more frequent calling requires more pre-funding
+
 
 ## Market Collateral Pool
 
@@ -129,42 +160,3 @@ Registry containing all currently tradeable MARKET contracts
 
 Currency driving the protocol
 
-
-
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
