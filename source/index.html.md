@@ -5,7 +5,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - javascript
 
 toc_footers:
-  - <a href='http://www.marketprotocol.io/'>MARKET home</a>
+  - <a href='http://www.marketprotocol.io/'>MARKET Home</a>
   - <a href='http://www.marketprotocol.io/'>MARKET DApp</a>
   - <a href='http://www.marketprotocol.io/'>MARKET Whitepaper</a>
   - <a href='https://github.com/MarketProject/'>MARKET GitHub</a>
