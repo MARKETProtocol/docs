@@ -27,10 +27,10 @@ search: true
 
 Welcome to MARKET! Here you will find documentation for our protocol and APIs.
 ## Documentation
-* [Background](#background): high level explanation of our protocol
-* [Smart Contracts](#smartcontracts): the underlying MARKET smart contracts
+* [Background](#background): High level explanation of our protocol
+* [Smart Contracts](#smartcontracts): The underlying MARKET smart contracts
 * [API](#api):  Typescript API documentation
-* [DApp](#dapp): Decentralized applcation allow for easy MARKET contract deployment and exploration
+* [DApp](#dapp): Decentralized application allowing for easy MARKET contract deployment and exploration
 
 ## Frequently Asked Questions
 * [General FAQ](#faq-general)
