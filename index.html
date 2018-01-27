@@ -529,7 +529,126 @@ and a test environment to ensure the queries are correct prior to contract deplo
         <span class="nx">MKT_TOKEN_ADDRESS</span> <span class="o">=</span> <span class="nx">MKT_CONTRACT</span><span class="p">.</span><span class="nx">MKT_TOKEN_ADDRESS</span><span class="p">();</span>
         <span class="nx">MKT_TOKEN</span> <span class="o">=</span> <span class="nx">MarketToken</span><span class="p">(</span><span class="nx">MKT_TOKEN_ADDRESS</span><span class="p">);</span>
     <span class="p">}</span>
-</code></pre><h2 id='market-contract-registry'>Market Contract Registry</h2>
+</code></pre>
+<p>The <code>MarketCollateralPool</code> is a contract controlled by a specific <code>MarketContract</code>.  It holds users balances, 
+locked collateral balances and open positions accounting.  These balances and positions are unique the linked 
+<code>MarketContract</code> and a user must deposit funds for each <code>MarketContract</code> they intend to trade.  The ERC20 Token
+specified are the only accepted form of funding or collateralization.</p>
+<h3 id='depositing-funds-for-trading'>Depositing funds for trading</h3>
+<blockquote>
+<p>depositTokensForTrading function</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code>    <span class="c1">/// @notice deposits tokens to the smart contract to fund the user account and provide needed tokens for collateral</span>
+    <span class="c1">/// pool upon trade matching.</span>
+    <span class="c1">/// @param depositAmount qty of ERC20 tokens to deposit to the smart contract to cover open orders and collateral</span>
+    <span class="kd">function</span> <span class="nx">depositTokensForTrading</span><span class="p">(</span><span class="nx">uint256</span> <span class="nx">depositAmount</span><span class="p">)</span> <span class="nx">external</span> <span class="p">{</span>
+        <span class="c1">// user must call approve!</span>
+        <span class="nx">require</span><span class="p">(</span><span class="nx">MKT_TOKEN</span><span class="p">.</span><span class="nx">isUserEnabledForContract</span><span class="p">(</span><span class="nx">MKT_CONTRACT</span><span class="p">,</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">));</span>
+        <span class="nx">uint256</span> <span class="nx">balanceAfterDeposit</span> <span class="o">=</span> <span class="nx">userAddressToAccountBalance</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">].</span><span class="nx">add</span><span class="p">(</span><span class="nx">depositAmount</span><span class="p">);</span>
+        <span class="nx">ERC20</span><span class="p">(</span><span class="nx">MKT_CONTRACT</span><span class="p">.</span><span class="nx">BASE_TOKEN_ADDRESS</span><span class="p">()).</span><span class="nx">safeTransferFrom</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="nx">depositAmount</span><span class="p">);</span>
+        <span class="nx">userAddressToAccountBalance</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span> <span class="o">=</span> <span class="nx">balanceAfterDeposit</span><span class="p">;</span>
+        <span class="nx">UpdatedUserBalance</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span> <span class="nx">balanceAfterDeposit</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre>
+<p>Funds deposited by a user a allocated to there address&#39;s account balance until a point at which a new position is 
+opened and the funds then become allocated to <code>collateralPoolBalance</code> and are locked until the user exits their
+position or the contract expires.  In this way, all open positions are always fully collateralized eliminating any
+counter party risk and ensuring the solvency of the contract.</p>
+<h3 id='calculating-needed-collateral-and-maximum-possible-loss'>Calculating needed collateral and maximum possible loss</h3>
+<blockquote>
+<p>calculateNeededCollateral function</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code>    <span class="c1">/// @notice determines the amount of needed collateral for a given position (qty and price)</span>
+    <span class="c1">/// @param priceFloor lowest price the contract is allowed to trade before expiration</span>
+    <span class="c1">/// @param priceCap highest price the contract is allowed to trade before expiration</span>
+    <span class="c1">/// @param qtyDecimalPlaces number of decimal places in traded quantity.</span>
+    <span class="c1">/// @param qty signed integer corresponding to the traded quantity</span>
+    <span class="c1">/// @param price of the trade</span>
+    <span class="kd">function</span> <span class="nx">calculateNeededCollateral</span><span class="p">(</span>
+        <span class="nx">uint</span> <span class="nx">priceFloor</span><span class="p">,</span>
+        <span class="nx">uint</span> <span class="nx">priceCap</span><span class="p">,</span>
+        <span class="nx">uint</span> <span class="nx">qtyDecimalPlaces</span><span class="p">,</span>
+        <span class="kr">int</span> <span class="nx">qty</span><span class="p">,</span>
+        <span class="nx">uint</span> <span class="nx">price</span>
+    <span class="p">)</span> <span class="nx">pure</span> <span class="nx">internal</span> <span class="nx">returns</span> <span class="p">(</span><span class="nx">uint</span> <span class="nx">neededCollateral</span><span class="p">)</span>
+    <span class="p">{</span>
+
+        <span class="nx">uint</span> <span class="nx">maxLoss</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">qty</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>   <span class="c1">// this qty is long, calculate max loss from entry price to floor</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">price</span> <span class="o">&lt;=</span> <span class="nx">priceFloor</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">maxLoss</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">maxLoss</span> <span class="o">=</span> <span class="nx">subtract</span><span class="p">(</span><span class="nx">price</span><span class="p">,</span> <span class="nx">priceFloor</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// this qty is short, calculate max loss from entry price to ceiling;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">price</span> <span class="o">&gt;=</span> <span class="nx">priceCap</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">maxLoss</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">maxLoss</span> <span class="o">=</span> <span class="nx">subtract</span><span class="p">(</span><span class="nx">priceCap</span><span class="p">,</span> <span class="nx">price</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="nx">neededCollateral</span> <span class="o">=</span> <span class="nx">maxLoss</span> <span class="o">*</span> <span class="nx">abs</span><span class="p">(</span><span class="nx">qty</span><span class="p">)</span> <span class="o">*</span> <span class="nx">qtyDecimalPlaces</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre>
+<p>The amount of funds that are allocated to the <code>collateralPoolBalance</code> upon entering a trade is defined by that positions
+maximum possible loss.  </p>
+
+<p>All positions are always fully collateralized, meaning the maximum possible loss for a position is the required 
+amount of collateral to open that position. This can be calculated from the <code>price</code> and <code>qty</code> of the 
+position and the defined specifications of the <code>MarketContract</code>.  </p>
+
+<p>For a buyer, the maximum possible loss is calculated as the <code>price</code> of the 
+trade minus the <code>priceFloor</code> times the qty transacted. Conversely, if you are opening a short position the maximum 
+loss is calculated as <code>priceCap</code> minus the price of the trade, multiplied by the <code>qty</code> transacted. Upon filling an order 
+both parties commit their respective maximum loss to the collateral pool.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>priceFloor</td>
+<td>as defined in the <code>MarketContract</code></td>
+</tr>
+<tr>
+<td>priceCap</td>
+<td>as defined in the <code>MarketContract</code></td>
+</tr>
+<tr>
+<td>qtyDecimalPlaces</td>
+<td>as defined in the <code>MarketContract</code></td>
+</tr>
+<tr>
+<td>qty</td>
+<td>signed integer corresponding to the traded quantity</td>
+</tr>
+<tr>
+<td>price</td>
+<td>agreed upon execution price</td>
+</tr>
+</tbody></table>
+<h3 id='withdrawing-funds'>Withdrawing funds</h3>
+<blockquote>
+<p>withdrawTokens function</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code>    <span class="c1">/// @notice removes token from users trading account</span>
+    <span class="c1">/// @param withdrawAmount qty of token to attempt to withdraw</span>
+    <span class="kd">function</span> <span class="nx">withdrawTokens</span><span class="p">(</span><span class="nx">uint256</span> <span class="nx">withdrawAmount</span><span class="p">)</span> <span class="kr">public</span> <span class="p">{</span>
+        <span class="c1">//require(userAddressToAccountBalance[msg.sender] &gt;= withdrawAmount);  subtract call below will enforce this</span>
+        <span class="nx">uint256</span> <span class="nx">balanceAfterWithdrawal</span> <span class="o">=</span> <span class="nx">userAddressToAccountBalance</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">].</span><span class="nx">subtract</span><span class="p">(</span><span class="nx">withdrawAmount</span><span class="p">);</span>
+        <span class="nx">userAddressToAccountBalance</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span> <span class="o">=</span> <span class="nx">balanceAfterWithdrawal</span><span class="p">;</span>   <span class="c1">// update balance before external call!</span>
+        <span class="nx">ERC20</span><span class="p">(</span><span class="nx">MKT_CONTRACT</span><span class="p">.</span><span class="nx">BASE_TOKEN_ADDRESS</span><span class="p">()).</span><span class="nx">safeTransfer</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span> <span class="nx">withdrawAmount</span><span class="p">);</span>
+        <span class="nx">UpdatedUserBalance</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span> <span class="nx">balanceAfterWithdrawal</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre>
+<p>At any time, tokens that are not allocated to an open position held by the user, are able to withdrawn.</p>
+
+<p>Upon exiting a position funds are returned to the user&#39;s account balance, net of any profit or loss.  Similarly,
+if the contract expires with the user maintaining an open position, their position settles to the final settlement
+price of the contract and funds are then eligible for immediate withdraw.</p>
+<h2 id='market-contract-registry'>Market Contract Registry</h2>
 <p>Registry containing all currently tradeable MARKET contracts</p>
 <h2 id='mkt-tokens'>MKT Tokens</h2>
 <p>Currency driving the protocol</p>
