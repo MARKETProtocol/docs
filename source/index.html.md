@@ -1,5 +1,5 @@
 ---
-title: API Reference
+title: MARKET
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - javascript
