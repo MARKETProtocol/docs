@@ -236,32 +236,24 @@
             <a href="#solidity-smart-contracts" class="toc-h1 toc-link" data-title="solidity-smart-contracts">Solidity Smart Contracts</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#market-contract" class="toc-h2 toc-link" data-title="market-contract">Market Contract</a>
+                  </li>
+                  <li>
+                    <a href="#market-contract-oraclize" class="toc-h2 toc-link" data-title="market-contract-oraclize">Market Contract Oraclize</a>
+                  </li>
+                  <li>
+                    <a href="#market-collateral-pool" class="toc-h2 toc-link" data-title="market-collateral-pool">Market Collateral Pool</a>
+                  </li>
+                  <li>
+                    <a href="#market-contract-registry" class="toc-h2 toc-link" data-title="market-contract-registry">Market Contract Registry</a>
+                  </li>
+                  <li>
                     <a href="#mkt-tokens" class="toc-h2 toc-link" data-title="mkt-tokens">MKT Tokens</a>
-                  </li>
-                  <li>
-                    <a href="#contract-whitelist" class="toc-h2 toc-link" data-title="contract-whitelist">Contract whitelist</a>
-                  </li>
-                  <li>
-                    <a href="#market-contract" class="toc-h2 toc-link" data-title="market-contract">MARKET contract</a>
-                  </li>
-                  <li>
-                    <a href="#collateral-pool" class="toc-h2 toc-link" data-title="collateral-pool">Collateral Pool</a>
                   </li>
               </ul>
           </li>
           <li>
             <a href="#api" class="toc-h1 toc-link" data-title="api">API</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="get-all-kittens">Get All Kittens</a>
-                  </li>
-                  <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="get-a-specific-kitten">Get a Specific Kitten</a>
-                  </li>
-                  <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="delete-a-specific-kitten">Delete a Specific Kitten</a>
-                  </li>
-              </ul>
           </li>
           <li>
             <a href="#dapp" class="toc-h1 toc-link" data-title="dapp">DApp</a>
@@ -335,7 +327,7 @@
           </li>
       </div>
         <ul class="toc-footer">
-            <li><a href='http://www.marketprotocol.io/'>MARKET home</a></li>
+            <li><a href='http://www.marketprotocol.io/'>MARKET Home</a></li>
             <li><a href='http://www.marketprotocol.io/'>MARKET DApp</a></li>
             <li><a href='http://www.marketprotocol.io/'>MARKET Whitepaper</a></li>
             <li><a href='https://github.com/MarketProject/'>MARKET GitHub</a></li>
@@ -360,135 +352,66 @@
 <li><a href="#faq-api">API FAQ</a> </li>
 <li><a href="#faq-dapp">DApp FAQ</a> </li>
 </ul>
-<h1 id='background'>Background</h1><h1 id='solidity-smart-contracts'>Solidity Smart Contracts</h1><h2 id='mkt-tokens'>MKT Tokens</h2>
-<p>Currency driving the protocol</p>
-<h2 id='contract-whitelist'>Contract whitelist</h2>
-<p>Registry containing all currently tradeable MARKET contracts</p>
-<h2 id='market-contract'>MARKET contract</h2>
-<p>Main contract facilitating trading</p>
-<h2 id='collateral-pool'>Collateral Pool</h2>
+<h1 id='background'>Background</h1><h1 id='solidity-smart-contracts'>Solidity Smart Contracts</h1>
+<p>All code for our smart contracts can be found <a href="https://github.com/MarketProject/MarketProtocol">here</a>. If you have any
+issues to report please do so by opening an issue on <a href="https://github.com/MarketProject/MarketProtocol/issues">GitHub</a>.</p>
+<h2 id='market-contract'>Market Contract</h2>
 <blockquote>
-<p>To authorize, use this code:</p>
+<p>MarketContract constructor:</p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<pre class="highlight javascript tab-javascript"><code>    <span class="c1">/// @param contractName viewable name of this contract (BTC/ETH, LTC/ETH, etc)</span>
+    <span class="c1">/// @param marketTokenAddress address of our member token</span>
+    <span class="c1">/// @param baseTokenAddress address of the ERC20 token that will be used for collateral and pricing</span>
+    <span class="c1">/// @param contractSpecs array of unsigned integers including:</span>
+    <span class="c1">/// floorPrice minimum tradeable price of this contract, contract enters settlement if breached</span>
+    <span class="c1">/// capPrice maximum tradeable price of this contract, contract enters settlement if breached</span>
+    <span class="c1">/// priceDecimalPlaces number of decimal places to convert our queried price from a floating point to</span>
+    <span class="c1">/// an integer</span>
+    <span class="c1">/// qtyDecimalPlaces decimal places to multiply traded qty by.</span>
+    <span class="c1">/// expirationTimeStamp - seconds from epoch that this contract expires and enters settlement</span>
+    <span class="kd">function</span> <span class="nx">MarketContract</span><span class="p">(</span>
+        <span class="nx">string</span> <span class="nx">contractName</span><span class="p">,</span>
+        <span class="nx">address</span> <span class="nx">marketTokenAddress</span><span class="p">,</span>
+        <span class="nx">address</span> <span class="nx">baseTokenAddress</span><span class="p">,</span>
+        <span class="nx">uint</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="nx">contractSpecs</span>
+    <span class="p">)</span> <span class="kr">public</span> <span class="nx">payable</span>
+    <span class="p">{</span>
+        <span class="nx">MKT_TOKEN_ADDRESS</span> <span class="o">=</span> <span class="nx">marketTokenAddress</span><span class="p">;</span>
+        <span class="nx">MKT_TOKEN</span> <span class="o">=</span> <span class="nx">MarketToken</span><span class="p">(</span><span class="nx">marketTokenAddress</span><span class="p">);</span>
+        <span class="nx">require</span><span class="p">(</span><span class="nx">MKT_TOKEN</span><span class="p">.</span><span class="nx">isBalanceSufficientForContractCreation</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">));</span>    <span class="c1">// creator must be MKT holder</span>
+        <span class="nx">PRICE_FLOOR</span> <span class="o">=</span> <span class="nx">contractSpecs</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+        <span class="nx">PRICE_CAP</span> <span class="o">=</span> <span class="nx">contractSpecs</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+        <span class="nx">require</span><span class="p">(</span><span class="nx">PRICE_CAP</span> <span class="o">&gt;</span> <span class="nx">PRICE_FLOOR</span><span class="p">);</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+        <span class="nx">PRICE_DECIMAL_PLACES</span> <span class="o">=</span> <span class="nx">contractSpecs</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+        <span class="nx">QTY_DECIMAL_PLACES</span> <span class="o">=</span> <span class="nx">contractSpecs</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+        <span class="nx">EXPIRATION</span> <span class="o">=</span> <span class="nx">contractSpecs</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+        <span class="nx">require</span><span class="p">(</span><span class="nx">EXPIRATION</span> <span class="o">&gt;</span> <span class="nx">now</span><span class="p">);</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+        <span class="nx">CONTRACT_NAME</span> <span class="o">=</span> <span class="nx">contractName</span><span class="p">;</span>
+        <span class="nx">BASE_TOKEN_ADDRESS</span> <span class="o">=</span> <span class="nx">baseTokenAddress</span><span class="p">;</span>
+        <span class="nx">BASE_TOKEN</span> <span class="o">=</span> <span class="nx">ERC20</span><span class="p">(</span><span class="nx">baseTokenAddress</span><span class="p">);</span>
+    <span class="p">}</span>
 </code></pre>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
+<p>The <code>MarketContract</code> represents the main contract responsible for 
+combining needed functionality for trading, settlement and position management.  Each <code>MarketContract</code> 
+must be paired with a unique <code>MarketCollateralPool</code> (<a href="#collateral-pool">see below</a>) after instantiation in order to allow trading to become
+enabled.  </p>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
+<p><code>MarketContract</code> is an abstract contract that will allow for implementing 
+classes such as <code>MarketContractOraclize</code> to complete the needed top level functionality around oracle solutions.
+We intend to expand our offering of oracle solutions offered in the near future.  If there are oracle services that
+you would like to submit for possible inclusion in these future plans, please <a href="mailto:info@marketprotocol.io">contact</a> us</p>
+<h3 id='oracle-pre-funding'>Oracle Pre-Funding</h3>
+<p>The <code>Creator</code> of the <code>MarketContract</code> must pre-fund the contract with enough ETH in order to pay for the gas costs
+associated with future oracle queries.  We intend to provide tools to help with this process, and in addition any
+unused, pre-funded ETH can be reclaimed by the <code>Creator</code> upon contract expiration.</p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+After linking of the <code>MarketContract</code> and the <code>MarketCollateralPool</code> is completed, the contract also must be added to 
+the <code>MarketContractRegistry</code> in order to be fully functional for trading.
 </aside>
-<h1 id='api'>API</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -496,38 +419,84 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>contractName</td>
+<td>viewable name of this contract, in the future we will implement suggested naming conventions</td>
+</tr>
+<tr>
+<td>marketTokenAddress</td>
+<td>address of the MKT deployed ERC20 token</td>
+</tr>
+<tr>
+<td>baseTokenAddress</td>
+<td>address of the ERC20 token that will be used for collateral</td>
+</tr>
+<tr>
+<td>contractSpecs</td>
+<td>array of unsigned integers including the below parameters</td>
+</tr>
+<tr>
+<td>floorPrice</td>
+<td>minimum tradeable price of this contract</td>
+</tr>
+<tr>
+<td>capPrice</td>
+<td>maximum tradeable price of this contract</td>
+</tr>
+<tr>
+<td>expirationTimeStamp</td>
+<td>seconds from epoch that this contract expires and enters settlement</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
+<h2 id='market-contract-oraclize'>Market Contract Oraclize</h2>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>MarketContractOraclize constructor:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
+<pre class="highlight javascript tab-javascript"><code>    <span class="c1">/// @param contractName viewable name of this contract (BTC/ETH, LTC/ETH, etc)</span>
+    <span class="c1">/// @param marketTokenAddress address of our member token</span>
+    <span class="c1">/// @param baseTokenAddress address of the ERC20 token that will be used for collateral and pricing</span>
+    <span class="c1">/// @param contractSpecs array of unsigned integers including:</span>
+    <span class="c1">/// floorPrice minimum tradeable price of this contract, contract enters settlement if breached</span>
+    <span class="c1">/// capPrice maximum tradeable price of this contract, contract enters settlement if breached</span>
+    <span class="c1">/// priceDecimalPlaces number of decimal places to convert our queried price from a floating point to</span>
+    <span class="c1">/// an integer</span>
+    <span class="c1">/// qtyDecimalPlaces decimal places to multiply traded qty by.</span>
+    <span class="c1">/// expirationTimeStamp - seconds from epoch that this contract expires and enters settlement</span>
+    <span class="c1">/// @param oracleDataSource a data-source such as "URL", "WolframAlpha", "IPFS"</span>
+    <span class="c1">/// see http://docs.oraclize.it/#ethereum-quick-start-simple-query</span>
+    <span class="c1">/// @param oracleQuery see http://docs.oraclize.it/#ethereum-quick-start-simple-query for examples</span>
+    <span class="c1">/// @param oracleQueryRepeatSeconds how often to repeat this callback to check for settlement, more frequent</span>
+    <span class="c1">/// queries require more gas and may not be needed.</span>
+    <span class="kd">function</span> <span class="nx">MarketContractOraclize</span><span class="p">(</span>
+        <span class="nx">string</span> <span class="nx">contractName</span><span class="p">,</span>
+        <span class="nx">address</span> <span class="nx">marketTokenAddress</span><span class="p">,</span>
+        <span class="nx">address</span> <span class="nx">baseTokenAddress</span><span class="p">,</span>
+        <span class="nx">uint</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="nx">contractSpecs</span><span class="p">,</span>
+        <span class="nx">string</span> <span class="nx">oracleDataSource</span><span class="p">,</span>
+        <span class="nx">string</span> <span class="nx">oracleQuery</span><span class="p">,</span>
+        <span class="nx">uint</span> <span class="nx">oracleQueryRepeatSeconds</span>
+    <span class="p">)</span> <span class="nx">MarketContract</span><span class="p">(</span>
+        <span class="nx">contractName</span><span class="p">,</span>
+        <span class="nx">marketTokenAddress</span><span class="p">,</span>
+        <span class="nx">baseTokenAddress</span><span class="p">,</span>
+        <span class="nx">contractSpecs</span>
+    <span class="p">)</span>  <span class="kr">public</span> <span class="nx">payable</span>
+    <span class="p">{</span>
+        <span class="nx">oraclize_setProof</span><span class="p">(</span><span class="nx">proofType_TLSNotary</span> <span class="o">|</span> <span class="nx">proofStorage_IPFS</span><span class="p">);</span>
+        <span class="nx">ORACLE_DATA_SOURCE</span> <span class="o">=</span> <span class="nx">oracleDataSource</span><span class="p">;</span>
+        <span class="nx">ORACLE_QUERY</span> <span class="o">=</span> <span class="nx">oracleQuery</span><span class="p">;</span>
+        <span class="nx">ORACLE_QUERY_REPEAT</span> <span class="o">=</span> <span class="nx">oracleQueryRepeatSeconds</span><span class="p">;</span>
+        <span class="nx">require</span><span class="p">(</span><span class="nx">checkSufficientStartingBalance</span><span class="p">(</span><span class="nx">EXPIRATION</span><span class="p">.</span><span class="nx">subtract</span><span class="p">(</span><span class="nx">now</span><span class="p">)));</span>
+        <span class="nx">queryOracle</span><span class="p">();</span>  <span class="c1">// schedules recursive calls to oracle</span>
+    <span class="p">}</span>
+</code></pre>
+<p><code>MarketContractOraclize</code> is the first fully implemented <code>MarketContract</code> that has been built out.  Using 
+<a href="http://www.oraclize.it/">Oraclize.it</a> allows for several different sources of truth in order to settle contracts.
+More information on forming correct queries can 
+be found in their <a href="http://docs.oraclize.it/#ethereum-quick-start-simple-query">documentation</a>.</p>
+
+<p>Our <a href="https://app.marketprotocol.io">DApp</a> additionally has some help in formatting your queries correctly
+and a test environment to ensure the queries are correct prior to contract deployment.</p>
+<h3 id='additional-parameters'>Additional parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -535,11 +504,35 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
+<td>oracleDataSource</td>
+<td>a data-source such as &quot;URL&quot;, &quot;WolframAlpha&quot;, &quot;IPFS&quot;</td>
+</tr>
+<tr>
+<td>oracleQuery</td>
+<td>properly formatted Oraclize.it query</td>
+</tr>
+<tr>
+<td>oracleQueryRepeatSeconds</td>
+<td>how often to repeat the query and check for settlement, more frequent calling requires more pre-funding</td>
 </tr>
 </tbody></table>
-<h1 id='dapp'>DApp</h1><h2 id='contract-deployment'>Contract Deployment</h2><h2 id='contract-explorer'>Contract Explorer</h2><h2 id='test-query'>Test Query</h2><h2 id='simulated-exchange'>Simulated Exchange</h2><h1 id='faq-general'>FAQ - General</h1><h3 id='what-is-a-derivative'>What is a derivative?</h3>
+<h2 id='market-collateral-pool'>Market Collateral Pool</h2>
+<blockquote>
+<p>MarketCollateralPool constructor:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code>    <span class="c1">/// @dev instantiates a collateral pool that is unique to the supplied address of a MarketContract. This pairing</span>
+    <span class="c1">/// is 1:1</span>
+    <span class="c1">/// @param marketContractAddress deployed address of a MarketContract</span>
+    <span class="kd">function</span> <span class="nx">MarketCollateralPool</span><span class="p">(</span><span class="nx">address</span> <span class="nx">marketContractAddress</span><span class="p">)</span> <span class="nx">Linkable</span><span class="p">(</span><span class="nx">marketContractAddress</span><span class="p">)</span> <span class="kr">public</span> <span class="p">{</span>
+        <span class="nx">MKT_CONTRACT</span> <span class="o">=</span> <span class="nx">MarketContract</span><span class="p">(</span><span class="nx">marketContractAddress</span><span class="p">);</span>
+        <span class="nx">MKT_TOKEN_ADDRESS</span> <span class="o">=</span> <span class="nx">MKT_CONTRACT</span><span class="p">.</span><span class="nx">MKT_TOKEN_ADDRESS</span><span class="p">();</span>
+        <span class="nx">MKT_TOKEN</span> <span class="o">=</span> <span class="nx">MarketToken</span><span class="p">(</span><span class="nx">MKT_TOKEN_ADDRESS</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre><h2 id='market-contract-registry'>Market Contract Registry</h2>
+<p>Registry containing all currently tradeable MARKET contracts</p>
+<h2 id='mkt-tokens'>MKT Tokens</h2>
+<p>Currency driving the protocol</p>
+<h1 id='api'>API</h1><h1 id='dapp'>DApp</h1><h2 id='contract-deployment'>Contract Deployment</h2><h2 id='contract-explorer'>Contract Explorer</h2><h2 id='test-query'>Test Query</h2><h2 id='simulated-exchange'>Simulated Exchange</h2><h1 id='faq-general'>FAQ - General</h1><h3 id='what-is-a-derivative'>What is a derivative?</h3>
 <p>A derivative represents a contract between a buyer and a seller. The value is derived from on an underlying asset or assets. Common derivatives use stocks, commodities, currencies, bonds, or interest rates as the underlying asset for the contract.</p>
 <h3 id='are-you-a-decentralized-exchange'>Are you a decentralized exchange?</h3>
 <p>No, MARKET is a protocol to enable the trading of decentralized derivative like contracts.  Third parties will write the application layers on top of the protocol and we hope to create an API layer to facilitate this as well. </p>
