@@ -152,7 +152,7 @@ function MarketCollateralPool(address marketContractAddress) Linkable(marketCont
 ```
 
 The `MarketCollateralPool` is a contract controlled by a specific `MarketContract`.  It holds users balances, 
-locked collateral balances and open positions accounting.  These balances and positions are unique the linked 
+locked collateral balances and open positions accounting.  These balances and positions are unique to the linked 
 `MarketContract` and a user must deposit funds for each `MarketContract` they intend to trade.  The ERC20 Token
 specified are the only accepted form of funding or collateralization.
 
@@ -174,7 +174,7 @@ function depositTokensForTrading(uint256 depositAmount) external {
 }
 ```
 
-Funds deposited by a user a allocated to there address's account balance until a point at which a new position is 
+Funds deposited by a user are allocated to their address's account balance until a point at which a new position is 
 opened and the funds then become allocated to `collateralPoolBalance` and are locked until the user exits their
 position or the contract expires.  In this way, all open positions are always fully collateralized eliminating any
 counter party risk and ensuring the solvency of the contract.
@@ -254,7 +254,7 @@ function withdrawTokens(uint256 withdrawAmount) public {
 }
 ```
 
-At any time, tokens that are not allocated to an open position held by the user, are able to withdrawn.
+At any time, tokens that are not allocated to an open position held by the user, are able to be withdrawn.
 
 Upon exiting a position funds are returned to the user's account balance, net of any profit or loss.  Similarly,
 if the contract expires with the user maintaining an open position, their position settles to the final settlement
@@ -330,7 +330,7 @@ function isValidSignature(
 }
 ```
 
-MARKET utilizes off chain orders to reduce the amount of needed transactions that must occur on the blockchain.   Third 
+MARKET utilizes off chain orders to reduce the number of needed transactions that must occur on the blockchain.   Third 
 party Nodes will provide order book hosting and aggregation services on top of the protocol to facilitate liquidity.
 Orders however are cryptographically signed to ensure no manipulation and facilitate trust-less executions.
  
@@ -462,7 +462,7 @@ This function, verifies the order signature, ensures all contracts and users are
 handles the accounting with the associated resulting fills (either open a new position, or perhaps, closing out an 
 existing open position). 
 
-A `taker` isn't required to fill the entire `maker` order and specifies the `qty` they are willing to transact.  The
+A `taker` is not required to fill the entire `maker` order and specifies the `qty` they are willing to transact.  The
 price however is static as set and signed by the `maker`.
 
 ## Market Contract Registry
@@ -475,6 +475,6 @@ such matters.
 ## MKT Tokens
 
 MKT Tokens are the lifeblood of the MARKET ecosystem.  All fees charged by nodes will be transacted in MKT and additionally
-anyone who wishes to create a new `MarketContract` will be forced to have some minimum balance of MKT. Finally, for ever
+anyone who wishes to create a new `MarketContract` will be forced to have some minimum balance of MKT. Finally, for every
 `MarketContract` a user desires to trade, some amount of MKT must be locked to enable access to that contract.  These
 can be unlocked at any time the user wishes to stop trading that `MarketContract`.   
