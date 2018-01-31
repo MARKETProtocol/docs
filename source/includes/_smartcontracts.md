@@ -16,7 +16,7 @@ issues to report please do so by opening an issue on [GitHub](https://github.com
 /// capPrice maximum tradeable price of this contract, contract enters settlement if breached
 /// priceDecimalPlaces number of decimal places to convert our queried price from a floating point to
 /// an integer
-/// qtyDecimalPlaces decimal places to multiply traded qty by.
+/// qtyMultiplier multiply traded qty by this value from base units of collateral token.
 /// expirationTimeStamp - seconds from epoch that this contract expires and enters settlement
 function MarketContract(
     string contractName,
@@ -33,7 +33,7 @@ function MarketContract(
     require(PRICE_CAP > PRICE_FLOOR);
 
     PRICE_DECIMAL_PLACES = contractSpecs[2];
-    QTY_DECIMAL_PLACES = contractSpecs[3];
+    QTY_MULTIPLIER = contractSpecs[3];
     EXPIRATION = contractSpecs[4];
     require(EXPIRATION > now);
 
@@ -88,7 +88,7 @@ expirationTimeStamp |  seconds from epoch that this contract expires and enters 
 /// capPrice maximum tradeable price of this contract, contract enters settlement if breached
 /// priceDecimalPlaces number of decimal places to convert our queried price from a floating point to
 /// an integer
-/// qtyDecimalPlaces decimal places to multiply traded qty by.
+/// qtyMultiplier multiply traded qty by this value from base units of collateral token.
 /// expirationTimeStamp - seconds from epoch that this contract expires and enters settlement
 /// @param oracleDataSource a data-source such as "URL", "WolframAlpha", "IPFS"
 /// see http://docs.oraclize.it/#ethereum-quick-start-simple-query
@@ -187,13 +187,13 @@ counter party risk and ensuring the solvency of the contract.
 /// @notice determines the amount of needed collateral for a given position (qty and price)
 /// @param priceFloor lowest price the contract is allowed to trade before expiration
 /// @param priceCap highest price the contract is allowed to trade before expiration
-/// @param qtyDecimalPlaces number of decimal places in traded quantity.
+/// @param qtyMultiplier multiplier for qty from base units
 /// @param qty signed integer corresponding to the traded quantity
 /// @param price of the trade
 function calculateNeededCollateral(
     uint priceFloor,
     uint priceCap,
-    uint qtyDecimalPlaces,
+    uint qtyMultiplier,
     int qty,
     uint price
 ) pure internal returns (uint neededCollateral)
@@ -213,7 +213,7 @@ function calculateNeededCollateral(
             maxLoss = subtract(priceCap, price);
         }
     }
-    neededCollateral = maxLoss * abs(qty) * qtyDecimalPlaces;
+    neededCollateral = maxLoss * abs(qty) * qtyMultiplier;
 }
 ``` 
 
@@ -234,7 +234,7 @@ Parameter | Description
 --------- |  -----------
 priceFloor | as defined in the `MarketContract` 
 priceCap | as defined in the `MarketContract` 
-qtyDecimalPlaces | as defined in the `MarketContract`
+qtyMultiplier | as defined in the `MarketContract`
 qty | signed integer corresponding to the traded quantity
 price | agreed upon execution price
 
