@@ -374,7 +374,7 @@ issues to report please do so by opening an issue on <a href="https://github.com
 <span class="c1">/// capPrice maximum tradeable price of this contract, contract enters settlement if breached</span>
 <span class="c1">/// priceDecimalPlaces number of decimal places to convert our queried price from a floating point to</span>
 <span class="c1">/// an integer</span>
-<span class="c1">/// qtyDecimalPlaces decimal places to multiply traded qty by.</span>
+<span class="c1">/// qtyMultiplier multiply traded qty by this value from base units of collateral token.</span>
 <span class="c1">/// expirationTimeStamp - seconds from epoch that this contract expires and enters settlement</span>
 <span class="kd">function</span> <span class="nx">MarketContract</span><span class="p">(</span>
     <span class="nx">string</span> <span class="nx">contractName</span><span class="p">,</span>
@@ -391,7 +391,7 @@ issues to report please do so by opening an issue on <a href="https://github.com
     <span class="nx">require</span><span class="p">(</span><span class="nx">PRICE_CAP</span> <span class="o">&gt;</span> <span class="nx">PRICE_FLOOR</span><span class="p">);</span>
 
     <span class="nx">PRICE_DECIMAL_PLACES</span> <span class="o">=</span> <span class="nx">contractSpecs</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
-    <span class="nx">QTY_DECIMAL_PLACES</span> <span class="o">=</span> <span class="nx">contractSpecs</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+    <span class="nx">QTY_MULTIPLIER</span> <span class="o">=</span> <span class="nx">contractSpecs</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
     <span class="nx">EXPIRATION</span> <span class="o">=</span> <span class="nx">contractSpecs</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
     <span class="nx">require</span><span class="p">(</span><span class="nx">EXPIRATION</span> <span class="o">&gt;</span> <span class="nx">now</span><span class="p">);</span>
 
@@ -466,7 +466,7 @@ the <code>MarketContractRegistry</code> in order to be fully functional for trad
 <span class="c1">/// capPrice maximum tradeable price of this contract, contract enters settlement if breached</span>
 <span class="c1">/// priceDecimalPlaces number of decimal places to convert our queried price from a floating point to</span>
 <span class="c1">/// an integer</span>
-<span class="c1">/// qtyDecimalPlaces decimal places to multiply traded qty by.</span>
+<span class="c1">/// qtyMultiplier multiply traded qty by this value from base units of collateral token.</span>
 <span class="c1">/// expirationTimeStamp - seconds from epoch that this contract expires and enters settlement</span>
 <span class="c1">/// @param oracleDataSource a data-source such as "URL", "WolframAlpha", "IPFS"</span>
 <span class="c1">/// see http://docs.oraclize.it/#ethereum-quick-start-simple-query</span>
@@ -567,13 +567,13 @@ counter party risk and ensuring the solvency of the contract.</p>
 <pre class="highlight javascript tab-javascript"><code><span class="c1">/// @notice determines the amount of needed collateral for a given position (qty and price)</span>
 <span class="c1">/// @param priceFloor lowest price the contract is allowed to trade before expiration</span>
 <span class="c1">/// @param priceCap highest price the contract is allowed to trade before expiration</span>
-<span class="c1">/// @param qtyDecimalPlaces number of decimal places in traded quantity.</span>
+<span class="c1">/// @param qtyMultiplier multiplier for qty from base units</span>
 <span class="c1">/// @param qty signed integer corresponding to the traded quantity</span>
 <span class="c1">/// @param price of the trade</span>
 <span class="kd">function</span> <span class="nx">calculateNeededCollateral</span><span class="p">(</span>
     <span class="nx">uint</span> <span class="nx">priceFloor</span><span class="p">,</span>
     <span class="nx">uint</span> <span class="nx">priceCap</span><span class="p">,</span>
-    <span class="nx">uint</span> <span class="nx">qtyDecimalPlaces</span><span class="p">,</span>
+    <span class="nx">uint</span> <span class="nx">qtyMultiplier</span><span class="p">,</span>
     <span class="kr">int</span> <span class="nx">qty</span><span class="p">,</span>
     <span class="nx">uint</span> <span class="nx">price</span>
 <span class="p">)</span> <span class="nx">pure</span> <span class="nx">internal</span> <span class="nx">returns</span> <span class="p">(</span><span class="nx">uint</span> <span class="nx">neededCollateral</span><span class="p">)</span>
@@ -593,7 +593,7 @@ counter party risk and ensuring the solvency of the contract.</p>
             <span class="nx">maxLoss</span> <span class="o">=</span> <span class="nx">subtract</span><span class="p">(</span><span class="nx">priceCap</span><span class="p">,</span> <span class="nx">price</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">}</span>
-    <span class="nx">neededCollateral</span> <span class="o">=</span> <span class="nx">maxLoss</span> <span class="o">*</span> <span class="nx">abs</span><span class="p">(</span><span class="nx">qty</span><span class="p">)</span> <span class="o">*</span> <span class="nx">qtyDecimalPlaces</span><span class="p">;</span>
+    <span class="nx">neededCollateral</span> <span class="o">=</span> <span class="nx">maxLoss</span> <span class="o">*</span> <span class="nx">abs</span><span class="p">(</span><span class="nx">qty</span><span class="p">)</span> <span class="o">*</span> <span class="nx">qtyMultiplier</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre>
 <p>The amount of funds that are allocated to the <code>collateralPoolBalance</code> upon entering a trade is defined by that positions
@@ -623,7 +623,7 @@ both parties commit their respective maximum loss to the collateral pool.</p>
 <td>as defined in the <code>MarketContract</code></td>
 </tr>
 <tr>
-<td>qtyDecimalPlaces</td>
+<td>qtyMultiplier</td>
 <td>as defined in the <code>MarketContract</code></td>
 </tr>
 <tr>
