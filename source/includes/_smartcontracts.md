@@ -1,7 +1,7 @@
 # Solidity Smart Contracts
 
-All code for our smart contracts can be found [here](https://github.com/MarketProject/MarketProtocol). If you have any
-issues to report please do so by opening an issue on [GitHub](https://github.com/MarketProject/MarketProtocol/issues).
+All code for our smart contracts can be found [here](https://github.com/MARKETProtocol/MARKETProtocol). If you have any
+issues to report please do so by opening an issue on [GitHub](https://github.com/MARKETProtocol/MARKETProtocol/issues).
 
 ## Market Contract
 
