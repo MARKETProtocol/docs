@@ -8,7 +8,7 @@ toc_footers:
   - <a href='http://www.marketprotocol.io/'>MARKET Home</a>
   - <a href='http://www.marketprotocol.io/'>MARKET DApp</a>
   - <a href='http://www.marketprotocol.io/'>MARKET Whitepaper</a>
-  - <a href='https://github.com/MarketProject/'>MARKET GitHub</a>
+  - <a href='https://github.com/MARKETProtocol/'>MARKET GitHub</a>
 
 includes:
   - background
