@@ -124,7 +124,7 @@ function MarketContractOraclize(
 More information on forming correct queries can 
 be found in their [documentation](http://docs.oraclize.it/#ethereum-quick-start-simple-query).
 
-Our [DApp](https://app.marketprotocol.io) additionally has some help in formatting your queries correctly
+Our [dApp](https://app.marketprotocol.io) additionally has some help in formatting your queries correctly
 and a test environment to ensure the queries are correct prior to contract deployment.
 
 ### Additional parameters 

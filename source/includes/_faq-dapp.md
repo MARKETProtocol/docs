@@ -1,1 +1,1 @@
-# FAQ - DApp
+# FAQ - dApp
