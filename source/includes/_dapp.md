@@ -52,7 +52,7 @@ Oraclize.it Query |  Properly structured Oraclize.it query, please use the
 
 The [Find Contracts](https://dapp.marketprotocol.io/contract/find) screen allows for a reverse lookup
 for MARKET Contracts using the ethereum address of the deployed contract.  Users can enter
-a known address, if valid, the dApp will display the current specifcations of the MARKET Contract
+a known address, if valid, the dApp will display the current specifications of the MARKET Contract
 deployed to this address.
 
 ## Test Query 
