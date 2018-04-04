@@ -73,6 +73,9 @@ Oraclize.it Query |  Properly structured Oraclize.it query, please use the [test
 
 ## Explore Contracts
 
+MARKET Protocol's dApp provides the needed functionality to easily search, filter, and sort already deployed
+MARKET Smart Contracts.  
+
 ## Find Contracts
 
 The [Find Contracts](https://dapp.marketprotocol.io/contract/find) screen allows for a reverse lookup
@@ -83,3 +86,5 @@ deployed to this address.
 ## Test Query 
 
 ## Simulated Exchange
+
+Coming soon...
