@@ -23,7 +23,7 @@ function MarketContract(
     address marketTokenAddress,
     address baseTokenAddress,
     uint[5] contractSpecs
-) public payable
+) public
 {
     MKT_TOKEN_ADDRESS = marketTokenAddress;
     MKT_TOKEN = MarketToken(marketTokenAddress);
@@ -39,7 +39,6 @@ function MarketContract(
 
     CONTRACT_NAME = contractName;
     BASE_TOKEN_ADDRESS = baseTokenAddress;
-    BASE_TOKEN = ERC20(baseTokenAddress);
 }
 ```
 
@@ -53,11 +52,11 @@ classes such as `MarketContractOraclize` to complete the needed top level functi
 We intend to expand our offering of oracle solutions offered in the near future.  If there are oracle services that
 you would like to submit for possible inclusion in these future plans, please [contact](mailto:info@marketprotocol.io) us
 
-### Oracle Pre-Funding
+### Oracle Costs
 
 The `Creator` of the `MarketContract` must pre-fund the contract with enough ETH in order to pay for the gas costs
-associated with future oracle queries.  We intend to provide tools to help with this process, and in addition any
-unused, pre-funded ETH can be reclaimed by the `Creator` upon contract expiration.
+associated with the needed oracle query.  Currently from Oraclize.it - the first query for any contract is free,
+so this need has been removed.
 
 <aside class="notice">
 After linking of the <code>MarketContract</code> and the <code>MarketCollateralPool</code> is completed, the contract also must be added to 
@@ -93,29 +92,30 @@ expirationTimeStamp |  seconds from epoch that this contract expires and enters 
 /// @param oracleDataSource a data-source such as "URL", "WolframAlpha", "IPFS"
 /// see http://docs.oraclize.it/#ethereum-quick-start-simple-query
 /// @param oracleQuery see http://docs.oraclize.it/#ethereum-quick-start-simple-query for examples
-/// @param oracleQueryRepeatSeconds how often to repeat this callback to check for settlement, more frequent
-/// queries require more gas and may not be needed.
 function MarketContractOraclize(
     string contractName,
     address marketTokenAddress,
     address baseTokenAddress,
     uint[5] contractSpecs,
     string oracleDataSource,
-    string oracleQuery,
-    uint oracleQueryRepeatSeconds
+    string oracleQuery
 ) MarketContract(
     contractName,
     marketTokenAddress,
     baseTokenAddress,
     contractSpecs
-)  public payable
+)  public
 {
     oraclize_setProof(proofType_TLSNotary | proofStorage_IPFS);
     ORACLE_DATA_SOURCE = oracleDataSource;
     ORACLE_QUERY = oracleQuery;
-    ORACLE_QUERY_REPEAT = oracleQueryRepeatSeconds;
-    require(checkSufficientStartingBalance(EXPIRATION.subtract(now)));
-    queryOracle();  // schedules recursive calls to oracle
+    require(EXPIRATION > now);         // Require expiration time in the future.
+
+    // Future timestamp must be within 60 days from now.
+    // https://docs.oraclize.it/#ethereum-quick-start-schedule-a-query-in-the-future
+    uint secondsPerSixtyDays = 60 * 60 * 24 * 60;
+    require(EXPIRATION - now <= secondsPerSixtyDays);
+    queryOracle();                      // Schedule a call to oracle at contract expiration time.
 }
 ```
 
@@ -133,7 +133,6 @@ Parameter | Description
 --------- |  -----------
 oracleDataSource | a data-source such as "URL", "WolframAlpha", "IPFS" 
 oracleQuery | properly formatted Oraclize.it query 
-oracleQueryRepeatSeconds | how often to repeat the query and check for settlement, more frequent calling requires more pre-funding
 
 
 ## Market Collateral Pool
@@ -147,7 +146,6 @@ oracleQueryRepeatSeconds | how often to repeat the query and check for settlemen
 function MarketCollateralPool(address marketContractAddress) Linkable(marketContractAddress) public {
     MKT_CONTRACT = MarketContract(marketContractAddress);
     MKT_TOKEN_ADDRESS = MKT_CONTRACT.MKT_TOKEN_ADDRESS();
-    MKT_TOKEN = MarketToken(MKT_TOKEN_ADDRESS);
 }
 ```
 
@@ -166,7 +164,7 @@ specified are the only accepted form of funding or collateralization.
 /// @param depositAmount qty of ERC20 tokens to deposit to the smart contract to cover open orders and collateral
 function depositTokensForTrading(uint256 depositAmount) external {
     // user must call approve!
-    require(MKT_TOKEN.isUserEnabledForContract(MKT_CONTRACT, msg.sender));
+    require(MarketToken(MKT_TOKEN_ADDRESS).isUserEnabledForContract(MKT_CONTRACT, msg.sender));
     uint256 balanceAfterDeposit = userAddressToAccountBalance[msg.sender].add(depositAmount);
     ERC20(MKT_CONTRACT.BASE_TOKEN_ADDRESS()).safeTransferFrom(msg.sender, this, depositAmount);
     userAddressToAccountBalance[msg.sender] = balanceAfterDeposit;
