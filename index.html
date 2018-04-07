@@ -6,7 +6,7 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <link href="images/navbar.png" rel="icon" type="image/png" />
-    <title>MARKET</title>
+    <title>MARKET Protocol</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -263,13 +263,16 @@
             <a href="#api" class="toc-h1 toc-link" data-title="api">API</a>
           </li>
           <li>
-            <a href="#dapp" class="toc-h1 toc-link" data-title="dapp">DApp</a>
+            <a href="#dapp" class="toc-h1 toc-link" data-title="dapp">dApp</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#contract-deployment" class="toc-h2 toc-link" data-title="contract-deployment">Contract Deployment</a>
                   </li>
                   <li>
-                    <a href="#contract-explorer" class="toc-h2 toc-link" data-title="contract-explorer">Contract Explorer</a>
+                    <a href="#explore-contracts" class="toc-h2 toc-link" data-title="explore-contracts">Explore Contracts</a>
+                  </li>
+                  <li>
+                    <a href="#find-contracts" class="toc-h2 toc-link" data-title="find-contracts">Find Contracts</a>
                   </li>
                   <li>
                     <a href="#test-query" class="toc-h2 toc-link" data-title="test-query">Test Query</a>
@@ -325,39 +328,44 @@
           </li>
           <li>
             <a href="#faq-solidity-smart-contracts" class="toc-h1 toc-link" data-title="faq-solidity-smart-contracts">FAQ - Solidity Smart Contracts</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#how-to-debug-market-protocol-tests" class="toc-h2 toc-link" data-title="how-to-debug-market-protocol-tests">How to debug MARKET Protocol tests?</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#faq-api" class="toc-h1 toc-link" data-title="faq-api">FAQ - API</a>
           </li>
           <li>
-            <a href="#faq-dapp" class="toc-h1 toc-link" data-title="faq-dapp">FAQ - DApp</a>
+            <a href="#faq-dapp" class="toc-h1 toc-link" data-title="faq-dapp">FAQ - dApp</a>
           </li>
       </div>
         <ul class="toc-footer">
-            <li><a href='http://www.marketprotocol.io/'>MARKET Home</a></li>
-            <li><a href='http://www.marketprotocol.io/'>MARKET DApp</a></li>
-            <li><a href='http://www.marketprotocol.io/'>MARKET Whitepaper</a></li>
-            <li><a href='https://github.com/MARKETProtocol/'>MARKET GitHub</a></li>
+            <li><a href='http://www.marketprotocol.io/'>MARKET Protocol Home</a></li>
+            <li><a href='http://www.marketprotocol.io/'>MARKET Protocol dApp</a></li>
+            <li><a href='https://www.marketprotocol.io/wp-content/uploads/MARKET-Protocol-White-Paper.pdf'>MARKET Protocol Whitepaper</a></li>
+            <li><a href='https://github.com/MARKETProtocol/'>MARKET Protocol GitHub</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to MARKET! Here you will find documentation for our protocol and APIs.</p>
+<p>Welcome to MARKET Protocol documentation here you will find documentation for our smart contracts and APIs.</p>
 <h2 id='documentation'>Documentation</h2>
 <ul>
 <li><a href="#background">Background</a>: High level explanation of our protocol</li>
-<li><a href="#smartcontracts">Smart Contracts</a>: The underlying MARKET smart contracts</li>
+<li><a href="#smartcontracts">Smart Contracts</a>: The underlying MARKET Protocol smart contracts</li>
 <li><a href="#api">API</a>:  Typescript API documentation</li>
-<li><a href="#dapp">DApp</a>: Decentralized application allowing for easy MARKET contract deployment and exploration</li>
+<li><a href="#dapp">dApp</a>: Decentralized application allowing for easy MARKET Protocol contract deployment and exploration</li>
 </ul>
 <h2 id='frequently-asked-questions'>Frequently Asked Questions</h2>
 <ul>
 <li><a href="#faq-general">General FAQ</a></li>
 <li><a href="#faq-solidity">Smart Contract FAQ</a></li>
 <li><a href="#faq-api">API FAQ</a> </li>
-<li><a href="#faq-dapp">DApp FAQ</a> </li>
+<li><a href="#faq-dapp">dApp FAQ</a> </li>
 </ul>
 <h1 id='background'>Background</h1><h1 id='solidity-smart-contracts'>Solidity Smart Contracts</h1>
 <p>All code for our smart contracts can be found <a href="https://github.com/MARKETProtocol/MARKETProtocol">here</a>. If you have any
@@ -381,7 +389,7 @@ issues to report please do so by opening an issue on <a href="https://github.com
     <span class="nx">address</span> <span class="nx">marketTokenAddress</span><span class="p">,</span>
     <span class="nx">address</span> <span class="nx">baseTokenAddress</span><span class="p">,</span>
     <span class="nx">uint</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="nx">contractSpecs</span>
-<span class="p">)</span> <span class="kr">public</span> <span class="nx">payable</span>
+<span class="p">)</span> <span class="kr">public</span>
 <span class="p">{</span>
     <span class="nx">MKT_TOKEN_ADDRESS</span> <span class="o">=</span> <span class="nx">marketTokenAddress</span><span class="p">;</span>
     <span class="nx">MKT_TOKEN</span> <span class="o">=</span> <span class="nx">MarketToken</span><span class="p">(</span><span class="nx">marketTokenAddress</span><span class="p">);</span>
@@ -397,7 +405,6 @@ issues to report please do so by opening an issue on <a href="https://github.com
 
     <span class="nx">CONTRACT_NAME</span> <span class="o">=</span> <span class="nx">contractName</span><span class="p">;</span>
     <span class="nx">BASE_TOKEN_ADDRESS</span> <span class="o">=</span> <span class="nx">baseTokenAddress</span><span class="p">;</span>
-    <span class="nx">BASE_TOKEN</span> <span class="o">=</span> <span class="nx">ERC20</span><span class="p">(</span><span class="nx">baseTokenAddress</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre>
 <p>The <code>MarketContract</code> represents the main contract responsible for 
@@ -409,10 +416,10 @@ enabled.  </p>
 classes such as <code>MarketContractOraclize</code> to complete the needed top level functionality around oracle solutions.
 We intend to expand our offering of oracle solutions offered in the near future.  If there are oracle services that
 you would like to submit for possible inclusion in these future plans, please <a href="mailto:info@marketprotocol.io">contact</a> us</p>
-<h3 id='oracle-pre-funding'>Oracle Pre-Funding</h3>
+<h3 id='oracle-costs'>Oracle Costs</h3>
 <p>The <code>Creator</code> of the <code>MarketContract</code> must pre-fund the contract with enough ETH in order to pay for the gas costs
-associated with future oracle queries.  We intend to provide tools to help with this process, and in addition any
-unused, pre-funded ETH can be reclaimed by the <code>Creator</code> upon contract expiration.</p>
+associated with the needed oracle query.  Currently from Oraclize.it - the first query for any contract is free,
+so this need has been removed.</p>
 
 <aside class="notice">
 After linking of the <code>MarketContract</code> and the <code>MarketCollateralPool</code> is completed, the contract also must be added to 
@@ -471,29 +478,30 @@ the <code>MarketContractRegistry</code> in order to be fully functional for trad
 <span class="c1">/// @param oracleDataSource a data-source such as "URL", "WolframAlpha", "IPFS"</span>
 <span class="c1">/// see http://docs.oraclize.it/#ethereum-quick-start-simple-query</span>
 <span class="c1">/// @param oracleQuery see http://docs.oraclize.it/#ethereum-quick-start-simple-query for examples</span>
-<span class="c1">/// @param oracleQueryRepeatSeconds how often to repeat this callback to check for settlement, more frequent</span>
-<span class="c1">/// queries require more gas and may not be needed.</span>
 <span class="kd">function</span> <span class="nx">MarketContractOraclize</span><span class="p">(</span>
     <span class="nx">string</span> <span class="nx">contractName</span><span class="p">,</span>
     <span class="nx">address</span> <span class="nx">marketTokenAddress</span><span class="p">,</span>
     <span class="nx">address</span> <span class="nx">baseTokenAddress</span><span class="p">,</span>
     <span class="nx">uint</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="nx">contractSpecs</span><span class="p">,</span>
     <span class="nx">string</span> <span class="nx">oracleDataSource</span><span class="p">,</span>
-    <span class="nx">string</span> <span class="nx">oracleQuery</span><span class="p">,</span>
-    <span class="nx">uint</span> <span class="nx">oracleQueryRepeatSeconds</span>
+    <span class="nx">string</span> <span class="nx">oracleQuery</span>
 <span class="p">)</span> <span class="nx">MarketContract</span><span class="p">(</span>
     <span class="nx">contractName</span><span class="p">,</span>
     <span class="nx">marketTokenAddress</span><span class="p">,</span>
     <span class="nx">baseTokenAddress</span><span class="p">,</span>
     <span class="nx">contractSpecs</span>
-<span class="p">)</span>  <span class="kr">public</span> <span class="nx">payable</span>
+<span class="p">)</span>  <span class="kr">public</span>
 <span class="p">{</span>
     <span class="nx">oraclize_setProof</span><span class="p">(</span><span class="nx">proofType_TLSNotary</span> <span class="o">|</span> <span class="nx">proofStorage_IPFS</span><span class="p">);</span>
     <span class="nx">ORACLE_DATA_SOURCE</span> <span class="o">=</span> <span class="nx">oracleDataSource</span><span class="p">;</span>
     <span class="nx">ORACLE_QUERY</span> <span class="o">=</span> <span class="nx">oracleQuery</span><span class="p">;</span>
-    <span class="nx">ORACLE_QUERY_REPEAT</span> <span class="o">=</span> <span class="nx">oracleQueryRepeatSeconds</span><span class="p">;</span>
-    <span class="nx">require</span><span class="p">(</span><span class="nx">checkSufficientStartingBalance</span><span class="p">(</span><span class="nx">EXPIRATION</span><span class="p">.</span><span class="nx">subtract</span><span class="p">(</span><span class="nx">now</span><span class="p">)));</span>
-    <span class="nx">queryOracle</span><span class="p">();</span>  <span class="c1">// schedules recursive calls to oracle</span>
+    <span class="nx">require</span><span class="p">(</span><span class="nx">EXPIRATION</span> <span class="o">&gt;</span> <span class="nx">now</span><span class="p">);</span>         <span class="c1">// Require expiration time in the future.</span>
+
+    <span class="c1">// Future timestamp must be within 60 days from now.</span>
+    <span class="c1">// https://docs.oraclize.it/#ethereum-quick-start-schedule-a-query-in-the-future</span>
+    <span class="nx">uint</span> <span class="nx">secondsPerSixtyDays</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span><span class="p">;</span>
+    <span class="nx">require</span><span class="p">(</span><span class="nx">EXPIRATION</span> <span class="o">-</span> <span class="nx">now</span> <span class="o">&lt;=</span> <span class="nx">secondsPerSixtyDays</span><span class="p">);</span>
+    <span class="nx">queryOracle</span><span class="p">();</span>                      <span class="c1">// Schedule a call to oracle at contract expiration time.</span>
 <span class="p">}</span>
 </code></pre>
 <p><code>MarketContractOraclize</code> is the first fully implemented <code>MarketContract</code> that has been built out.  Using 
@@ -501,7 +509,7 @@ the <code>MarketContractRegistry</code> in order to be fully functional for trad
 More information on forming correct queries can 
 be found in their <a href="http://docs.oraclize.it/#ethereum-quick-start-simple-query">documentation</a>.</p>
 
-<p>Our <a href="https://app.marketprotocol.io">DApp</a> additionally has some help in formatting your queries correctly
+<p>Our <a href="https://app.marketprotocol.io">dApp</a> additionally has some help in formatting your queries correctly
 and a test environment to ensure the queries are correct prior to contract deployment.</p>
 <h3 id='additional-parameters'>Additional parameters</h3>
 <table><thead>
@@ -518,10 +526,6 @@ and a test environment to ensure the queries are correct prior to contract deplo
 <td>oracleQuery</td>
 <td>properly formatted Oraclize.it query</td>
 </tr>
-<tr>
-<td>oracleQueryRepeatSeconds</td>
-<td>how often to repeat the query and check for settlement, more frequent calling requires more pre-funding</td>
-</tr>
 </tbody></table>
 <h2 id='market-collateral-pool'>Market Collateral Pool</h2>
 <blockquote>
@@ -533,7 +537,6 @@ and a test environment to ensure the queries are correct prior to contract deplo
 <span class="kd">function</span> <span class="nx">MarketCollateralPool</span><span class="p">(</span><span class="nx">address</span> <span class="nx">marketContractAddress</span><span class="p">)</span> <span class="nx">Linkable</span><span class="p">(</span><span class="nx">marketContractAddress</span><span class="p">)</span> <span class="kr">public</span> <span class="p">{</span>
     <span class="nx">MKT_CONTRACT</span> <span class="o">=</span> <span class="nx">MarketContract</span><span class="p">(</span><span class="nx">marketContractAddress</span><span class="p">);</span>
     <span class="nx">MKT_TOKEN_ADDRESS</span> <span class="o">=</span> <span class="nx">MKT_CONTRACT</span><span class="p">.</span><span class="nx">MKT_TOKEN_ADDRESS</span><span class="p">();</span>
-    <span class="nx">MKT_TOKEN</span> <span class="o">=</span> <span class="nx">MarketToken</span><span class="p">(</span><span class="nx">MKT_TOKEN_ADDRESS</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre>
 <p>The <code>MarketCollateralPool</code> is a contract controlled by a specific <code>MarketContract</code>.  It holds users balances, 
@@ -549,7 +552,7 @@ specified are the only accepted form of funding or collateralization.</p>
 <span class="c1">/// @param depositAmount qty of ERC20 tokens to deposit to the smart contract to cover open orders and collateral</span>
 <span class="kd">function</span> <span class="nx">depositTokensForTrading</span><span class="p">(</span><span class="nx">uint256</span> <span class="nx">depositAmount</span><span class="p">)</span> <span class="nx">external</span> <span class="p">{</span>
     <span class="c1">// user must call approve!</span>
-    <span class="nx">require</span><span class="p">(</span><span class="nx">MKT_TOKEN</span><span class="p">.</span><span class="nx">isUserEnabledForContract</span><span class="p">(</span><span class="nx">MKT_CONTRACT</span><span class="p">,</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">));</span>
+    <span class="nx">require</span><span class="p">(</span><span class="nx">MarketToken</span><span class="p">(</span><span class="nx">MKT_TOKEN_ADDRESS</span><span class="p">).</span><span class="nx">isUserEnabledForContract</span><span class="p">(</span><span class="nx">MKT_CONTRACT</span><span class="p">,</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">));</span>
     <span class="nx">uint256</span> <span class="nx">balanceAfterDeposit</span> <span class="o">=</span> <span class="nx">userAddressToAccountBalance</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">].</span><span class="nx">add</span><span class="p">(</span><span class="nx">depositAmount</span><span class="p">);</span>
     <span class="nx">ERC20</span><span class="p">(</span><span class="nx">MKT_CONTRACT</span><span class="p">.</span><span class="nx">BASE_TOKEN_ADDRESS</span><span class="p">()).</span><span class="nx">safeTransferFrom</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="nx">depositAmount</span><span class="p">);</span>
     <span class="nx">userAddressToAccountBalance</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span> <span class="o">=</span> <span class="nx">balanceAfterDeposit</span><span class="p">;</span>
@@ -891,7 +894,114 @@ anyone who wishes to create a new <code>MarketContract</code> will be forced to 
 can be unlocked at any time the user wishes to stop trading that <code>MarketContract</code>.   </p>
 <h1 id='api'>API</h1>
 <p>Coming Soon...</p>
-<h1 id='dapp'>DApp</h1><h2 id='contract-deployment'>Contract Deployment</h2><h2 id='contract-explorer'>Contract Explorer</h2><h2 id='test-query'>Test Query</h2><h2 id='simulated-exchange'>Simulated Exchange</h2><h1 id='faq-general'>FAQ - General</h1><h3 id='what-is-a-derivative'>What is a derivative?</h3>
+<h1 id='dapp'>dApp</h1>
+<p>The MARKET Protocol dApp provides tools for contract creation, oracle testing and deployment. 
+Additionally, users are able to easily search previously deployed MARKET contracts they would 
+like to trade.</p>
+
+<p>A simulated trading environment allows user to place test trades and participate in beta
+releases of the protocol.</p>
+<h2 id='contract-deployment'>Contract Deployment</h2>
+<p>MARKET Protocol creates a flexible contract specification which allows users to easily implement
+their desired contract prior to trading.  First time users, can use our 
+<a href="https://dapp.marketprotocol.io/contract/deploy?mode=guided">Guided Deploy</a> process
+walking them through the step by step process to deployment.  Expert users, can opt for a more
+condensed process with the <a href="https://dapp.marketprotocol.io/contract/deploy?mode=quick">Quick Deploy</a> </p>
+<h3 id='guided-deploy'>Guided Deploy</h3>
+<p>MARKET Protocol Quick Deploy provides a step by step guide to first time deployment.  Below are the needed variables
+to deploy a contract to the Ethereum Blockchain</p>
+
+<ol>
+<li>Name - the contract name should be as descriptive as possible capturing the underlying asset relationship as well as possibly the expiration. 
+Something like <code>ETH/BTC-Kraken_YYYY-MM-DD</code> may help others understand the underlying asset, the data source, and 
+expiration date in a nice human readable and searchable way.
+In the future, MARKET will implement a standardized naming convention and guidelines to formalize this process</li>
+<li>Base Token - every contract should be backed by an ERC20 Token that will be used a collateral for the contract. Traders 
+must deposit tokens to the smart contract prior to trading, and upon execution of a trade, the appropriate amount of 
+collateral becomes locked until that position is exited. In this fashion, all open positions always remain 100% 
+collateralized removing counter party risk from the traders. Please specify a ERC20 Token address for this contract.
+In the future, users will be able to easily select from well known ERC20 tokens to ensure more safety and 
+avoid dealing with long addresses.</li>
+<li>Oraclize.it data source - Oraclize.it offers several data-sources such as &quot;URL&quot;, &quot;WolframAlpha&quot; and &quot;IPFS&quot;</li>
+<li>Price Decimal Places - Ethereum currently does not support floating points numbers. Therefore all prices reported by 
+oracles must be converted to a whole number (integer). This variable is how many decimal places one needs to move 
+the decimal in order to go from the oracle query price to an integer. For example, if the oracle query results 
+returned a value of 190.22, we need to move the decimal two (2) places to convert to a whole number of 19022, 
+so we would enter 2. </li>
+<li>Price Floor - this is the lower bound of price exposure this contract will trade. If the oracle reports a price 
+below this value the contract will enter into settlement. This should also be represented as a whole number. 
+If we take the example above of a price of 190.22 and decide the Floor for our contract should be 150.00, 
+we would enter 15000.</li>
+<li>This is the upper bound of price exposure this contract will trade. If the oracle reports a price above this value 
+the contract will enter into settlement. Following our example, if we decide the Cap for our contract 
+should be 230.00, we would enter 23000 as our Cap.<br></li>
+<li>The quantity multiplier allows the user to specify how many base units (for Ethereum, this would be wei) each integer 
+price movement changes the value of the contract. If our integerized price was 19022 with a qty multiplier of 1, 
+and the price moved to 19023, then the value will have change by 1 wei. If however the multiplier was set at 
+1,000,000,000 the price movement of 1 unit would now correspond to a value of 1 gwei (not wei). 
+Please see <a href="https://etherconverter.online/">here</a> for an ethereum unit converter.</li>
+<li>Expiration Time - upon reaching the expiration timestamp all open positions will settle against the final 
+price query returned by the oracle.</li>
+</ol>
+<h3 id='quick-deploy'>Quick Deploy</h3>
+<p>MARKET Protocol Quick Deploy provides a scaled down interface for easy deployment of contracts to the 
+Ethereum blockchain.  Expert users can enter variables, that are validated with error checking prior
+to deploying.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Name</td>
+<td>Viewable name of this contract, in the future we will implement suggested naming conventions</td>
+</tr>
+<tr>
+<td>Base Token Address</td>
+<td>address of the ERC20 token that will be used for collateral</td>
+</tr>
+<tr>
+<td>Price Floor</td>
+<td>minimum tradeable price of this contract</td>
+</tr>
+<tr>
+<td>Price Cap</td>
+<td>maximum tradeable price of this contract</td>
+</tr>
+<tr>
+<td>Price Decimal Places</td>
+<td>Since all numbers must be represented as integers on the Ethereum blockchain, this is how many decimal places one needs to move the decimal in order to go from the oracle query price to an integer. For instance if the oracle query results returned a value such as 190.22, we need to move the decimal two (2) places to convert to an integer value of 19022.</td>
+</tr>
+<tr>
+<td>Qty Multiplier</td>
+<td>The qty multiplier allows the user to specify how many base units (for ethereum, this would be wei) each integer price movement changes the value of the contract. If our integerized price was 19022 with a qty multiplier of 1, and the price moved to 19023, then the value will have change by 1 wei. If however the multiplier was set at 1,000,000,000 the price movement of 1 unit would now correspond to a value of 1 gwei (not wei)</td>
+</tr>
+<tr>
+<td>Expiration Time</td>
+<td>Expiration timestamp for all open positions to settle.</td>
+</tr>
+<tr>
+<td>Oraclize.it data source</td>
+<td>Available data sources from Oraclize.it</td>
+</tr>
+<tr>
+<td>Oraclize.it Query</td>
+<td>Properly structured Oraclize.it query, please use the <a href="http://dapp.marketprotocol.io/test">test query</a> page for clarification</td>
+</tr>
+</tbody></table>
+<h2 id='explore-contracts'>Explore Contracts</h2>
+<p>MARKET Protocol&#39;s dApp provides the needed functionality to easily search, filter, and sort already deployed
+MARKET Smart Contracts.  </p>
+<h2 id='find-contracts'>Find Contracts</h2>
+<p>The <a href="https://dapp.marketprotocol.io/contract/find">Find Contracts</a> screen allows for a reverse lookup
+for MARKET Contracts using the ethereum address of the deployed contract.  Users can enter
+a known address, if valid, the dApp will display the current specifications of the MARKET Contract
+deployed to this address.</p>
+<h2 id='test-query'>Test Query</h2><h2 id='simulated-exchange'>Simulated Exchange</h2>
+<p>Coming soon...</p>
+<h1 id='faq-general'>FAQ - General</h1><h3 id='what-is-a-derivative'>What is a derivative?</h3>
 <p>A derivative represents a contract between a buyer and a seller. The value is derived from on an underlying asset or assets. Common derivatives use stocks, commodities, currencies, bonds, or interest rates as the underlying asset for the contract.</p>
 <h3 id='are-you-a-decentralized-exchange'>Are you a decentralized exchange?</h3>
 <p>No, MARKET is a protocol to enable the trading of decentralized derivative like contracts.  Third parties will write the application layers on top of the protocol and we hope to create an API layer to facilitate this as well. </p>
@@ -917,7 +1027,9 @@ can be unlocked at any time the user wishes to stop trading that <code>MarketCon
 <p>This is an area of active research and discussion.  We would love for community feedback to help shape the process.  Our current working theory is that once a contract settlement enters into a disputed state, that a second attempt may be made to use the originally agreed upon oracle, and if that still fails to enter into a crowd sourced voting from community members that are incentivized for a fair resolution.  We do anticipate that even in the best of circumstances oracle solutions will fail, or receive bad data.  The problem of bad or inaccurate market data is not new or unique in the world of finance, but the need to resolve these problems when they arise in a trust-less manner will be essential. </p>
 <h3 id='how-do-i-get-involved'>How do I get involved?</h3>
 <p>We are actively looking to expand our team. For more info please send an email to info@marketprotocol.io</p>
-<h1 id='faq-solidity-smart-contracts'>FAQ - Solidity Smart Contracts</h1><h1 id='faq-api'>FAQ - API</h1><h1 id='faq-dapp'>FAQ - DApp</h1>
+<h1 id='faq-solidity-smart-contracts'>FAQ - Solidity Smart Contracts</h1><h3 id='how-to-debug-market-protocol-tests'>How to debug MARKET Protocol tests?</h3>
+<p>First option is to use console.log() to display Javascript objects and their properties on the console during test execution. This works well for simple cases, for more difficult scenarios one should set an asynchronous event watcher and expect events sent from Solidity contracts. For tests that have expectation on price or asynchronously wait for contract settlement it is also possible to manually update price using TestableMarketContractOraclize contract to verify correctness of the contract flow.</p>
+<h1 id='faq-api'>FAQ - API</h1><h1 id='faq-dapp'>FAQ - dApp</h1>
       </div>
       <div class="dark-box">
           <div class="lang-selector">
