@@ -30,7 +30,7 @@ to deploy a contract to the Ethereum Blockchain
    collateralized removing counter party risk from the traders. Please specify a ERC20 Token address for this contract.
    In the future, users will be able to easily select from well known ERC20 tokens to ensure more safety and 
    avoid dealing with long addresses.
-3. Oraclize.it data source - Oraclize.it offers several data-sources such as "URL", "WolframAlpha" and "IPFS"
+3. Oraclize.it data source - Oraclize.it offers several data-sources such as "URL" and "WolframAlpha"
 4. Price Decimal Places - Ethereum currently does not support floating points numbers. Therefore all prices reported by 
    oracles must be converted to a whole number (integer). This variable is how many decimal places one needs to move 
    the decimal in order to go from the oracle query price to an integer. For example, if the oracle query results 
