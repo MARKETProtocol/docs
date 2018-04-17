@@ -202,7 +202,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;solidity&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -212,7 +212,7 @@
     <div class="toc-wrapper">
       <img src="images/market-logo.png" class="logo" alt="Market logo" />
         <div class="lang-selector">
-              <a href="#" data-language-name="javascript">javascript</a>
+              <a href="#" data-language-name="solidity">solidity</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -229,9 +229,6 @@
                     <a href="#frequently-asked-questions" class="toc-h2 toc-link" data-title="frequently-asked-questions">Frequently Asked Questions</a>
                   </li>
               </ul>
-          </li>
-          <li>
-            <a href="#background" class="toc-h1 toc-link" data-title="background">Background</a>
           </li>
           <li>
             <a href="#solidity-smart-contracts" class="toc-h1 toc-link" data-title="solidity-smart-contracts">Solidity Smart Contracts</a>
@@ -342,10 +339,10 @@
           </li>
       </div>
         <ul class="toc-footer">
-            <li><a href='http://www.marketprotocol.io/'>MARKET Protocol Home</a></li>
-            <li><a href='http://www.marketprotocol.io/'>MARKET Protocol dApp</a></li>
-            <li><a href='https://www.marketprotocol.io/wp-content/uploads/MARKET-Protocol-White-Paper.pdf'>MARKET Protocol Whitepaper</a></li>
-            <li><a href='https://github.com/MARKETProtocol/'>MARKET Protocol GitHub</a></li>
+            <li><a href='http://www.marketprotocol.io/'>Home</a></li>
+            <li><a href='http://dapp.marketprotocol.io/'>dApp</a></li>
+            <li><a href='https://www.marketprotocol.io/wp-content/uploads/MARKET-Protocol-White-Paper.pdf'>Whitepaper</a></li>
+            <li><a href='https://github.com/MARKETProtocol/'>GitHub</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -353,6 +350,10 @@
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to MARKET Protocol documentation here you will find documentation for our smart contracts and APIs.</p>
+
+<p>MARKET Protocol has been created to provide a secure, flexible, open source foundation for decentralized trading on the 
+Ethereum blockchain. We provide the pieces necessary to create a decentralized exchange, including the requisite 
+clearing and collateral pool infrastructure, enabling third parties to build applications for trading.</p>
 <h2 id='documentation'>Documentation</h2>
 <ul>
 <li><a href="#background">Background</a>: High level explanation of our protocol</li>
@@ -367,7 +368,7 @@
 <li><a href="#faq-api">API FAQ</a> </li>
 <li><a href="#faq-dapp">dApp FAQ</a> </li>
 </ul>
-<h1 id='background'>Background</h1><h1 id='solidity-smart-contracts'>Solidity Smart Contracts</h1>
+<h1 id='solidity-smart-contracts'>Solidity Smart Contracts</h1>
 <p>All code for our smart contracts can be found <a href="https://github.com/MARKETProtocol/MARKETProtocol">here</a>. If you have any
 issues to report please do so by opening an issue on <a href="https://github.com/MARKETProtocol/MARKETProtocol/issues">GitHub</a>.</p>
 <h2 id='market-contract'>Market Contract</h2>
@@ -912,35 +913,35 @@ condensed process with the <a href="https://dapp.marketprotocol.io/contract/depl
 to deploy a contract to the Ethereum Blockchain</p>
 
 <ol>
-<li>Name - the contract name should be as descriptive as possible capturing the underlying asset relationship as well as possibly the expiration. 
+<li><code>Name</code> - the contract name should be as descriptive as possible capturing the underlying asset relationship as well as possibly the expiration. 
 Something like <code>ETH/BTC-Kraken_YYYY-MM-DD</code> may help others understand the underlying asset, the data source, and 
 expiration date in a nice human readable and searchable way.
 In the future, MARKET will implement a standardized naming convention and guidelines to formalize this process</li>
-<li>Base Token - every contract should be backed by an ERC20 Token that will be used a collateral for the contract. Traders 
+<li><code>Base Token</code> - every contract should be backed by an ERC20 Token that will be used a collateral for the contract. Traders 
 must deposit tokens to the smart contract prior to trading, and upon execution of a trade, the appropriate amount of 
 collateral becomes locked until that position is exited. In this fashion, all open positions always remain 100% 
 collateralized removing counter party risk from the traders. Please specify a ERC20 Token address for this contract.
 In the future, users will be able to easily select from well known ERC20 tokens to ensure more safety and 
 avoid dealing with long addresses.</li>
-<li>Oraclize.it data source - Oraclize.it offers several data-sources such as &quot;URL&quot; and &quot;WolframAlpha&quot;</li>
-<li>Price Decimal Places - Ethereum currently does not support floating points numbers. Therefore all prices reported by 
+<li><code>Oraclize.it data source</code> - Oraclize.it offers several data-sources such as &quot;URL&quot; and &quot;WolframAlpha&quot;</li>
+<li><code>Price Decimal Places</code> - Ethereum currently does not support floating points numbers. Therefore all prices reported by 
 oracles must be converted to a whole number (integer). This variable is how many decimal places one needs to move 
 the decimal in order to go from the oracle query price to an integer. For example, if the oracle query results 
 returned a value of 190.22, we need to move the decimal two (2) places to convert to a whole number of 19022, 
 so we would enter 2. </li>
-<li>Price Floor - this is the lower bound of price exposure this contract will trade. If the oracle reports a price 
+<li><code>Price Floor</code> - this is the lower bound of price exposure this contract will trade. If the oracle reports a price 
 below this value the contract will enter into settlement. This should also be represented as a whole number. 
 If we take the example above of a price of 190.22 and decide the Floor for our contract should be 150.00, 
 we would enter 15000.</li>
-<li>This is the upper bound of price exposure this contract will trade. If the oracle reports a price above this value 
+<li><code>Price Cap</code> - This is the upper bound of price exposure this contract will trade. If the oracle reports a price above this value 
 the contract will enter into settlement. Following our example, if we decide the Cap for our contract 
 should be 230.00, we would enter 23000 as our Cap.<br></li>
-<li>The quantity multiplier allows the user to specify how many base units (for Ethereum, this would be wei) each integer 
+<li><code>Qty Multiplier</code> - The quantity multiplier allows the user to specify how many base units (for Ethereum, this would be wei) each integer 
 price movement changes the value of the contract. If our integerized price was 19022 with a qty multiplier of 1, 
 and the price moved to 19023, then the value will have change by 1 wei. If however the multiplier was set at 
 1,000,000,000 the price movement of 1 unit would now correspond to a value of 1 gwei (not wei). 
 Please see <a href="https://etherconverter.online/">here</a> for an ethereum unit converter.</li>
-<li>Expiration Time - upon reaching the expiration timestamp all open positions will settle against the final 
+<li><code>Expiration Time</code> - upon reaching the expiration timestamp all open positions will settle against the final 
 price query returned by the oracle.</li>
 </ol>
 <h3 id='quick-deploy'>Quick Deploy</h3>
@@ -1033,7 +1034,7 @@ deployed to this address.</p>
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="javascript">javascript</a>
+                <a href="#" data-language-name="solidity">solidity</a>
           </div>
       </div>
     </div>
