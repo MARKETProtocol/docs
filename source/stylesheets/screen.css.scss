@@ -84,22 +84,23 @@ html, body {
 
     input {
       background: $nav-bg;
-      border-width: 0 0 1px 0;
+      border-width: 1px;
       border-color: $search-box-border-color;
-      padding: 6px 0 6px 20px;
+      border-style: solid;
+      padding: 6px 0 6px 30px;
       box-sizing: border-box;
       margin: $nav-v-padding $nav-padding;
       width: $nav-width - 30;
       outline: none;
       color: $nav-text;
-      border-radius: 0; /* ios has a default border radius */
+      border-radius: 4px; /* ios has a default border radius */
     }
 
     &:before {
       position: absolute;
       top: 17px;
-      left: $nav-padding;
-      color: $nav-text;
+      left: 25px;
+      color: $link-text;
       @extend %icon-search;
     }
   }
@@ -254,7 +255,6 @@ html, body {
   z-index: 10;
   background-color: $main-bg;
   min-height: 100%;
-
   padding-bottom: 1px; // prevent margin overflow
 
   // The dark box is what gives the code samples their dark background.
@@ -352,9 +352,6 @@ html, body {
     padding-bottom: 0.5em;
     margin-bottom: $h1-margin-bottom;
     margin-top: 2em;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    background-color: #fdfdfd;
   }
 
   h1:first-child, div:first-child + h1 {
@@ -390,7 +387,15 @@ html, body {
   h4, h5, h6 {
     font-size: 10px;
   }
-
+    
+  a {
+    color: $link-text;
+  }
+  
+  ul {
+    list-style-image: url('../images/bullet.svg');
+  }
+    
   hr {
     margin: 2em 0;
     border-top: 2px solid $examples-bg;
