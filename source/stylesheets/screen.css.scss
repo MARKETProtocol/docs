@@ -352,6 +352,9 @@ html, body {
     padding-bottom: 0.5em;
     margin-bottom: $h1-margin-bottom;
     margin-top: 2em;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background-color: $main-header-bg;
   }
 
   h1:first-child, div:first-child + h1 {
@@ -387,15 +390,15 @@ html, body {
   h4, h5, h6 {
     font-size: 10px;
   }
-    
+
   a {
     color: $link-text;
   }
-  
+
   ul {
     list-style-image: url('../images/bullet.svg');
   }
-    
+
   hr {
     margin: 2em 0;
     border-top: 2px solid $examples-bg;
