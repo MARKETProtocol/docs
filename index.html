@@ -365,6 +365,9 @@
                     <a href="#development-process" class="toc-h2 toc-link" data-title="development-process">Development Process</a>
                   </li>
                   <li>
+                    <a href="#gitcoin-and-bounties" class="toc-h2 toc-link" data-title="gitcoin-and-bounties">Gitcoin and Bounties</a>
+                  </li>
+                  <li>
                     <a href="#coding-style" class="toc-h2 toc-link" data-title="coding-style">Coding Style</a>
                   </li>
                   <li>
@@ -1119,12 +1122,12 @@ There are many ways to help, from reporting issues, contributing code, and helpi
 <li><a href="https://github.com/MARKETProtocol/community">community</a> - upcoming dev calls, meeting minutes and events</li>
 <li><a href="https://github.com/MARKETProtocol/meta">meta</a> - project wide information</li>
 </ul>
-<h3 id='dive-right-in'>Dive Right In</h3>
+<h2 id='dive-right-in'>Dive Right In</h2>
 <p>If you&#39;re ready to start helping us to build the decentralized future right now and you just need an issue to focus on, 
 check out <a href="https://github.com/orgs/MARKETProtocol/projects/1?card_filter_query=label%3A%22help+wanted%22+no%3Aassignee+is%3Aopen">this list of open issues</a>.</p>
 
 <p>Read our <a href="#development-process">development process</a> and <a href="#community-guidelines">community guidelines</a> first and have fun!</p>
-<h3 id='development-process'>Development Process</h3>
+<h2 id='development-process'>Development Process</h2>
 <p>We follow the <a href="http://nvie.com/posts/a-successful-git-branching-model/">GitFlow</a> branching model for development. 
 The latest merged code generally lives in the <code>develop</code> branch of each repository. Your development flow should look like:</p>
 
@@ -1137,15 +1140,28 @@ The latest merged code generally lives in the <code>develop</code> branch of eac
 <li>See <a href="https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html">here</a> for some notes on good commit messages</li>
 <li>Open a pull request to the <code>develop</code> branch, not <code>master</code></li>
 </ol>
+<h2 id='gitcoin-and-bounties'>Gitcoin and Bounties</h2>
+<p>We are very proud users of <a href="https://gitcoin.co/">Gitcoin</a>.  It allows us an easy way to reward our community members
+for their hard work contributing to MARKET Protocol.  Additionally, it allows us to gain traction on issues that are a 
+priority for us to address.  We won&#39;t always stake every issue, but if you need a bounty to encourage your participation
+on an issue, and there isn&#39;t one yet, please reach out on discord.</p>
 
-<p>[comment]: TODO: add gitcoin notes here</p>
-<h3 id='coding-style'>Coding Style</h3>
+<p>There are a few guidelines when using Gitcoin that are worth mentioning</p>
+
+<ol>
+<li>Please only <code>start work</code> on an issue when your actually planning on working on it. Don&#39;t call dibs before you can allocate time to the issue</li>
+<li>Please make sure to comment in the issue immediately after starting work so we know your plans for implementation and a timeline.</li>
+<li>We politely ask that users only have open work on a single bounty at a time, if you have an open bounty that has a PR submitted and would like to tackle another issue, please ask in discord before proceeding</li>
+<li>We will do our best to scope out the issue, but please anticipate some revision requested after you have submitted a PR, we are happy to tip you if these end up well beyond the initial scope</li>
+<li>Once you have create a PR, please <code>submit work</code> on Gitcoin so we are able to pay you out once we have accepted the work </li>
+</ol>
+<h2 id='coding-style'>Coding Style</h2>
 <p>We use a variety of programming languages in our repositories. When contributing, please follow existing coding conventions 
 and refer to the CONTRIBUTING.md file in the repository, if one exists. </p>
 
 <p>[comment]: TODO: update style
 For JavaScript, we use <a href="https://docs.npmjs.com/misc/coding-style">NPM&#39;s style</a>, which is automatically enforced via <a href="https://prettier.io/">prettier</a>.</p>
-<h3 id='community-guidelines'>Community Guidelines</h3>
+<h2 id='community-guidelines'>Community Guidelines</h2>
 <p>We want to keep the MARKET Protocol community awesome, growing and collaborative. 
 We need your help to keep it that way. To help with this we&#39;ve come up with some general guidelines for the community as a whole:</p>
 
@@ -1162,7 +1178,7 @@ Please consider this before you update. Also remember that nobody likes spam.</p
 </ul>
 
 <p>Full code of conduct is posted available <a href="https://github.com/MARKETProtocol/meta/blob/master/guidelines/CODE_OF_CONDUCT.md]">here</a></p>
-<h3 id='reporting-issues'>Reporting Issues</h3>
+<h2 id='reporting-issues'>Reporting Issues</h2>
 <p>If you find bugs, mistakes or inconsistencies in the project&#39;s code or
 documents, please let us know by filing an issue at the appropriate issue
 tracker (we use multiple repositories). </p>
@@ -1178,7 +1194,7 @@ No issue is too small. Help us fix our tpyos!
 <li><a href="https://github.com/MARKETProtocol/dApp/issues">dApp issues</a></li>
 <li><a href="https://github.com/MARKETProtocol/website/issues">main website issues</a></li>
 </ul>
-<h3 id='security-issues'>Security Issues</h3>
+<h2 id='security-issues'>Security Issues</h2>
 <p>The MARKET Protocol and its implementations are still in early development, which means there may be problems with the 
 protocol or in our implementations. We take security vulnerabilities very seriously. If you discover a security issue, 
 please bring it to our attention right away!</p>
@@ -1186,7 +1202,7 @@ please bring it to our attention right away!</p>
 <p>If you find a vulnerability please send your report privately to <a href="mailto:support@marketprotocol.io">support@marketprotocol.io</a> Please DO NOT file a public issue.</p>
 
 <p>If the issue is a protocol weakness or something not yet deployed, feel free to discuss it openly.</p>
-<h3 id='community-improvement'>Community Improvement</h3>
+<h2 id='community-improvement'>Community Improvement</h2>
 <p>MARKET Protocol is just as much about community as it is about our technology.</p>
 
 <p>We need constant help in improving our documentation, building new tools to interface with our platform, 
@@ -1194,7 +1210,7 @@ spreading the word to new users, helping new users getting setup and much more.<
 
 <p>Please get in touch if you would like to help out. Our <code>general</code> channel on <a href="#discord">Discord</a> is a great place to 
 share ideas and volunteer to help.</p>
-<h3 id='full-time-positions'>Full Time Positions</h3>
+<h2 id='full-time-positions'>Full Time Positions</h2>
 <p>MARKET Protocol occasionally hires developers for part time or full time positions. </p>
 
 <p>We have a strong preference for hiring people who have already started contributing to the project. 
