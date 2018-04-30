@@ -18,14 +18,14 @@ Additionally, these repositories have some very useful information for developer
 - [meta](https://github.com/MARKETProtocol/meta) - project wide information
 
 
-### Dive Right In
+## Dive Right In
 
 If you're ready to start helping us to build the decentralized future right now and you just need an issue to focus on, 
 check out [this list of open issues](https://github.com/orgs/MARKETProtocol/projects/1?card_filter_query=label%3A%22help+wanted%22+no%3Aassignee+is%3Aopen).
 
 Read our [development process](#development-process) and [community guidelines](#community-guidelines) first and have fun!
 
-### Development Process
+## Development Process
 
 We follow the [GitFlow](http://nvie.com/posts/a-successful-git-branching-model/) branching model for development. 
 The latest merged code generally lives in the `develop` branch of each repository. Your development flow should look like:
@@ -38,10 +38,24 @@ The latest merged code generally lives in the `develop` branch of each repositor
 1. See [here](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) for some notes on good commit messages
 1. Open a pull request to the `develop` branch, not `master`
 
-[comment]: TODO: add gitcoin notes here
- 
 
-### Coding Style
+## Gitcoin and Bounties
+ 
+We are very proud users of [Gitcoin](https://gitcoin.co/).  It allows us an easy way to reward our community members
+for their hard work contributing to MARKET Protocol.  Additionally, it allows us to gain traction on issues that are a 
+priority for us to address.  We won't always stake every issue, but if you need a bounty to encourage your participation
+on an issue, and there isn't one yet, please reach out on discord.
+
+There are a few guidelines when using Gitcoin that are worth mentioning
+
+1. Please only `start work` on an issue when your actually planning on working on it. Don't call dibs before you can allocate time to the issue
+1. Please make sure to comment in the issue immediately after starting work so we know your plans for implementation and a timeline.
+1. We politely ask that users only have open work on a single bounty at a time, if you have an open bounty that has a PR submitted and would like to tackle another issue, please ask in discord before proceeding
+1. We will do our best to scope out the issue, but please anticipate some revision requested after you have submitted a PR, we are happy to tip you if these end up well beyond the initial scope
+1. Once you have create a PR, please `submit work` on Gitcoin so we are able to pay you out once we have accepted the work 
+
+
+## Coding Style
 
 We use a variety of programming languages in our repositories. When contributing, please follow existing coding conventions 
 and refer to the CONTRIBUTING.md file in the repository, if one exists. 
@@ -50,7 +64,7 @@ and refer to the CONTRIBUTING.md file in the repository, if one exists.
 For JavaScript, we use [NPM's style](https://docs.npmjs.com/misc/coding-style), which is automatically enforced via [prettier](https://prettier.io/).
 
 
-### Community Guidelines
+## Community Guidelines
 
 We want to keep the MARKET Protocol community awesome, growing and collaborative. 
 We need your help to keep it that way. To help with this we've come up with some general guidelines for the community as a whole:
@@ -70,7 +84,7 @@ Please consider this before you update. Also remember that nobody likes spam.
 
 Full code of conduct is posted available [here](https://github.com/MARKETProtocol/meta/blob/master/guidelines/CODE_OF_CONDUCT.md])
 
-### Reporting Issues
+## Reporting Issues
 
 If you find bugs, mistakes or inconsistencies in the project's code or
 documents, please let us know by filing an issue at the appropriate issue
@@ -87,7 +101,7 @@ No issue is too small. Help us fix our tpyos!
  - [main website issues](https://github.com/MARKETProtocol/website/issues)
   
 
-### Security Issues
+## Security Issues
 
 The MARKET Protocol and its implementations are still in early development, which means there may be problems with the 
 protocol or in our implementations. We take security vulnerabilities very seriously. If you discover a security issue, 
@@ -97,7 +111,7 @@ If you find a vulnerability please send your report privately to [support@market
 
 If the issue is a protocol weakness or something not yet deployed, feel free to discuss it openly.
 
-### Community Improvement
+## Community Improvement
 
 MARKET Protocol is just as much about community as it is about our technology.
 
@@ -107,7 +121,7 @@ spreading the word to new users, helping new users getting setup and much more.
 Please get in touch if you would like to help out. Our `general` channel on [Discord](#discord) is a great place to 
 share ideas and volunteer to help.
 
-### Full Time Positions
+## Full Time Positions
 
 MARKET Protocol occasionally hires developers for part time or full time positions. 
 
