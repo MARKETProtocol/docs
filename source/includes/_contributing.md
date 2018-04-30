@@ -83,8 +83,8 @@ No issue is too small. Help us fix our tpyos!
  - [Docs issues](https://github.com/MARKETProtocol/docs/issues)
  - [MARKET Protocol issues (Solidity)](https://github.com/MARKETProtocol/MARKETProtocol/issues)
  - [MARKET.js](https://github.com/MARKETProtocol/MARKET.js/issues)
- - [dApp issues (Solidity)](https://github.com/MARKETProtocol/dApp/issues)
- - [main website issues (Solidity)](https://github.com/MARKETProtocol/website/issues)
+ - [dApp issues](https://github.com/MARKETProtocol/dApp/issues)
+ - [main website issues](https://github.com/MARKETProtocol/website/issues)
   
 
 ### Security Issues
