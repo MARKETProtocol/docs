@@ -7,7 +7,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
 toc_footers:
   - <a href='http://www.marketprotocol.io/'>Home</a>
   - <a href='http://dapp.marketprotocol.io/'>dApp</a>
-  - <a href='https://www.marketprotocol.io/wp-content/uploads/MARKET-Protocol-White-Paper.pdf'>Whitepaper</a>
+  - <a href='http://marketprotocol.io.s3-website-us-east-1.amazonaws.com/assets/MARKET_Protocol-Whitepaper.pdf'>Whitepaper</a>
   - <a href='https://github.com/MARKETProtocol/'>GitHub</a>
 
 includes:
@@ -31,13 +31,12 @@ Ethereum blockchain. We provide the pieces necessary to create a decentralized e
 clearing and collateral pool infrastructure, enabling third parties to build applications for trading.
 
 ## Documentation
-* [Background](#background): High level explanation of our protocol
-* [Smart Contracts](#smartcontracts): The underlying MARKET Protocol smart contracts
+* [Smart Contracts](#solidity-smart-contracts): The underlying MARKET Protocol smart contracts
 * [API](#api):  Typescript API documentation
 * [dApp](#dapp): Decentralized application allowing for easy MARKET Protocol contract deployment and exploration
 
 ## Frequently Asked Questions
 * [General FAQ](#faq-general)
-* [Smart Contract FAQ](#faq-solidity)
+* [Smart Contract FAQ](#faq-solidity-smart-contracts)
 * [API FAQ](#faq-api) 
 * [dApp FAQ](#faq-dapp) 
