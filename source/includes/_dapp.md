@@ -7,6 +7,23 @@ like to trade.
 A simulated trading environment allows user to place test trades and participate in beta
 releases of the protocol.
 
+Our beta dApp is currently running on the `Rinkeby testnet` [here](https://dapp.marketprotocol.io/).
+
+## Using an Ethereum-enabled browser
+
+For testing and interacting with our dApp, you will need to use a browser that supports Web3. 
+We recommend using the [Metamask Chrome Browser Extension](https://metamask.io/). This will enable you to connect to the 
+Ethereum network from your browser. Metamask allows you to run Ethereum dApps right in your browser without running a full Ethereum node.
+
+## Acquire Test ETH
+
+Our smart contracts are currently deployed on the `Rinkeby testnet`. You will need to have test ETH to use this library. 
+You can request test funds from the [Rinkeby faucet](https://faucet.rinkeby.io/). 
+
+<aside class="notice">
+Always confirm that you are on Rinkeby testnet when testing our dApp.
+</aside>
+
 ## Contract Deployment
 
 MARKET Protocol creates a flexible contract specification which allows users to easily implement
