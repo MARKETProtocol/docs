@@ -232,6 +232,35 @@
               </ul>
           </li>
           <li>
+            <a href="#dapp" class="toc-h1 toc-link" data-title="dapp">dApp</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#using-an-ethereum-enabled-browser" class="toc-h2 toc-link" data-title="using-an-ethereum-enabled-browser">Using an Ethereum-enabled browser</a>
+                  </li>
+                  <li>
+                    <a href="#acquire-test-eth" class="toc-h2 toc-link" data-title="acquire-test-eth">Acquire Test ETH</a>
+                  </li>
+                  <li>
+                    <a href="#contract-deployment" class="toc-h2 toc-link" data-title="contract-deployment">Contract Deployment</a>
+                  </li>
+                  <li>
+                    <a href="#explore-contracts" class="toc-h2 toc-link" data-title="explore-contracts">Explore Contracts</a>
+                  </li>
+                  <li>
+                    <a href="#find-contracts" class="toc-h2 toc-link" data-title="find-contracts">Find Contracts</a>
+                  </li>
+                  <li>
+                    <a href="#test-query" class="toc-h2 toc-link" data-title="test-query">Test Query</a>
+                  </li>
+                  <li>
+                    <a href="#simulated-exchange" class="toc-h2 toc-link" data-title="simulated-exchange">Simulated Exchange</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#api" class="toc-h1 toc-link" data-title="api">API</a>
+          </li>
+          <li>
             <a href="#solidity-smart-contracts" class="toc-h1 toc-link" data-title="solidity-smart-contracts">Solidity Smart Contracts</a>
               <ul class="toc-list-h2">
                   <li>
@@ -254,29 +283,6 @@
                   </li>
                   <li>
                     <a href="#mkt-tokens" class="toc-h2 toc-link" data-title="mkt-tokens">MKT Tokens</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#api" class="toc-h1 toc-link" data-title="api">API</a>
-          </li>
-          <li>
-            <a href="#dapp" class="toc-h1 toc-link" data-title="dapp">dApp</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#contract-deployment" class="toc-h2 toc-link" data-title="contract-deployment">Contract Deployment</a>
-                  </li>
-                  <li>
-                    <a href="#explore-contracts" class="toc-h2 toc-link" data-title="explore-contracts">Explore Contracts</a>
-                  </li>
-                  <li>
-                    <a href="#find-contracts" class="toc-h2 toc-link" data-title="find-contracts">Find Contracts</a>
-                  </li>
-                  <li>
-                    <a href="#test-query" class="toc-h2 toc-link" data-title="test-query">Test Query</a>
-                  </li>
-                  <li>
-                    <a href="#simulated-exchange" class="toc-h2 toc-link" data-title="simulated-exchange">Simulated Exchange</a>
                   </li>
               </ul>
           </li>
@@ -412,6 +418,128 @@ clearing and collateral pool infrastructure, enabling third parties to build app
 <li><a href="#faq-api">API FAQ</a> </li>
 <li><a href="#faq-dapp">dApp FAQ</a> </li>
 </ul>
+<h1 id='dapp'>dApp</h1>
+<p>The MARKET Protocol dApp provides tools for contract creation, oracle testing and deployment. 
+Additionally, users are able to easily search previously deployed MARKET contracts they would 
+like to trade.</p>
+
+<p>A simulated trading environment allows user to place test trades and participate in beta
+releases of the protocol.</p>
+
+<p>Our beta dApp is currently running on the <code>Rinkeby testnet</code> <a href="https://dapp.marketprotocol.io/">here</a>.</p>
+<h2 id='using-an-ethereum-enabled-browser'>Using an Ethereum-enabled browser</h2>
+<p>For testing and interacting with our dApp, you will need to use a browser that supports Web3. 
+We recommend using the <a href="https://metamask.io/">Metamask Chrome Browser Extension</a>. This will enable you to connect to the 
+Ethereum network from your browser. Metamask allows you to run Ethereum dApps right in your browser without running a full Ethereum node.</p>
+<h2 id='acquire-test-eth'>Acquire Test ETH</h2>
+<p>Our smart contracts are currently deployed on the <code>Rinkeby testnet</code>. You will need to have test ETH to use this library. 
+You can request test funds from the <a href="https://faucet.rinkeby.io/">Rinkeby faucet</a>. </p>
+
+<aside class="notice">
+Always confirm that you are on Rinkeby testnet when testing our dApp.
+</aside>
+<h2 id='contract-deployment'>Contract Deployment</h2>
+<p>MARKET Protocol creates a flexible contract specification which allows users to easily implement
+their desired contract prior to trading.  First time users, can use our 
+<a href="https://dapp.marketprotocol.io/contract/deploy?mode=guided">Guided Deploy</a> process
+walking them through the step by step process to deployment.  Expert users, can opt for a more
+condensed process with the <a href="https://dapp.marketprotocol.io/contract/deploy?mode=quick">Quick Deploy</a> </p>
+<h3 id='guided-deploy'>Guided Deploy</h3>
+<p>MARKET Protocol Quick Deploy provides a step by step guide to first time deployment.  Below are the needed variables
+to deploy a contract to the Ethereum Blockchain</p>
+
+<ol>
+<li><code>Name</code> - the contract name should be as descriptive as possible capturing the underlying asset relationship as well as possibly the expiration. 
+Something like <code>ETH/BTC-Kraken_YYYY-MM-DD</code> may help others understand the underlying asset, the data source, and 
+expiration date in a nice human readable and searchable way.
+In the future, MARKET will implement a standardized naming convention and guidelines to formalize this process</li>
+<li><code>Base Token</code> - every contract should be backed by an ERC20 Token that will be used a collateral for the contract. Traders 
+must deposit tokens to the smart contract prior to trading, and upon execution of a trade, the appropriate amount of 
+collateral becomes locked until that position is exited. In this fashion, all open positions always remain 100% 
+collateralized removing counter party risk from the traders. Please specify a ERC20 Token address for this contract.
+In the future, users will be able to easily select from well known ERC20 tokens to ensure more safety and 
+avoid dealing with long addresses.</li>
+<li><code>Oraclize.it data source</code> - Oraclize.it offers several data-sources such as &quot;URL&quot; and &quot;WolframAlpha&quot;</li>
+<li><code>Price Decimal Places</code> - Ethereum currently does not support floating points numbers. Therefore all prices reported by 
+oracles must be converted to a whole number (integer). This variable is how many decimal places one needs to move 
+the decimal in order to go from the oracle query price to an integer. For example, if the oracle query results 
+returned a value of 190.22, we need to move the decimal two (2) places to convert to a whole number of 19022, 
+so we would enter 2. </li>
+<li><code>Price Floor</code> - this is the lower bound of price exposure this contract will trade. If the oracle reports a price 
+below this value the contract will enter into settlement. This should also be represented as a whole number. 
+If we take the example above of a price of 190.22 and decide the Floor for our contract should be 150.00, 
+we would enter 15000.</li>
+<li><code>Price Cap</code> - This is the upper bound of price exposure this contract will trade. If the oracle reports a price above this value 
+the contract will enter into settlement. Following our example, if we decide the Cap for our contract 
+should be 230.00, we would enter 23000 as our Cap.<br></li>
+<li><code>Qty Multiplier</code> - The quantity multiplier allows the user to specify how many base units (for Ethereum, this would be wei) each integer 
+price movement changes the value of the contract. If our integerized price was 19022 with a qty multiplier of 1, 
+and the price moved to 19023, then the value will have change by 1 wei. If however the multiplier was set at 
+1,000,000,000 the price movement of 1 unit would now correspond to a value of 1 gwei (not wei). 
+Please see <a href="https://etherconverter.online/">here</a> for an ethereum unit converter.</li>
+<li><code>Expiration Time</code> - upon reaching the expiration timestamp all open positions will settle against the final 
+price query returned by the oracle.</li>
+</ol>
+<h3 id='quick-deploy'>Quick Deploy</h3>
+<p>MARKET Protocol Quick Deploy provides a scaled down interface for easy deployment of contracts to the 
+Ethereum blockchain.  Expert users can enter variables, that are validated with error checking prior
+to deploying.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Name</td>
+<td>Viewable name of this contract, in the future we will implement suggested naming conventions</td>
+</tr>
+<tr>
+<td>Base Token Address</td>
+<td>address of the ERC20 token that will be used for collateral</td>
+</tr>
+<tr>
+<td>Price Floor</td>
+<td>minimum tradeable price of this contract</td>
+</tr>
+<tr>
+<td>Price Cap</td>
+<td>maximum tradeable price of this contract</td>
+</tr>
+<tr>
+<td>Price Decimal Places</td>
+<td>Since all numbers must be represented as integers on the Ethereum blockchain, this is how many decimal places one needs to move the decimal in order to go from the oracle query price to an integer. For instance if the oracle query results returned a value such as 190.22, we need to move the decimal two (2) places to convert to an integer value of 19022.</td>
+</tr>
+<tr>
+<td>Qty Multiplier</td>
+<td>The qty multiplier allows the user to specify how many base units (for ethereum, this would be wei) each integer price movement changes the value of the contract. If our integerized price was 19022 with a qty multiplier of 1, and the price moved to 19023, then the value will have change by 1 wei. If however the multiplier was set at 1,000,000,000 the price movement of 1 unit would now correspond to a value of 1 gwei (not wei)</td>
+</tr>
+<tr>
+<td>Expiration Time</td>
+<td>Expiration timestamp for all open positions to settle.</td>
+</tr>
+<tr>
+<td>Oraclize.it data source</td>
+<td>Available data sources from Oraclize.it</td>
+</tr>
+<tr>
+<td>Oraclize.it Query</td>
+<td>Properly structured Oraclize.it query, please use the <a href="http://dapp.marketprotocol.io/test">test query</a> page for clarification</td>
+</tr>
+</tbody></table>
+<h2 id='explore-contracts'>Explore Contracts</h2>
+<p>MARKET Protocol&#39;s dApp provides the needed functionality to easily search, filter, and sort already deployed
+MARKET Smart Contracts.  </p>
+<h2 id='find-contracts'>Find Contracts</h2>
+<p>The <a href="https://dapp.marketprotocol.io/contract/find">Find Contracts</a> screen allows for a reverse lookup
+for MARKET Contracts using the ethereum address of the deployed contract.  Users can enter
+a known address, if valid, the dApp will display the current specifications of the MARKET Contract
+deployed to this address.</p>
+<h2 id='test-query'>Test Query</h2><h2 id='simulated-exchange'>Simulated Exchange</h2>
+<p>Coming soon...</p>
+<h1 id='api'>API</h1>
+<p>Coming Soon...</p>
 <h1 id='solidity-smart-contracts'>Solidity Smart Contracts</h1>
 <p>All code for our smart contracts can be found <a href="https://github.com/MARKETProtocol/MARKETProtocol">here</a>. If you have any
 issues to report please do so by opening an issue on <a href="https://github.com/MARKETProtocol/MARKETProtocol/issues">GitHub</a>.</p>
@@ -937,115 +1065,6 @@ such matters.</p>
 anyone who wishes to create a new <code>MarketContract</code> will be forced to have some minimum balance of MKT. Finally, for every
 <code>MarketContract</code> a user desires to trade, some amount of MKT must be locked to enable access to that contract.  These
 can be unlocked at any time the user wishes to stop trading that <code>MarketContract</code>.   </p>
-<h1 id='api'>API</h1>
-<p>Coming Soon...</p>
-<h1 id='dapp'>dApp</h1>
-<p>The MARKET Protocol dApp provides tools for contract creation, oracle testing and deployment. 
-Additionally, users are able to easily search previously deployed MARKET contracts they would 
-like to trade.</p>
-
-<p>A simulated trading environment allows user to place test trades and participate in beta
-releases of the protocol.</p>
-<h2 id='contract-deployment'>Contract Deployment</h2>
-<p>MARKET Protocol creates a flexible contract specification which allows users to easily implement
-their desired contract prior to trading.  First time users, can use our 
-<a href="https://dapp.marketprotocol.io/contract/deploy?mode=guided">Guided Deploy</a> process
-walking them through the step by step process to deployment.  Expert users, can opt for a more
-condensed process with the <a href="https://dapp.marketprotocol.io/contract/deploy?mode=quick">Quick Deploy</a> </p>
-<h3 id='guided-deploy'>Guided Deploy</h3>
-<p>MARKET Protocol Quick Deploy provides a step by step guide to first time deployment.  Below are the needed variables
-to deploy a contract to the Ethereum Blockchain</p>
-
-<ol>
-<li><code>Name</code> - the contract name should be as descriptive as possible capturing the underlying asset relationship as well as possibly the expiration. 
-Something like <code>ETH/BTC-Kraken_YYYY-MM-DD</code> may help others understand the underlying asset, the data source, and 
-expiration date in a nice human readable and searchable way.
-In the future, MARKET will implement a standardized naming convention and guidelines to formalize this process</li>
-<li><code>Base Token</code> - every contract should be backed by an ERC20 Token that will be used a collateral for the contract. Traders 
-must deposit tokens to the smart contract prior to trading, and upon execution of a trade, the appropriate amount of 
-collateral becomes locked until that position is exited. In this fashion, all open positions always remain 100% 
-collateralized removing counter party risk from the traders. Please specify a ERC20 Token address for this contract.
-In the future, users will be able to easily select from well known ERC20 tokens to ensure more safety and 
-avoid dealing with long addresses.</li>
-<li><code>Oraclize.it data source</code> - Oraclize.it offers several data-sources such as &quot;URL&quot; and &quot;WolframAlpha&quot;</li>
-<li><code>Price Decimal Places</code> - Ethereum currently does not support floating points numbers. Therefore all prices reported by 
-oracles must be converted to a whole number (integer). This variable is how many decimal places one needs to move 
-the decimal in order to go from the oracle query price to an integer. For example, if the oracle query results 
-returned a value of 190.22, we need to move the decimal two (2) places to convert to a whole number of 19022, 
-so we would enter 2. </li>
-<li><code>Price Floor</code> - this is the lower bound of price exposure this contract will trade. If the oracle reports a price 
-below this value the contract will enter into settlement. This should also be represented as a whole number. 
-If we take the example above of a price of 190.22 and decide the Floor for our contract should be 150.00, 
-we would enter 15000.</li>
-<li><code>Price Cap</code> - This is the upper bound of price exposure this contract will trade. If the oracle reports a price above this value 
-the contract will enter into settlement. Following our example, if we decide the Cap for our contract 
-should be 230.00, we would enter 23000 as our Cap.<br></li>
-<li><code>Qty Multiplier</code> - The quantity multiplier allows the user to specify how many base units (for Ethereum, this would be wei) each integer 
-price movement changes the value of the contract. If our integerized price was 19022 with a qty multiplier of 1, 
-and the price moved to 19023, then the value will have change by 1 wei. If however the multiplier was set at 
-1,000,000,000 the price movement of 1 unit would now correspond to a value of 1 gwei (not wei). 
-Please see <a href="https://etherconverter.online/">here</a> for an ethereum unit converter.</li>
-<li><code>Expiration Time</code> - upon reaching the expiration timestamp all open positions will settle against the final 
-price query returned by the oracle.</li>
-</ol>
-<h3 id='quick-deploy'>Quick Deploy</h3>
-<p>MARKET Protocol Quick Deploy provides a scaled down interface for easy deployment of contracts to the 
-Ethereum blockchain.  Expert users can enter variables, that are validated with error checking prior
-to deploying.</p>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Name</td>
-<td>Viewable name of this contract, in the future we will implement suggested naming conventions</td>
-</tr>
-<tr>
-<td>Base Token Address</td>
-<td>address of the ERC20 token that will be used for collateral</td>
-</tr>
-<tr>
-<td>Price Floor</td>
-<td>minimum tradeable price of this contract</td>
-</tr>
-<tr>
-<td>Price Cap</td>
-<td>maximum tradeable price of this contract</td>
-</tr>
-<tr>
-<td>Price Decimal Places</td>
-<td>Since all numbers must be represented as integers on the Ethereum blockchain, this is how many decimal places one needs to move the decimal in order to go from the oracle query price to an integer. For instance if the oracle query results returned a value such as 190.22, we need to move the decimal two (2) places to convert to an integer value of 19022.</td>
-</tr>
-<tr>
-<td>Qty Multiplier</td>
-<td>The qty multiplier allows the user to specify how many base units (for ethereum, this would be wei) each integer price movement changes the value of the contract. If our integerized price was 19022 with a qty multiplier of 1, and the price moved to 19023, then the value will have change by 1 wei. If however the multiplier was set at 1,000,000,000 the price movement of 1 unit would now correspond to a value of 1 gwei (not wei)</td>
-</tr>
-<tr>
-<td>Expiration Time</td>
-<td>Expiration timestamp for all open positions to settle.</td>
-</tr>
-<tr>
-<td>Oraclize.it data source</td>
-<td>Available data sources from Oraclize.it</td>
-</tr>
-<tr>
-<td>Oraclize.it Query</td>
-<td>Properly structured Oraclize.it query, please use the <a href="http://dapp.marketprotocol.io/test">test query</a> page for clarification</td>
-</tr>
-</tbody></table>
-<h2 id='explore-contracts'>Explore Contracts</h2>
-<p>MARKET Protocol&#39;s dApp provides the needed functionality to easily search, filter, and sort already deployed
-MARKET Smart Contracts.  </p>
-<h2 id='find-contracts'>Find Contracts</h2>
-<p>The <a href="https://dapp.marketprotocol.io/contract/find">Find Contracts</a> screen allows for a reverse lookup
-for MARKET Contracts using the ethereum address of the deployed contract.  Users can enter
-a known address, if valid, the dApp will display the current specifications of the MARKET Contract
-deployed to this address.</p>
-<h2 id='test-query'>Test Query</h2><h2 id='simulated-exchange'>Simulated Exchange</h2>
-<p>Coming soon...</p>
 <h1 id='faq-general'>FAQ - General</h1><h3 id='what-is-a-derivative'>What is a derivative?</h3>
 <p>A derivative represents a contract between a buyer and a seller. The value is derived from on an underlying asset or assets. Common derivatives use stocks, commodities, currencies, bonds, or interest rates as the underlying asset for the contract.</p>
 <h3 id='are-you-a-decentralized-exchange'>Are you a decentralized exchange?</h3>
