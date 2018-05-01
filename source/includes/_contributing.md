@@ -82,7 +82,7 @@ or sensitive information, and don't break laws.
 Remember when you update an issue or respond to an email you are potentially sending to a large number of people.
 Please consider this before you update. Also remember that nobody likes spam.
 
-Full code of conduct is posted available [here](https://github.com/MARKETProtocol/meta/blob/master/guidelines/CODE_OF_CONDUCT.md)
+Full code of conduct is posted available [here](https://github.com/MARKETProtocol/meta/blob/master/guidelines/CODE_OF_CONDUCT.md).
 
 ## Reporting Issues
 
