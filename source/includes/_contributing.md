@@ -12,10 +12,9 @@ There are three main repositories that are considered as core components of the 
 - [dApp](https://github.com/MARKETProtocol/dApp) - React based dApp for contract creation, exploration, and simulated trading.
 
 
-Additionally, these repositories have some very useful information for developers and community members
+Additionally, the following repository has useful information for developers and community members:
 
 - [community](https://github.com/MARKETProtocol/community) - upcoming dev calls, meeting minutes and events
-- [meta](https://github.com/MARKETProtocol/meta) - project wide information
 
 
 ## Dive Right In
@@ -44,7 +43,7 @@ The latest merged code generally lives in the `develop` branch of each repositor
 We are very proud users of [Gitcoin](https://gitcoin.co/).  It allows us an easy way to reward our community members
 for their hard work contributing to MARKET Protocol.  Additionally, it allows us to gain traction on issues that are a
 priority for us to address.  We won't always stake every issue, but if you need a bounty to encourage your participation
-on an issue, and there isn't one yet, please reach out on [discord](https://www.marketprotocol.io/discord).
+on an issue, and there isn't one yet, please reach out on [Discord](https://www.marketprotocol.io/discord).
 
 There are a few guidelines when using Gitcoin that are worth mentioning
 
@@ -82,7 +81,7 @@ or sensitive information, and don't break laws.
 Remember when you update an issue or respond to an email you are potentially sending to a large number of people.
 Please consider this before you update. Also remember that nobody likes spam.
 
-Full code of conduct is posted available [here](https://github.com/MARKETProtocol/meta/blob/master/guidelines/CODE_OF_CONDUCT.md).
+Full code of conduct is posted available [here](https://github.com/MARKETProtocol/community/blob/master/guidelines/code-of-confuct.md).
 
 ## Reporting Issues
 
@@ -98,7 +97,7 @@ No issue is too small. Help us fix our tpyos!
  - [MARKET Protocol issues (Solidity)](https://github.com/MARKETProtocol/MARKETProtocol/issues)
  - [MARKET.js](https://github.com/MARKETProtocol/MARKET.js/issues)
  - [dApp issues](https://github.com/MARKETProtocol/dApp/issues)
- - [main website issues](https://github.com/MARKETProtocol/website/issues)
+ - [Main website issues](https://github.com/MARKETProtocol/website/issues)
 
 
 ## Security Issues
