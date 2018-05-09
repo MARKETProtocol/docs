@@ -34,6 +34,9 @@ clearing and collateral pool infrastructure, enabling third parties to build app
 
 > Visit our Github: [https://github.com/MARKETProtocol](https://github.com/MARKETProtocol)
 
+![alt text](https://raw.githubusercontent.com/MARKETProtocol/assets/master/Schematics/MARKET_Protocol-TradeFlow.png 
+"Trade Flow")
+ 
 ## Documentation
 * [Smart Contracts](#solidity-smart-contracts): The underlying MARKET Protocol smart contracts
 * [API](#api):  Typescript API documentation
