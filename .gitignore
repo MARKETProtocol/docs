@@ -16,7 +16,7 @@ build/
 .cache
 .vagrant
 .sass-cache
-igonore_*.*
+ignore_*.*
 
 # YARD artifacts
 .yardoc
