@@ -49,7 +49,7 @@ There are a few guidelines when using Gitcoin that are worth mentioning
 
 1. Please only `start work` on an issue when your actually planning on working on it. Don't call dibs before you can allocate time to the issue
 1. Please make sure to comment in the issue immediately after starting work so we know your plans for implementation and a timeline.
-1. We politely ask that users only have open work on a single bounty at a time, if you have an open bounty that has a PR submitted and would like to tackle another issue, please ask in [discord](https://www.marketprotocol.io/discord) before proceeding
+1. We politely ask that users only have open work on a single bounty at a time, if you have an open bounty that has a PR submitted and would like to tackle another issue, please ask in [Discord](https://www.marketprotocol.io/discord) before proceeding
 1. We will do our best to scope out the issue, but please anticipate some revision requested after you have submitted a PR, we are happy to tip you if these end up well beyond the initial scope
 1. Once you have create a PR, please `submit work` on Gitcoin so we are able to pay you out once we have accepted the work
 
@@ -98,7 +98,6 @@ No issue is too small. Help us fix our tpyos!
  - [MARKET.js](https://github.com/MARKETProtocol/MARKET.js/issues)
  - [dApp issues](https://github.com/MARKETProtocol/dApp/issues)
  - [Main website issues](https://github.com/MARKETProtocol/website/issues)
-
 
 ## Security Issues
 
