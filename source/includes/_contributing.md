@@ -16,7 +16,9 @@ There are three main repositories that are considered as core components of the 
 If you're ready to start helping us to build the decentralized future right now and you just need an issue to focus on,
 check out [this list of open issues](https://github.com/orgs/MARKETProtocol/projects/1?card_filter_query=label%3A%22help+wanted%22+no%3Aassignee+is%3Aopen).
 
-First, read our [development process](#development-process) and [community guidelines](#community-guidelines). Then [read here](https://github.com/MARKETProtocol/community/blob/master/docs/project-management.md) how the project board is organized and how we use labels on GitHub.
+First, read our [development process](#development-process) and [community guidelines](#community-guidelines).
+
+Then, [read here](https://github.com/MARKETProtocol/community/blob/master/docs/project-management.md) how the project board is organized and how we use labels on GitHub.
 
 And have fun!
 
