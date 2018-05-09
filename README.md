@@ -20,3 +20,5 @@ To deploy your changes to [docs.marketprotocol.io](https://docs.marketprotocol.i
 ```shell
 ./deploy.sh
 ```
+
+More details: [Deploying Slate](https://github.com/lord/slate/wiki/Deploying-Slate)
