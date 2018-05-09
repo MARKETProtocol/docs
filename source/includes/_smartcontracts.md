@@ -45,7 +45,10 @@ function MarketContract(
 The `MarketContract` represents the main contract responsible for 
 combining needed functionality for trading, settlement and position management.  Each `MarketContract` 
 must be paired with a unique `MarketCollateralPool` ([see below](#collateral-pool)) after instantiation in order to allow trading to become
-enabled.  
+enabled.
+
+![alt text](https://raw.githubusercontent.com/MARKETProtocol/assets/master/Schematics/MARKET_Protocol-SmartContracts.png 
+"Contract Diagram")
 
 `MarketContract` is an abstract contract that will allow for implementing 
 classes such as `MarketContractOraclize` to complete the needed top level functionality around oracle solutions.
