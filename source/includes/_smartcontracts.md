@@ -476,7 +476,7 @@ such matters.
 ## MKT Tokens
 
 ![alt text](https://raw.githubusercontent.com/MARKETProtocol/assets/master/Art/MARKET_Protocol-MKT-small.png 
-"Contract Diagram")
+"MKT Token")
 
 MKT Tokens are the lifeblood of the MARKET ecosystem.  All fees charged by nodes will be transacted in MKT and additionally
 anyone who wishes to create a new `MarketContract` will be forced to have some minimum balance of MKT. Finally, for every
