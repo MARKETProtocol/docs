@@ -83,6 +83,14 @@ Please consider this before you update. Also remember that nobody likes spam.
 
 Full code of conduct is posted available [here](https://github.com/MARKETProtocol/community/blob/master/guidelines/code-of-confuct.md).
 
+## Engineering Weekly
+
+Once a week, contributors get together to talk about the project.  
+
+In the Engineering Weekly meetings, the core engineering team, contributors, and casual followers check in to discuss the progress of the project, to call attention to particular items, to make announcements, or to seek discussion of a topic.
+
+Everyone is welcome! Check [details here](https://github.com/MARKETProtocol/community/blob/master/docs/engineering-weekly.md). And you can find the [notes from previous meetings here](https://github.com/MARKETProtocol/community/tree/master/meeting-notes).
+
 ## Reporting Issues
 
 If you find bugs, mistakes or inconsistencies in the project's code or
