@@ -591,7 +591,9 @@ issues to report please do so by opening an issue on <a href="https://github.com
 <p>The <code>MarketContract</code> represents the main contract responsible for 
 combining needed functionality for trading, settlement and position management.  Each <code>MarketContract</code> 
 must be paired with a unique <code>MarketCollateralPool</code> (<a href="#collateral-pool">see below</a>) after instantiation in order to allow trading to become
-enabled.  </p>
+enabled.</p>
+
+<p><img src="https://raw.githubusercontent.com/MARKETProtocol/assets/master/Schematics/MARKET_Protocol-SmartContracts.png" title="Contract Diagram" alt="alt text" /></p>
 
 <p><code>MarketContract</code> is an abstract contract that will allow for implementing 
 classes such as <code>MarketContractOraclize</code> to complete the needed top level functionality around oracle solutions.
