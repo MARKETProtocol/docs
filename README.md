@@ -17,7 +17,7 @@ bundle exec middleman server
 
 To deploy your changes to [docs.marketprotocol.io](https://docs.marketprotocol.io/)
 
-1 - Make sure your `origin` is `github.com/MARKETProtocol/docs.git`
+1 - Make sure your `origin` is `github.com/MARKETProtocol/docs.git`   
 2 - `./deploy.sh`
 
 ## Contributing

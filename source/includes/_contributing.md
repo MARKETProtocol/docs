@@ -11,18 +11,14 @@ There are three main repositories that are considered as core components of the 
 - [MARKET.js](https://github.com/MARKETProtocol/MARKET.js) - library of tools to interact with the protocol
 - [dApp](https://github.com/MARKETProtocol/dApp) - React based dApp for contract creation, exploration, and simulated trading.
 
-
-Additionally, the following repository has useful information for developers and community members:
-
-- [community](https://github.com/MARKETProtocol/community) - upcoming dev calls, meeting minutes and events
-
-
 ## Dive Right In
 
 If you're ready to start helping us to build the decentralized future right now and you just need an issue to focus on,
 check out [this list of open issues](https://github.com/orgs/MARKETProtocol/projects/1?card_filter_query=label%3A%22help+wanted%22+no%3Aassignee+is%3Aopen).
 
-Read our [development process](#development-process) and [community guidelines](#community-guidelines) first and have fun!
+First, read our [development process](#development-process) and [community guidelines](#community-guidelines). Then [read here](https://github.com/MARKETProtocol/community/blob/master/docs/project-management.md) how the project board is organized and how we use labels on GitHub.
+
+And have fun!
 
 ## Development Process
 
@@ -36,7 +32,6 @@ The latest merged code generally lives in the `develop` branch of each repositor
 1. Follow the appropriate [coding style](#coding-style) and write some awesome code
 1. See [here](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) for some notes on good commit messages
 1. Open a pull request to the `develop` branch, not `master`
-
 
 ## Gitcoin and Bounties
 
@@ -53,7 +48,6 @@ There are a few guidelines when using Gitcoin that are worth mentioning
 1. We will do our best to scope out the issue, but please anticipate some revision requested after you have submitted a PR, we are happy to tip you if these end up well beyond the initial scope
 1. Once you have create a PR, please `submit work` on Gitcoin so we are able to pay you out once we have accepted the work
 
-
 ## Coding Style
 
 We use a variety of programming languages in our repositories. When contributing, please follow existing coding conventions
@@ -61,7 +55,6 @@ and refer to the CONTRIBUTING.md file in the repository, if one exists.
 
 [comment]: TODO: update style
 For JavaScript, we use [NPM's style](https://docs.npmjs.com/misc/coding-style), which is automatically enforced via [prettier](https://prettier.io/).
-
 
 ## Community Guidelines
 
@@ -85,11 +78,13 @@ Full code of conduct is posted available [here](https://github.com/MARKETProtoco
 
 ## Engineering Weekly
 
-Once a week, contributors get together to talk about the project.  
+Once a week, we all get together to talk about the project.
 
-In the Engineering Weekly meetings, the core engineering team, contributors, and casual followers check in to discuss the progress of the project, to call attention to particular items, to make announcements, or to seek discussion of a topic.
+In the Engineering Weekly meeting, the core engineering team and contributors check in to discuss the progress of the project, to call attention to particular items, to make announcements, or to seek discussion of a topic.
 
-Everyone is welcome! Check [details here](https://github.com/MARKETProtocol/community/blob/master/docs/engineering-weekly.md). And you can find the [notes from previous meetings here](https://github.com/MARKETProtocol/community/tree/master/meeting-notes).
+Everyone is welcome!
+
+Check [details here](https://github.com/MARKETProtocol/community/blob/master/docs/engineering-weekly.md). And you can find the [notes from previous meetings here](https://github.com/MARKETProtocol/community/tree/master/meeting-notes).
 
 ## Reporting Issues
 
