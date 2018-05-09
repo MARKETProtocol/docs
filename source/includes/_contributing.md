@@ -18,9 +18,7 @@ check out [this list of open issues](https://github.com/orgs/MARKETProtocol/proj
 
 First, read our [development process](#development-process) and [community guidelines](#community-guidelines).
 
-Then, [read here](https://github.com/MARKETProtocol/community/blob/master/docs/project-management.md) how the project board is organized and how we use labels on GitHub.
-
-And have fun!
+Then, [read here](https://github.com/MARKETProtocol/community/blob/master/docs/project-management.md) how the project board is organized and how we use labels on GitHub. And have fun!
 
 ## Development Process
 
@@ -84,9 +82,9 @@ Once a week, we all get together to talk about the project.
 
 In the Engineering Weekly meeting, the core engineering team and contributors check in to discuss the progress of the project, to call attention to particular items, to make announcements, or to seek discussion of a topic.
 
-Everyone is welcome!
+Everyone is welcome! Check [details here](https://github.com/MARKETProtocol/community/blob/master/docs/engineering-weekly.md).
 
-Check [details here](https://github.com/MARKETProtocol/community/blob/master/docs/engineering-weekly.md). And you can find the [notes from previous meetings here](https://github.com/MARKETProtocol/community/tree/master/meeting-notes).
+And you can find the [notes from previous meetings here](https://github.com/MARKETProtocol/community/tree/master/meeting-notes).
 
 ## Reporting Issues
 
