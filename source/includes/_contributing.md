@@ -6,10 +6,10 @@ MARKET Protocol is an Open Source project and we welcome contributions of all so
 There are many ways to help, from reporting issues, contributing code, and helping us improve our community.
 
 Please, start reading about our:
-* [Development process](#development-process)
-* [Community guidelines](#community-guidelines)
-* [Coding style](https://docs.marketprotocol.io/#coding-style)
-* [Project board and GitHub labels](https://github.com/MARKETProtocol/community/blob/master/docs/project-management.md)
+- [Development process](#development-process)
+- [Community guidelines](#community-guidelines)
+- [Coding style](https://docs.marketprotocol.io/#coding-style)
+- [Project board and GitHub labels](https://github.com/MARKETProtocol/community/blob/master/docs/project-management.md)  
 
 ## Dive Right In
 
