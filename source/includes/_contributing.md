@@ -6,15 +6,14 @@ MARKET Protocol is an Open Source project and we welcome contributions of all so
 There are many ways to help, from reporting issues, contributing code, and helping us improve our community.
 
 Please, start reading about our:
-- [Development process](#development-process)
-- [Community guidelines](#community-guidelines)
-- [Coding style](https://docs.marketprotocol.io/#coding-style)
-- [Project board and GitHub labels](https://github.com/MARKETProtocol/community/blob/master/docs/project-management.md)
+* [Development process](#development-process)
+* [Community guidelines](#community-guidelines)
+* [Coding style](https://docs.marketprotocol.io/#coding-style)
+* [Project board and GitHub labels](https://github.com/MARKETProtocol/community/blob/master/docs/project-management.md)
 
 ## Dive Right In
 
-If you're ready to start helping us to build the decentralized future right now and you just need an issue to focus on,
-check out [this list of open issues](https://github.com/orgs/MARKETProtocol/projects/1?card_filter_query=label%3A%22help+wanted%22+no%3Aassignee+is%3Aopen).
+If you're ready to start helping us to build the decentralized future right now and you just need an issue to focus on, check out [this list of open issues](https://github.com/orgs/MARKETProtocol/projects/1?card_filter_query=label%3A%22help+wanted%22+no%3Aassignee+is%3Aopen).
 
 There are three main repositories that are considered as core components of the MARKET Protocol:
 
@@ -22,7 +21,9 @@ There are three main repositories that are considered as core components of the 
 - [MARKET.js](https://github.com/MARKETProtocol/MARKET.js) - library of tools to interact with the protocol
 - [dApp](https://github.com/MARKETProtocol/dApp) - React based dApp for contract creation, exploration, and simulated trading.
 
-Note that the `README` file of each one of these repositories has a helpful `Getting Started` section. Plus, you will find a `CONTRIBUTING.md` file with additional details in all of them as well. And if you have any question, you can join our [Discord Community](https://marketprotocol.io/discord) to get in touch with our dev staff and other contributors. We will love to see you there.
+Note that the `README` file of each one of these repositories has a helpful `Getting Started` section. Plus, you will find a `CONTRIBUTING.md` file with additional details in all of them as well.
+
+Remember to join our [Discord Community](https://marketprotocol.io/discord) to get in touch with our dev staff and other contributors. We will love to see you there.
 
 We appreaciate your contribution and we hope you have lots of fun while working on MARKET Protocol!
 
