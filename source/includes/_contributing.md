@@ -5,11 +5,11 @@ Want to hack on MARKET Protocol? Awesome!
 MARKET Protocol is an Open Source project and we welcome contributions of all sorts.
 There are many ways to help, from reporting issues, contributing code, and helping us improve our community.
 
-Please, start reading about our:
+Please, start reading about our:   
 - [Development process](#development-process)
 - [Community guidelines](#community-guidelines)
 - [Coding style](https://docs.marketprotocol.io/#coding-style)
-- [Project board and GitHub labels](https://github.com/MARKETProtocol/community/blob/master/docs/project-management.md)  
+- [Project board and GitHub labels](https://github.com/MARKETProtocol/community/blob/master/docs/project-management.md)
 
 ## Dive Right In
 
