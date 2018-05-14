@@ -24,7 +24,7 @@ There are three main repositories that are considered as core components of the 
 
 Note that the `README` file of each one of these repositories has a helpful `Getting Started` section. Plus, you will find a `CONTRIBUTING.md` file with additional details in all of them as well. And if you have any question, you can join our [Discord Community](https://marketprotocol.io/discord) to get in touch with our dev staff and other contributors. We will love to see you there.
 
-We appreaciate your contribution and we hope you have of fun while working on MARKET Protocol!
+We appreaciate your contribution and we hope you have lots of fun while working on MARKET Protocol!
 
 ## Development Process
 
