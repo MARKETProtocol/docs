@@ -40,6 +40,13 @@ end
 activate :relative_assets
 set :relative_links, true
 
+# Generate robots.txt
+activate :robots,
+  rules: [
+    { user_agent: '*', disallow: %w() }
+  ],
+  sitemap: 'https://marketprotocol.io/sitemap.xml'
+
 # Build Configuration
 configure :build do
   # If you're having trouble with Middleman hanging, commenting
