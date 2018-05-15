@@ -45,7 +45,7 @@ activate :robots,
   rules: [
     { user_agent: '*', disallow: %w() }
   ],
-  sitemap: 'https://marketprotocol.io/sitemap.xml'
+  sitemap: 'https://marketprotocol.io/docs_sitemap.xml'
 
 # Build Configuration
 configure :build do
