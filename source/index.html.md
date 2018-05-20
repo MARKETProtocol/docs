@@ -5,9 +5,9 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - solidity
 
 toc_footers:
-  - <a href='http://www.marketprotocol.io/'>Home</a>
-  - <a href='http://dapp.marketprotocol.io/'>dApp</a>
-  - <a href='https://www.marketprotocol.io/assets/MARKET_Protocol-Whitepaper.pdf'>Whitepaper</a>
+  - <a href='https://marketprotocol.io/'>Home</a>
+  - <a href='https://dapp.marketprotocol.io/'>dApp</a>
+  - <a href='https://marketprotocol.io/assets/MARKET_Protocol-Whitepaper.pdf'>Whitepaper</a>
   - <a href='https://github.com/MARKETProtocol/'>GitHub</a>
 
 includes:
@@ -15,6 +15,7 @@ includes:
   - api
   - smartcontracts
   - faq-general
+  - faq-market-protocol
   - faq-solidity
   - faq-api
   - faq-dapp
@@ -44,6 +45,7 @@ clearing and collateral pool infrastructure, enabling third parties to build app
 
 ## Frequently Asked Questions
 * [General FAQ](#faq-general)
+* [MARKET Protocol FAQ](#faq-market-protocol)
 * [Smart Contract FAQ](#faq-solidity-smart-contracts)
 * [API FAQ](#faq-api) 
 * [dApp FAQ](#faq-dapp) 
