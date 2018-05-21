@@ -6,7 +6,7 @@ MARKET Protocol has chosen to build on top of Ethereum.
 MARKET Protocol Token
 ## What is the token ticker symbol?
 MKT
-## How can I receive updates for MARKET protocol?
+## How can I receive updates from MARKET Protocol?
 Check out our [telegram room](htttps://marketprotocol.io/telegram) and join our [newsletter!](https://marketprotocol.io/#subscribe) 
 ## What's the total supply of the token?
 600 million MKT tokens (600,000,000) 
@@ -17,7 +17,7 @@ No.  All tokens will be minted upon main net launch.
 ## What wallet should I use to keep my MKT tokens?
 MKT is an ERC20 token, so a wallet that supports ERC20 tokens will be needed.
 ## When will the main net launch occur?
-Our goal is Q1 2019.
+The proposed launch date is in Q1 2019 
 ## What are the official chat channels and links?
 * Main Site [https://marketprotocol.io](https://marketprotocol.io)
 * Medium [https://medium.com/market-protocol](https://medium.com/market-protocol)
