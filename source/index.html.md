@@ -11,7 +11,6 @@ toc_footers:
   - <a href='https://github.com/MARKETProtocol/'>GitHub</a>
 
 includes:
-  - bug-reporting
   - dapp
   - api
   - smartcontracts
@@ -22,6 +21,7 @@ includes:
   - faq-dapp
   - getting-help
   - contributing
+  - bug-reporting
 
 search: true
 ---

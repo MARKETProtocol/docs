@@ -26,7 +26,7 @@ Note that the `README` file of each one of these repositories has a helpful `Get
 
 Remember to join our [Discord Community](https://marketprotocol.io/discord) to get in touch with our dev staff and other contributors. We will love to see you there.
 
-We appreaciate your contribution and we hope you have lots of fun while working on MARKET Protocol!
+We appreciate your contribution and we hope you have lots of fun while working on MARKET Protocol!
 
 ## Development Process
 
@@ -82,7 +82,7 @@ or sensitive information, and don't break laws.
 Remember when you update an issue or respond to an email you are potentially sending to a large number of people.
 Please consider this before you update. Also remember that nobody likes spam.
 
-Full code of conduct is posted available [here](https://github.com/MARKETProtocol/community/blob/master/guidelines/code-of-confuct.md).
+Full code of conduct is posted available [here](https://github.com/MARKETProtocol/community/blob/master/guidelines/code-of-conduct.md).
 
 ## Engineering Weekly
 
@@ -101,7 +101,7 @@ MARKET Protocol is just as much about community as it is about our technology.
 We need constant help in improving our documentation, building new tools to interface with our platform,
 spreading the word to new users, helping new users getting setup and much more.
 
-Please get in touch if you would like to help out. Our `general` channel on [Discord](#discord) is a great place to
+Please get in touch if you would like to help out. Our `general` channel on [Discord](https://marketprotocol.io/discord) is a great place to
 share ideas and volunteer to help.
 
 ## Full Time Positions
