@@ -11,6 +11,7 @@ toc_footers:
   - <a href='https://github.com/MARKETProtocol/'>GitHub</a>
 
 includes:
+  - bug-reporting
   - dapp
   - api
   - smartcontracts
@@ -29,15 +30,15 @@ search: true
 
 Welcome to MARKET Protocol documentation here you will find documentation for our smart contracts and APIs.
 
-MARKET Protocol has been created to provide a secure, flexible, open source foundation for decentralized trading on the 
-Ethereum blockchain. We provide the pieces necessary to create a decentralized exchange, including the requisite 
+MARKET Protocol has been created to provide a secure, flexible, open source foundation for decentralized trading on the
+Ethereum blockchain. We provide the pieces necessary to create a decentralized exchange, including the requisite
 clearing and collateral pool infrastructure, enabling third parties to build applications for trading.
 
 > Visit our Github: [https://github.com/MARKETProtocol](https://github.com/MARKETProtocol)
 
 [![Trade Flow](https://raw.githubusercontent.com/MARKETProtocol/assets/master/Schematics/MARKET_Protocol-TradeFlow.png)]
 (https://raw.githubusercontent.com/MARKETProtocol/assets/master/Schematics/MARKET_Protocol-TradeFlow.png)
- 
+
 ## Documentation
 * [Smart Contracts](#solidity-smart-contracts): The underlying MARKET Protocol smart contracts
 * [API](#api):  Typescript API documentation
@@ -47,5 +48,5 @@ clearing and collateral pool infrastructure, enabling third parties to build app
 * [General FAQ](#faq-general)
 * [MARKET Protocol FAQ](#faq-market-protocol)
 * [Smart Contract FAQ](#faq-solidity-smart-contracts)
-* [API FAQ](#faq-api) 
-* [dApp FAQ](#faq-dapp) 
+* [API FAQ](#faq-api)
+* [dApp FAQ](#faq-dapp)

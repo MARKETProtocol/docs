@@ -94,32 +94,6 @@ Everyone is welcome! Check [details here](https://github.com/MARKETProtocol/comm
 
 And you can find the [notes from previous meetings here](https://github.com/MARKETProtocol/community/tree/master/meeting-notes).
 
-## Reporting Issues
-
-If you find bugs, mistakes or inconsistencies in the project's code or
-documents, please let us know by filing an issue at the appropriate issue
-tracker (we use multiple repositories).
-
-<aside class="notice">
-No issue is too small. Help us fix our tpyos!
-</aside>
-
- - [Docs issues](https://github.com/MARKETProtocol/docs/issues)
- - [MARKET Protocol issues (Solidity)](https://github.com/MARKETProtocol/MARKETProtocol/issues)
- - [MARKET.js](https://github.com/MARKETProtocol/MARKET.js/issues)
- - [dApp issues](https://github.com/MARKETProtocol/dApp/issues)
- - [Main website issues](https://github.com/MARKETProtocol/website/issues)
-
-## Security Issues
-
-The MARKET Protocol and its implementations are still in early development, which means there may be problems with the
-protocol or in our implementations. We take security vulnerabilities very seriously. If you discover a security issue,
-please bring it to our attention right away!
-
-If you find a vulnerability please send your report privately to [support@marketprotocol.io](mailto:support@marketprotocol.io) Please DO NOT file a public issue.
-
-If the issue is a protocol weakness or something not yet deployed, feel free to discuss it openly.
-
 ## Community Improvement
 
 MARKET Protocol is just as much about community as it is about our technology.
