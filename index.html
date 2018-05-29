@@ -258,9 +258,6 @@
               </ul>
           </li>
           <li>
-            <a href="#api" class="toc-h1 toc-link" data-title="api">API</a>
-          </li>
-          <li>
             <a href="#solidity-smart-contracts" class="toc-h1 toc-link" data-title="solidity-smart-contracts">Solidity Smart Contracts</a>
               <ul class="toc-list-h2">
                   <li>
@@ -283,6 +280,17 @@
                   </li>
                   <li>
                     <a href="#mkt-tokens" class="toc-h2 toc-link" data-title="mkt-tokens">MKT Tokens</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#market-js" class="toc-h1 toc-link" data-title="market-js">MARKET.js</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#order-life-cycle" class="toc-h2 toc-link" data-title="order-life-cycle">Order Life Cycle</a>
+                  </li>
+                  <li>
+                    <a href="#requirements-for-a-successful-traderorder-call" class="toc-h2 toc-link" data-title="requirements-for-a-successful-code-traderorder-code-call">Requirements for a successful <code>traderOrder</code> call</a>
                   </li>
               </ul>
           </li>
@@ -462,7 +470,7 @@ clearing and collateral pool infrastructure, enabling third parties to build app
 <h2 id='documentation'>Documentation</h2>
 <ul>
 <li><a href="#solidity-smart-contracts">Smart Contracts</a>: The underlying MARKET Protocol smart contracts</li>
-<li><a href="#api">API</a>:  Typescript API documentation</li>
+<li><a href="#market-js">MARKET.js</a>: Typescript ibrary to interact with MARKET Protocol</li>
 <li><a href="#dapp">dApp</a>: Decentralized application allowing for easy MARKET Protocol contract deployment and exploration</li>
 </ul>
 <h2 id='frequently-asked-questions'>Frequently Asked Questions</h2>
@@ -593,8 +601,6 @@ a known address, if valid, the dApp will display the current specifications of t
 deployed to this address.</p>
 <h2 id='test-query'>Test Query</h2><h2 id='simulated-exchange'>Simulated Exchange</h2>
 <p>Coming soon...</p>
-<h1 id='api'>API</h1>
-<p>Coming Soon...</p>
 <h1 id='solidity-smart-contracts'>Solidity Smart Contracts</h1>
 <p>All code for our smart contracts can be found <a href="https://github.com/MARKETProtocol/MARKETProtocol">here</a>. If you have any
 issues to report please do so by opening an issue on <a href="https://github.com/MARKETProtocol/MARKETProtocol/issues">GitHub</a>.</p>
@@ -992,6 +998,10 @@ to trade against (taking liquidity).  </p>
 <td>agreed upon execution price</td>
 </tr>
 <tr>
+<td>expirationTimeStamp</td>
+<td>timestamp that the order is valid until</td>
+</tr>
+<tr>
 <td>qty</td>
 <td>agreed upon execution qty</td>
 </tr>
@@ -1124,6 +1134,46 @@ such matters.</p>
 anyone who wishes to create a new <code>MarketContract</code> will be forced to have some minimum balance of MKT. Finally, for every
 <code>MarketContract</code> a user desires to trade, some amount of MKT must be locked to enable access to that contract.  These
 can be unlocked at any time the user wishes to stop trading that <code>MarketContract</code>.   </p>
+<h1 id='market-js'>MARKET.js</h1>
+<p>All code for this library can be found <a href="https://github.com/MARKETProtocol/MARKET.js">here</a>. If you have any
+issues to report or features to request please do so by opening an issue on 
+<a href="https://github.com/MARKETProtocol/MARKET.js/issues">GitHub</a>.</p>
+
+<p><strong>Under Construction</strong></p>
+<h2 id='order-life-cycle'>Order Life Cycle</h2>
+<p>Note: this is the generalized lifecycle, function calls will be replaced with MARKET.js function calls that provide
+a simplified abstraction to the underlying solidity calls. </p>
+
+<ol>
+<li>An order is generated from a <code>maker</code> as described <a href="#orders">here</a>. Signing and hashing this order allows for us
+to confirm its validity.</li>
+<li>Depending on the application, this order may then be broadcast to a third party order book host who may provide
+further verifications before publishing the order to their orders books, including: 
+
+<ul>
+<li>Verifying sufficient funding in the MARKET Contract for the maker&#39;s address</li>
+<li>Validating user has locked MKT to allow for access for trading the specified MARKET Protocol smart contract.</li>
+</ul></li>
+<li>The specified taker, or an arbitrary taker (if none specified) is able to call the <code>traderOrder</code> function filling 
+all or a partial qty of the order.  This transaction happens on-chain and therefore validates all aspects of the transaction are
+successful.</li>
+<li> Third party order book hosts will be responsible for removing completely filled or completely cancelled orders from 
+their order books.  Orders can be cancelled by setting an <code>expirationTimeStamp</code> or by calling the function <code>cancelOrder</code>
+at any time</li>
+</ol>
+<h2 id='requirements-for-a-successful-traderorder-call'>Requirements for a successful <code>traderOrder</code> call</h2>
+<p>In order for a taker to not waste gas on a call to <code>traderOrder</code> that will ultimately fail it is important to note 
+the following requirements in order for a transaction to be executed.</p>
+
+<ol>
+<li><code>MarketContract</code> must be deployed correctly, linked to a <code>MarketCollateralPool</code> and not be in an <code>isSettled</code> state</li>
+<li>Both <code>maker</code> and <code>taker</code> must have locked the requisite amount of MKT to enable trading for the specific contract.
+This can be verified by calling <code>isUserEnabledForContract</code> in the <code>MarketToken</code> smart contract (not enforced on Rinkeby currently). </li>
+<li>caller of <code>tradeOrder</code> is either the specified <code>taker</code> in the order, or no taker was specified</li>
+<li>the <code>maker</code> and <code>taker</code> are not the same address (no <a href="https://en.wikipedia.org/wiki/Wash_trade">wash</a> trading)</li>
+<li>the order has not expired, been cancelled, or been completely filled</li>
+<li>both <code>maker</code> and <code>taker</code> have sufficient balances to lock collateral for attempted trade<br></li>
+</ol>
 <h1 id='faq-general'>FAQ - General</h1><h2 id='what-blockchain-is-used'>What blockchain is used?</h2>
 <p>MARKET Protocol has chosen to build on top of Ethereum.</p>
 <h2 id='what-is-the-token-name'>What is the token name?</h2>
