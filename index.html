@@ -1169,9 +1169,9 @@ the following requirements in order for a transaction to be executed.</p>
 <li><code>MarketContract</code> must be deployed correctly, linked to a <code>MarketCollateralPool</code> and not be in an <code>isSettled</code> state</li>
 <li>Both <code>maker</code> and <code>taker</code> must have locked the requisite amount of MKT to enable trading for the specific contract.
 This can be verified by calling <code>isUserEnabledForContract</code> in the <code>MarketToken</code> smart contract (not enforced on Rinkeby currently). </li>
-<li>caller of <code>tradeOrder</code> is either the specified <code>taker</code> in the order, or no taker was specified</li>
+<li>caller of <code>tradeOrder</code> is either the specified <code>taker</code> in the order, or no <code>taker</code> was specified</li>
 <li>the <code>maker</code> and <code>taker</code> are not the same address (no <a href="https://en.wikipedia.org/wiki/Wash_trade">wash</a> trading)</li>
-<li>the order has not expired, been cancelled, or been completely filled</li>
+<li>the order has not expired, been cancelled, nor been completely filled</li>
 <li>both <code>maker</code> and <code>taker</code> have sufficient balances to lock collateral for attempted trade<br></li>
 </ol>
 <h1 id='faq-general'>FAQ - General</h1><h2 id='what-blockchain-is-used'>What blockchain is used?</h2>
