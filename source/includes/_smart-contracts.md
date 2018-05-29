@@ -346,6 +346,7 @@ feeRecipient | address of fee recipient node, if any (MARKET does not charge any
 makerFee | fee to paid by the maker in MKT tokens to the `feeRecipient`
 takerFee | fee to paid by the taker in MKT tokens to the `feeRecipient`
 price | agreed upon execution price
+expirationTimeStamp | timestamp that the order is valid until
 qty | agreed upon execution qty
 orderHash | hash created by maker to ensure all order parameters are valid and originated from `maker`
 

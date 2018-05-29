@@ -12,8 +12,8 @@ toc_footers:
 
 includes:
   - dapp
-  - api
-  - smartcontracts
+  - smart-contracts
+  - market-js
   - faq-general
   - faq-market-protocol
   - faq-solidity
@@ -41,7 +41,7 @@ clearing and collateral pool infrastructure, enabling third parties to build app
 
 ## Documentation
 * [Smart Contracts](#solidity-smart-contracts): The underlying MARKET Protocol smart contracts
-* [API](#api):  Typescript API documentation
+* [MARKET.js](#market-js): Typescript ibrary to interact with MARKET Protocol
 * [dApp](#dapp): Decentralized application allowing for easy MARKET Protocol contract deployment and exploration
 
 ## Frequently Asked Questions
