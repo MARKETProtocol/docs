@@ -33,7 +33,7 @@ the following requirements in order for a transaction to be executed.
 1. `MarketContract` must be deployed correctly, linked to a `MarketCollateralPool` and not be in an `isSettled` state
 1. Both `maker` and `taker` must have locked the requisite amount of MKT to enable trading for the specific contract.
 This can be verified by calling `isUserEnabledForContract` in the `MarketToken` smart contract (not enforced on Rinkeby currently). 
-1. caller of `tradeOrder` is either the specified `taker` in the order, or no taker was specified
+1. caller of `tradeOrder` is either the specified `taker` in the order, or no `taker` was specified
 1. the `maker` and `taker` are not the same address (no [wash](https://en.wikipedia.org/wiki/Wash_trade) trading)
-1. the order has not expired, been cancelled, or been completely filled
+1. the order has not expired, been cancelled, nor been completely filled
 1. both `maker` and `taker` have sufficient balances to lock collateral for attempted trade        
