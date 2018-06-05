@@ -58,8 +58,8 @@ There are a few guidelines when using Gitcoin that are worth mentioning
 
 ## Coding Style
 
-We use a variety of programming languages in our repositories. When contributing, please follow existing coding conventions
-and refer to the CONTRIBUTING.md file in the repository, if one exists.
+We use a variety of programming languages in our repositories. When contributing, please follow the existing coding conventions
+according to the `CONTRIBUTING.md` file of each repository.   
 
 [comment]: TODO: update style
 For JavaScript, we use [NPM's style](https://docs.npmjs.com/misc/coding-style), which is automatically enforced via [prettier](https://prettier.io/).
