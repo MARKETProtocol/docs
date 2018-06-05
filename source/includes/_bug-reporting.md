@@ -18,15 +18,15 @@ GitHub allows groups of developers to collaborate on the same documents (often s
 
 In order to report your findings on GitHub, you need to have a GitHub account. If you don't have one yet, you can easily sign up for one for free.
 
-Please, see: [Signing up for a new GitHub account](https://help.github.com/articles/signing-up-for-a-new-github-account/)
+Please, see: [signing up for a new GitHub account](https://help.github.com/articles/signing-up-for-a-new-github-account/)
 
 ## Creating a Bug Report
 
-To report a bug related to MARKET Protocol applications, you must [create an issue in our GitHub account](https://github.com/MARKETProtocol/dapp/issues).
+To report a bug related to MARKET Protocol applications, you must [create an issue in our GitHub repository](https://github.com/MARKETProtocol/dapp/issues).
 
 In our GitHub repositories, issues can be created by anyone and are moderated by our core collaborators.
 
-To create a new issue in our GitHub account, you can [click on this link](https://github.com/MARKETProtocol/dapp/issues/new), or you go to [our GitHub account](https://github.com/MARKETProtocol/dapp/issues/) and click on the `New Issue` button.
+To create a new issue in our GitHub repository, you can [click on this link](https://github.com/MARKETProtocol/dapp/issues/new), or you go to [our GitHub repository](https://github.com/MARKETProtocol/dapp/issues/) and click on the `New Issue` button.
 
 ### When filing a new bug, please include:
 

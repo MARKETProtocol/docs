@@ -12,6 +12,7 @@ toc_footers:
 
 includes:
   - bug-reporting
+  - feature-requests
   - dapp
   - api
   - smartcontracts
