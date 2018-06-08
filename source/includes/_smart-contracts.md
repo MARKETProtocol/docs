@@ -9,8 +9,10 @@ issues to report please do so by opening an issue on [GitHub](https://github.com
 
 ```javascript
 /// @param contractName viewable name of this contract (BTC/ETH, LTC/ETH, etc)
+/// @param creatorAddress address of the person creating the contract
 /// @param marketTokenAddress address of our member token
-/// @param baseTokenAddress address of the ERC20 token that will be used for collateral and pricing
+/// @param collateralTokenAddress address of the ERC20 token that will be used for collateral and pricing
+/// @param collateralPoolFactoryAddress address of the factory creating the collateral pools
 /// @param contractSpecs array of unsigned integers including:
 /// floorPrice minimum tradeable price of this contract, contract enters settlement if breached
 /// capPrice maximum tradeable price of this contract, contract enters settlement if breached
@@ -18,13 +20,16 @@ issues to report please do so by opening an issue on [GitHub](https://github.com
 /// an integer
 /// qtyMultiplier multiply traded qty by this value from base units of collateral token.
 /// expirationTimeStamp - seconds from epoch that this contract expires and enters settlement
-function MarketContract(
+constructor(
     string contractName,
+    address creatorAddress,
     address marketTokenAddress,
-    address baseTokenAddress,
+    address collateralTokenAddress,
+    address collateralPoolFactoryAddress,
     uint[5] contractSpecs
 ) public
 {
+    COLLATERAL_POOL_FACTORY_ADDRESS = collateralPoolFactoryAddress;
     MKT_TOKEN_ADDRESS = marketTokenAddress;
     MKT_TOKEN = MarketToken(marketTokenAddress);
     require(MKT_TOKEN.isBalanceSufficientForContractCreation(msg.sender));    // creator must be MKT holder
@@ -38,7 +43,8 @@ function MarketContract(
     require(EXPIRATION > now);
 
     CONTRACT_NAME = contractName;
-    BASE_TOKEN_ADDRESS = baseTokenAddress;
+    COLLATERAL_TOKEN_ADDRESS = collateralTokenAddress;
+    creator = creatorAddress;
 }
 ```
 
@@ -52,8 +58,12 @@ enabled.
 
 `MarketContract` is an abstract contract that will allow for implementing 
 classes such as `MarketContractOraclize` to complete the needed top level functionality around oracle solutions.
-We intend to expand our offering of oracle solutions offered in the near future.  If there are oracle services that
-you would like to submit for possible inclusion in these future plans, please [contact](mailto:info@marketprotocol.io) us
+We intend to expand our offering of oracle solutions offered in the near future.  
+
+<aside class="notice">
+If there are oracle services that
+you would like to submit for possible inclusion in these future plans, please email info@marketprotocol.io
+</aside>
 
 ### Oracle Costs
 
@@ -61,16 +71,11 @@ The `Creator` of the `MarketContract` must pre-fund the contract with enough ETH
 associated with the needed oracle query.  Currently from Oraclize.it - the first query for any contract is free,
 so this need has been removed.
 
-<aside class="notice">
-After linking of the <code>MarketContract</code> and the <code>MarketCollateralPool</code> is completed, the contract also must be added to 
-the <code>MarketContractRegistry</code> in order to be fully functional for trading.
-</aside>
-
 Parameter | Description
 --------- |  -----------
 contractName | viewable name of this contract, in the future we will implement suggested naming conventions 
 marketTokenAddress | address of the MKT deployed ERC20 token
-baseTokenAddress | address of the ERC20 token that will be used for collateral
+collateralTokenAddress | address of the ERC20 token that will be used for collateral
 contractSpecs | array of unsigned integers including the below parameters
 floorPrice | minimum tradeable price of this contract
 capPrice | maximum tradeable price of this contract
@@ -83,8 +88,10 @@ expirationTimeStamp |  seconds from epoch that this contract expires and enters 
 
 ```javascript
 /// @param contractName viewable name of this contract (BTC/ETH, LTC/ETH, etc)
+/// @param creatorAddress address of the person creating the contract
 /// @param marketTokenAddress address of our member token
-/// @param baseTokenAddress address of the ERC20 token that will be used for collateral and pricing
+/// @param collateralTokenAddress address of the ERC20 token that will be used for collateral and pricing
+/// @param collateralPoolFactoryAddress address of the factory creating the collateral pools
 /// @param contractSpecs array of unsigned integers including:
 /// floorPrice minimum tradeable price of this contract, contract enters settlement if breached
 /// capPrice maximum tradeable price of this contract, contract enters settlement if breached
@@ -95,17 +102,21 @@ expirationTimeStamp |  seconds from epoch that this contract expires and enters 
 /// @param oracleDataSource a data-source such as "URL", "WolframAlpha", "IPFS"
 /// see http://docs.oraclize.it/#ethereum-quick-start-simple-query
 /// @param oracleQuery see http://docs.oraclize.it/#ethereum-quick-start-simple-query for examples
-function MarketContractOraclize(
+constructor(
     string contractName,
+    address creatorAddress,
     address marketTokenAddress,
-    address baseTokenAddress,
+    address collateralTokenAddress,
+    address collateralPoolFactoryAddress,
     uint[5] contractSpecs,
     string oracleDataSource,
     string oracleQuery
 ) MarketContract(
     contractName,
+    creatorAddress,
     marketTokenAddress,
-    baseTokenAddress,
+    collateralTokenAddress,
+    collateralPoolFactoryAddress,
     contractSpecs
 )  public
 {
@@ -146,7 +157,7 @@ oracleQuery | properly formatted Oraclize.it query
 /// @dev instantiates a collateral pool that is unique to the supplied address of a MarketContract. This pairing
 /// is 1:1
 /// @param marketContractAddress deployed address of a MarketContract
-function MarketCollateralPool(address marketContractAddress) Linkable(marketContractAddress) public {
+constructor(address marketContractAddress) Linkable(marketContractAddress) public {
     MKT_CONTRACT = MarketContract(marketContractAddress);
     MKT_TOKEN_ADDRESS = MKT_CONTRACT.MKT_TOKEN_ADDRESS();
 }
@@ -156,6 +167,77 @@ The `MarketCollateralPool` is a contract controlled by a specific `MarketContrac
 locked collateral balances and open positions accounting.  These balances and positions are unique to the linked 
 `MarketContract` and a user must deposit funds for each `MarketContract` they intend to trade.  The ERC20 Token
 specified are the only accepted form of funding or collateralization.
+
+
+## Factory deployment
+> MarketContractOraclize factory for deployment:
+
+```javascript
+/// @dev Deploys a new instance of a market contract and adds it to the whitelist.
+/// @param contractName viewable name of this contract (BTC/ETH, LTC/ETH, etc)
+/// @param collateralTokenAddress address of the ERC20 token that will be used for collateral and pricing
+/// @param contractSpecs array of unsigned integers including:
+/// floorPrice minimum tradeable price of this contract, contract enters settlement if breached
+/// capPrice maximum tradeable price of this contract, contract enters settlement if breached
+/// priceDecimalPlaces number of decimal places to convert our queried price from a floating point to
+/// an integer
+/// qtyMultiplier multiply traded qty by this value from base units of collateral token.
+/// expirationTimeStamp - seconds from epoch that this contract expires and enters settlement
+/// @param oracleDataSource a data-source such as "URL", "WolframAlpha", "IPFS"
+/// see http://docs.oraclize.it/#ethereum-quick-start-simple-query
+/// @param oracleQuery see http://docs.oraclize.it/#ethereum-quick-start-simple-query for examples
+function deployMarketContractOraclize(
+    string contractName,
+    address collateralTokenAddress,
+    uint[5] contractSpecs,
+    string oracleDataSource,
+    string oracleQuery
+) external
+{
+    MarketContractOraclize mktContract = new MarketContractOraclize(
+        contractName,
+        msg.sender,
+        MKT_TOKEN_ADDRESS,
+        collateralTokenAddress,
+        collateralPoolFactoryAddress,
+        contractSpecs,
+        oracleDataSource,
+        oracleQuery
+    );
+    MarketContractRegistryInterface(marketContractRegistry).addAddressToWhiteList(mktContract);
+    emit MarketContractCreated(address(mktContract));
+}
+```
+> MarketCollateralPool factory for deployment:
+
+```javascript
+/// @dev creates the needed collateral pool and links it to our market contract.
+/// @param marketContractAddress address of the newly deployed market contract.
+function deployMarketCollateralPool(address marketContractAddress) external {
+    require(MarketContractRegistryInterface(marketContractRegistry).isAddressWhiteListed(marketContractAddress));
+    MarketCollateralPool marketCollateralPool = new MarketCollateralPool(marketContractAddress);
+    MarketContract(marketContractAddress).setCollateralPoolContractAddress(marketCollateralPool);
+}
+```
+
+Currently two factories exist to aid in the deployment of linked contracts and the whitelisting of these contracts in 
+the [`MarketContractRegistry`](#market-contract-registry), which holds a record of all currently deployed and functional
+contracts.
+
+### MarketContractOraclize deployment
+
+First, a user calls `deployMarketContractOraclize` on the `MarketContractFactoryOraclize` in order to begin
+the deployment process.
+
+
+This function call creates the new MarketContractOraclize and then adds the address to the `MarketContractRegistry` so
+that others may find the contract for trading. A second call to the `deployMarketCollateralPool` of the 
+`MarketCollateralPoolFactory` then deploys the needed `MarketCollateralPool` and links it to the `MarketContract`.
+At this point the contract is ready to be traded.
+
+
+ 
+## Collateral
 
 ### Depositing funds for trading
 
@@ -169,9 +251,9 @@ function depositTokensForTrading(uint256 depositAmount) external {
     // user must call approve!
     require(MarketToken(MKT_TOKEN_ADDRESS).isUserEnabledForContract(MKT_CONTRACT, msg.sender));
     uint256 balanceAfterDeposit = userAddressToAccountBalance[msg.sender].add(depositAmount);
-    ERC20(MKT_CONTRACT.BASE_TOKEN_ADDRESS()).safeTransferFrom(msg.sender, this, depositAmount);
+    ERC20(MKT_CONTRACT.COLLATERAL_TOKEN_ADDRESS()).safeTransferFrom(msg.sender, this, depositAmount);
     userAddressToAccountBalance[msg.sender] = balanceAfterDeposit;
-    UpdatedUserBalance(msg.sender, balanceAfterDeposit);
+    emit UpdatedUserBalance(msg.sender, balanceAfterDeposit);
 }
 ```
 
@@ -250,8 +332,8 @@ function withdrawTokens(uint256 withdrawAmount) public {
     //require(userAddressToAccountBalance[msg.sender] >= withdrawAmount);  subtract call below will enforce this
     uint256 balanceAfterWithdrawal = userAddressToAccountBalance[msg.sender].subtract(withdrawAmount);
     userAddressToAccountBalance[msg.sender] = balanceAfterWithdrawal;   // update balance before external call!
-    ERC20(MKT_CONTRACT.BASE_TOKEN_ADDRESS()).safeTransfer(msg.sender, withdrawAmount);
-    UpdatedUserBalance(msg.sender, balanceAfterWithdrawal);
+    ERC20(MKT_CONTRACT.COLLATERAL_TOKEN_ADDRESS()).safeTransfer(msg.sender, withdrawAmount);
+    emit UpdatedUserBalance(msg.sender, balanceAfterWithdrawal);
 }
 ```
 
@@ -295,16 +377,18 @@ function createOrderHash(
 ) public pure returns (bytes32)
 {
     return keccak256(
-        contractAddress,
-        orderAddresses[0],
-        orderAddresses[1],
-        orderAddresses[2],
-        unsignedOrderValues[0],
-        unsignedOrderValues[1],
-        unsignedOrderValues[2],
-        unsignedOrderValues[3],
-        unsignedOrderValues[4],
-        orderQty
+        abi.encodePacked(
+            contractAddress,
+            orderAddresses[0],
+            orderAddresses[1],
+            orderAddresses[2],
+            unsignedOrderValues[0],
+            unsignedOrderValues[1],
+            unsignedOrderValues[2],
+            unsignedOrderValues[3],
+            unsignedOrderValues[4],
+            orderQty
+        )
     );
 }
 
@@ -323,7 +407,7 @@ function isValidSignature(
 ) public pure returns (bool)
 {
     return signerAddress == ecrecover(
-        keccak256("\x19Ethereum Signed Message:\n32", hash),
+        keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", hash)),
         v,
         r,
         s
@@ -361,7 +445,6 @@ additional gas cost.
 ## Trading
 
 ```javascript
-
 // @notice called by a participant wanting to trade a specific order
 /// @param orderAddresses - maker, taker and feeRecipient addresses
 /// @param unsignedOrderValues makerFee, takerFree, price, expirationTimeStamp, and salt (for hashing)
@@ -389,7 +472,7 @@ function tradeOrder(
     // taker can be anyone, or specifically the caller!
     require(order.taker == address(0) || order.taker == msg.sender);
     // do not allow self trade
-    require(order.maker != address(0) && order.maker != order.taker);
+    require(order.maker != address(0) && order.maker != msg.sender);
     require(
         order.maker.isValidSignature(
             order.orderHash,
@@ -398,14 +481,15 @@ function tradeOrder(
             s
     ));
 
+
     if (now >= order.expirationTimeStamp) {
-        Error(ErrorCodes.ORDER_EXPIRED, order.orderHash);
+        emit Error(ErrorCodes.ORDER_EXPIRED, order.orderHash);
         return 0;
     }
 
     int remainingQty = orderQty.subtract(getQtyFilledOrCancelledFromOrder(order.orderHash));
     if (remainingQty == 0) { // there is no qty remaining  - cannot fill!
-        Error(ErrorCodes.ORDER_DEAD, order.orderHash);
+        emit Error(ErrorCodes.ORDER_DEAD, order.orderHash);
         return 0;
     }
 
@@ -444,7 +528,7 @@ function tradeOrder(
         }
     }
 
-    OrderFilled(
+    emit OrderFilled(
         order.maker,
         msg.sender,
         order.feeRecipient,
