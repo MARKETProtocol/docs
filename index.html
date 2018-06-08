@@ -270,6 +270,12 @@
                     <a href="#market-collateral-pool" class="toc-h2 toc-link" data-title="market-collateral-pool">Market Collateral Pool</a>
                   </li>
                   <li>
+                    <a href="#factory-deployment" class="toc-h2 toc-link" data-title="factory-deployment">Factory deployment</a>
+                  </li>
+                  <li>
+                    <a href="#collateral" class="toc-h2 toc-link" data-title="collateral">Collateral</a>
+                  </li>
+                  <li>
                     <a href="#orders" class="toc-h2 toc-link" data-title="orders">Orders</a>
                   </li>
                   <li>
@@ -609,8 +615,10 @@ issues to report please do so by opening an issue on <a href="https://github.com
 <p>MarketContract constructor:</p>
 </blockquote>
 <pre class="highlight javascript tab-javascript"><code><span class="c1">/// @param contractName viewable name of this contract (BTC/ETH, LTC/ETH, etc)</span>
+<span class="c1">/// @param creatorAddress address of the person creating the contract</span>
 <span class="c1">/// @param marketTokenAddress address of our member token</span>
-<span class="c1">/// @param baseTokenAddress address of the ERC20 token that will be used for collateral and pricing</span>
+<span class="c1">/// @param collateralTokenAddress address of the ERC20 token that will be used for collateral and pricing</span>
+<span class="c1">/// @param collateralPoolFactoryAddress address of the factory creating the collateral pools</span>
 <span class="c1">/// @param contractSpecs array of unsigned integers including:</span>
 <span class="c1">/// floorPrice minimum tradeable price of this contract, contract enters settlement if breached</span>
 <span class="c1">/// capPrice maximum tradeable price of this contract, contract enters settlement if breached</span>
@@ -618,13 +626,16 @@ issues to report please do so by opening an issue on <a href="https://github.com
 <span class="c1">/// an integer</span>
 <span class="c1">/// qtyMultiplier multiply traded qty by this value from base units of collateral token.</span>
 <span class="c1">/// expirationTimeStamp - seconds from epoch that this contract expires and enters settlement</span>
-<span class="kd">function</span> <span class="nx">MarketContract</span><span class="p">(</span>
+<span class="nx">constructor</span><span class="p">(</span>
     <span class="nx">string</span> <span class="nx">contractName</span><span class="p">,</span>
+    <span class="nx">address</span> <span class="nx">creatorAddress</span><span class="p">,</span>
     <span class="nx">address</span> <span class="nx">marketTokenAddress</span><span class="p">,</span>
-    <span class="nx">address</span> <span class="nx">baseTokenAddress</span><span class="p">,</span>
+    <span class="nx">address</span> <span class="nx">collateralTokenAddress</span><span class="p">,</span>
+    <span class="nx">address</span> <span class="nx">collateralPoolFactoryAddress</span><span class="p">,</span>
     <span class="nx">uint</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="nx">contractSpecs</span>
 <span class="p">)</span> <span class="kr">public</span>
 <span class="p">{</span>
+    <span class="nx">COLLATERAL_POOL_FACTORY_ADDRESS</span> <span class="o">=</span> <span class="nx">collateralPoolFactoryAddress</span><span class="p">;</span>
     <span class="nx">MKT_TOKEN_ADDRESS</span> <span class="o">=</span> <span class="nx">marketTokenAddress</span><span class="p">;</span>
     <span class="nx">MKT_TOKEN</span> <span class="o">=</span> <span class="nx">MarketToken</span><span class="p">(</span><span class="nx">marketTokenAddress</span><span class="p">);</span>
     <span class="nx">require</span><span class="p">(</span><span class="nx">MKT_TOKEN</span><span class="p">.</span><span class="nx">isBalanceSufficientForContractCreation</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">));</span>    <span class="c1">// creator must be MKT holder</span>
@@ -638,7 +649,8 @@ issues to report please do so by opening an issue on <a href="https://github.com
     <span class="nx">require</span><span class="p">(</span><span class="nx">EXPIRATION</span> <span class="o">&gt;</span> <span class="nx">now</span><span class="p">);</span>
 
     <span class="nx">CONTRACT_NAME</span> <span class="o">=</span> <span class="nx">contractName</span><span class="p">;</span>
-    <span class="nx">BASE_TOKEN_ADDRESS</span> <span class="o">=</span> <span class="nx">baseTokenAddress</span><span class="p">;</span>
+    <span class="nx">COLLATERAL_TOKEN_ADDRESS</span> <span class="o">=</span> <span class="nx">collateralTokenAddress</span><span class="p">;</span>
+    <span class="nx">creator</span> <span class="o">=</span> <span class="nx">creatorAddress</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre>
 <p>The <code>MarketContract</code> represents the main contract responsible for 
@@ -650,17 +662,16 @@ enabled.</p>
 
 <p><code>MarketContract</code> is an abstract contract that will allow for implementing 
 classes such as <code>MarketContractOraclize</code> to complete the needed top level functionality around oracle solutions.
-We intend to expand our offering of oracle solutions offered in the near future.  If there are oracle services that
-you would like to submit for possible inclusion in these future plans, please <a href="mailto:info@marketprotocol.io">contact</a> us</p>
+We intend to expand our offering of oracle solutions offered in the near future.  </p>
+
+<aside class="notice">
+If there are oracle services that
+you would like to submit for possible inclusion in these future plans, please email info@marketprotocol.io
+</aside>
 <h3 id='oracle-costs'>Oracle Costs</h3>
 <p>The <code>Creator</code> of the <code>MarketContract</code> must pre-fund the contract with enough ETH in order to pay for the gas costs
 associated with the needed oracle query.  Currently from Oraclize.it - the first query for any contract is free,
 so this need has been removed.</p>
-
-<aside class="notice">
-After linking of the <code>MarketContract</code> and the <code>MarketCollateralPool</code> is completed, the contract also must be added to 
-the <code>MarketContractRegistry</code> in order to be fully functional for trading.
-</aside>
 
 <table><thead>
 <tr>
@@ -677,7 +688,7 @@ the <code>MarketContractRegistry</code> in order to be fully functional for trad
 <td>address of the MKT deployed ERC20 token</td>
 </tr>
 <tr>
-<td>baseTokenAddress</td>
+<td>collateralTokenAddress</td>
 <td>address of the ERC20 token that will be used for collateral</td>
 </tr>
 <tr>
@@ -702,8 +713,10 @@ the <code>MarketContractRegistry</code> in order to be fully functional for trad
 <p>MarketContractOraclize constructor:</p>
 </blockquote>
 <pre class="highlight javascript tab-javascript"><code><span class="c1">/// @param contractName viewable name of this contract (BTC/ETH, LTC/ETH, etc)</span>
+<span class="c1">/// @param creatorAddress address of the person creating the contract</span>
 <span class="c1">/// @param marketTokenAddress address of our member token</span>
-<span class="c1">/// @param baseTokenAddress address of the ERC20 token that will be used for collateral and pricing</span>
+<span class="c1">/// @param collateralTokenAddress address of the ERC20 token that will be used for collateral and pricing</span>
+<span class="c1">/// @param collateralPoolFactoryAddress address of the factory creating the collateral pools</span>
 <span class="c1">/// @param contractSpecs array of unsigned integers including:</span>
 <span class="c1">/// floorPrice minimum tradeable price of this contract, contract enters settlement if breached</span>
 <span class="c1">/// capPrice maximum tradeable price of this contract, contract enters settlement if breached</span>
@@ -714,17 +727,21 @@ the <code>MarketContractRegistry</code> in order to be fully functional for trad
 <span class="c1">/// @param oracleDataSource a data-source such as "URL", "WolframAlpha", "IPFS"</span>
 <span class="c1">/// see http://docs.oraclize.it/#ethereum-quick-start-simple-query</span>
 <span class="c1">/// @param oracleQuery see http://docs.oraclize.it/#ethereum-quick-start-simple-query for examples</span>
-<span class="kd">function</span> <span class="nx">MarketContractOraclize</span><span class="p">(</span>
+<span class="nx">constructor</span><span class="p">(</span>
     <span class="nx">string</span> <span class="nx">contractName</span><span class="p">,</span>
+    <span class="nx">address</span> <span class="nx">creatorAddress</span><span class="p">,</span>
     <span class="nx">address</span> <span class="nx">marketTokenAddress</span><span class="p">,</span>
-    <span class="nx">address</span> <span class="nx">baseTokenAddress</span><span class="p">,</span>
+    <span class="nx">address</span> <span class="nx">collateralTokenAddress</span><span class="p">,</span>
+    <span class="nx">address</span> <span class="nx">collateralPoolFactoryAddress</span><span class="p">,</span>
     <span class="nx">uint</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="nx">contractSpecs</span><span class="p">,</span>
     <span class="nx">string</span> <span class="nx">oracleDataSource</span><span class="p">,</span>
     <span class="nx">string</span> <span class="nx">oracleQuery</span>
 <span class="p">)</span> <span class="nx">MarketContract</span><span class="p">(</span>
     <span class="nx">contractName</span><span class="p">,</span>
+    <span class="nx">creatorAddress</span><span class="p">,</span>
     <span class="nx">marketTokenAddress</span><span class="p">,</span>
-    <span class="nx">baseTokenAddress</span><span class="p">,</span>
+    <span class="nx">collateralTokenAddress</span><span class="p">,</span>
+    <span class="nx">collateralPoolFactoryAddress</span><span class="p">,</span>
     <span class="nx">contractSpecs</span>
 <span class="p">)</span>  <span class="kr">public</span>
 <span class="p">{</span>
@@ -770,7 +787,7 @@ and a test environment to ensure the queries are correct prior to contract deplo
 <pre class="highlight javascript tab-javascript"><code><span class="c1">/// @dev instantiates a collateral pool that is unique to the supplied address of a MarketContract. This pairing</span>
 <span class="c1">/// is 1:1</span>
 <span class="c1">/// @param marketContractAddress deployed address of a MarketContract</span>
-<span class="kd">function</span> <span class="nx">MarketCollateralPool</span><span class="p">(</span><span class="nx">address</span> <span class="nx">marketContractAddress</span><span class="p">)</span> <span class="nx">Linkable</span><span class="p">(</span><span class="nx">marketContractAddress</span><span class="p">)</span> <span class="kr">public</span> <span class="p">{</span>
+<span class="nx">constructor</span><span class="p">(</span><span class="nx">address</span> <span class="nx">marketContractAddress</span><span class="p">)</span> <span class="nx">Linkable</span><span class="p">(</span><span class="nx">marketContractAddress</span><span class="p">)</span> <span class="kr">public</span> <span class="p">{</span>
     <span class="nx">MKT_CONTRACT</span> <span class="o">=</span> <span class="nx">MarketContract</span><span class="p">(</span><span class="nx">marketContractAddress</span><span class="p">);</span>
     <span class="nx">MKT_TOKEN_ADDRESS</span> <span class="o">=</span> <span class="nx">MKT_CONTRACT</span><span class="p">.</span><span class="nx">MKT_TOKEN_ADDRESS</span><span class="p">();</span>
 <span class="p">}</span>
@@ -779,7 +796,68 @@ and a test environment to ensure the queries are correct prior to contract deplo
 locked collateral balances and open positions accounting.  These balances and positions are unique to the linked 
 <code>MarketContract</code> and a user must deposit funds for each <code>MarketContract</code> they intend to trade.  The ERC20 Token
 specified are the only accepted form of funding or collateralization.</p>
-<h3 id='depositing-funds-for-trading'>Depositing funds for trading</h3>
+<h2 id='factory-deployment'>Factory deployment</h2>
+<blockquote>
+<p>MarketContractOraclize factory for deployment:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="c1">/// @dev Deploys a new instance of a market contract and adds it to the whitelist.</span>
+<span class="c1">/// @param contractName viewable name of this contract (BTC/ETH, LTC/ETH, etc)</span>
+<span class="c1">/// @param collateralTokenAddress address of the ERC20 token that will be used for collateral and pricing</span>
+<span class="c1">/// @param contractSpecs array of unsigned integers including:</span>
+<span class="c1">/// floorPrice minimum tradeable price of this contract, contract enters settlement if breached</span>
+<span class="c1">/// capPrice maximum tradeable price of this contract, contract enters settlement if breached</span>
+<span class="c1">/// priceDecimalPlaces number of decimal places to convert our queried price from a floating point to</span>
+<span class="c1">/// an integer</span>
+<span class="c1">/// qtyMultiplier multiply traded qty by this value from base units of collateral token.</span>
+<span class="c1">/// expirationTimeStamp - seconds from epoch that this contract expires and enters settlement</span>
+<span class="c1">/// @param oracleDataSource a data-source such as "URL", "WolframAlpha", "IPFS"</span>
+<span class="c1">/// see http://docs.oraclize.it/#ethereum-quick-start-simple-query</span>
+<span class="c1">/// @param oracleQuery see http://docs.oraclize.it/#ethereum-quick-start-simple-query for examples</span>
+<span class="kd">function</span> <span class="nx">deployMarketContractOraclize</span><span class="p">(</span>
+    <span class="nx">string</span> <span class="nx">contractName</span><span class="p">,</span>
+    <span class="nx">address</span> <span class="nx">collateralTokenAddress</span><span class="p">,</span>
+    <span class="nx">uint</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="nx">contractSpecs</span><span class="p">,</span>
+    <span class="nx">string</span> <span class="nx">oracleDataSource</span><span class="p">,</span>
+    <span class="nx">string</span> <span class="nx">oracleQuery</span>
+<span class="p">)</span> <span class="nx">external</span>
+<span class="p">{</span>
+    <span class="nx">MarketContractOraclize</span> <span class="nx">mktContract</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MarketContractOraclize</span><span class="p">(</span>
+        <span class="nx">contractName</span><span class="p">,</span>
+        <span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span>
+        <span class="nx">MKT_TOKEN_ADDRESS</span><span class="p">,</span>
+        <span class="nx">collateralTokenAddress</span><span class="p">,</span>
+        <span class="nx">collateralPoolFactoryAddress</span><span class="p">,</span>
+        <span class="nx">contractSpecs</span><span class="p">,</span>
+        <span class="nx">oracleDataSource</span><span class="p">,</span>
+        <span class="nx">oracleQuery</span>
+    <span class="p">);</span>
+    <span class="nx">MarketContractRegistryInterface</span><span class="p">(</span><span class="nx">marketContractRegistry</span><span class="p">).</span><span class="nx">addAddressToWhiteList</span><span class="p">(</span><span class="nx">mktContract</span><span class="p">);</span>
+    <span class="nx">emit</span> <span class="nx">MarketContractCreated</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">mktContract</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>MarketCollateralPool factory for deployment:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="c1">/// @dev creates the needed collateral pool and links it to our market contract.</span>
+<span class="c1">/// @param marketContractAddress address of the newly deployed market contract.</span>
+<span class="kd">function</span> <span class="nx">deployMarketCollateralPool</span><span class="p">(</span><span class="nx">address</span> <span class="nx">marketContractAddress</span><span class="p">)</span> <span class="nx">external</span> <span class="p">{</span>
+    <span class="nx">require</span><span class="p">(</span><span class="nx">MarketContractRegistryInterface</span><span class="p">(</span><span class="nx">marketContractRegistry</span><span class="p">).</span><span class="nx">isAddressWhiteListed</span><span class="p">(</span><span class="nx">marketContractAddress</span><span class="p">));</span>
+    <span class="nx">MarketCollateralPool</span> <span class="nx">marketCollateralPool</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MarketCollateralPool</span><span class="p">(</span><span class="nx">marketContractAddress</span><span class="p">);</span>
+    <span class="nx">MarketContract</span><span class="p">(</span><span class="nx">marketContractAddress</span><span class="p">).</span><span class="nx">setCollateralPoolContractAddress</span><span class="p">(</span><span class="nx">marketCollateralPool</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<p>Currently two factories exist to aid in the deployment of linked contracts and the whitelisting of these contracts in 
+the <a href="#market-contract-registry"><code>MarketContractRegistry</code></a>, which holds a record of all currently deployed and functional
+contracts.</p>
+<h3 id='marketcontractoraclize-deployment'>MarketContractOraclize deployment</h3>
+<p>First, a user calls <code>deployMarketContractOraclize</code> on the <code>MarketContractFactoryOraclize</code> in order to begin
+the deployment process.</p>
+
+<p>This function call creates the new MarketContractOraclize and then adds the address to the <code>MarketContractRegistry</code> so
+that others may find the contract for trading. A second call to the <code>deployMarketCollateralPool</code> of the 
+<code>MarketCollateralPoolFactory</code> then deploys the needed <code>MarketCollateralPool</code> and links it to the <code>MarketContract</code>.
+At this point the contract is ready to be traded.</p>
+<h2 id='collateral'>Collateral</h2><h3 id='depositing-funds-for-trading'>Depositing funds for trading</h3>
 <blockquote>
 <p>depositTokensForTrading function</p>
 </blockquote>
@@ -790,9 +868,9 @@ specified are the only accepted form of funding or collateralization.</p>
     <span class="c1">// user must call approve!</span>
     <span class="nx">require</span><span class="p">(</span><span class="nx">MarketToken</span><span class="p">(</span><span class="nx">MKT_TOKEN_ADDRESS</span><span class="p">).</span><span class="nx">isUserEnabledForContract</span><span class="p">(</span><span class="nx">MKT_CONTRACT</span><span class="p">,</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">));</span>
     <span class="nx">uint256</span> <span class="nx">balanceAfterDeposit</span> <span class="o">=</span> <span class="nx">userAddressToAccountBalance</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">].</span><span class="nx">add</span><span class="p">(</span><span class="nx">depositAmount</span><span class="p">);</span>
-    <span class="nx">ERC20</span><span class="p">(</span><span class="nx">MKT_CONTRACT</span><span class="p">.</span><span class="nx">BASE_TOKEN_ADDRESS</span><span class="p">()).</span><span class="nx">safeTransferFrom</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="nx">depositAmount</span><span class="p">);</span>
+    <span class="nx">ERC20</span><span class="p">(</span><span class="nx">MKT_CONTRACT</span><span class="p">.</span><span class="nx">COLLATERAL_TOKEN_ADDRESS</span><span class="p">()).</span><span class="nx">safeTransferFrom</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="nx">depositAmount</span><span class="p">);</span>
     <span class="nx">userAddressToAccountBalance</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span> <span class="o">=</span> <span class="nx">balanceAfterDeposit</span><span class="p">;</span>
-    <span class="nx">UpdatedUserBalance</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span> <span class="nx">balanceAfterDeposit</span><span class="p">);</span>
+    <span class="nx">emit</span> <span class="nx">UpdatedUserBalance</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span> <span class="nx">balanceAfterDeposit</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre>
 <p>Funds deposited by a user are allocated to their address&#39;s account balance until a point at which a new position is 
@@ -884,8 +962,8 @@ both parties commit their respective maximum loss to the collateral pool.</p>
     <span class="c1">//require(userAddressToAccountBalance[msg.sender] &gt;= withdrawAmount);  subtract call below will enforce this</span>
     <span class="nx">uint256</span> <span class="nx">balanceAfterWithdrawal</span> <span class="o">=</span> <span class="nx">userAddressToAccountBalance</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">].</span><span class="nx">subtract</span><span class="p">(</span><span class="nx">withdrawAmount</span><span class="p">);</span>
     <span class="nx">userAddressToAccountBalance</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span> <span class="o">=</span> <span class="nx">balanceAfterWithdrawal</span><span class="p">;</span>   <span class="c1">// update balance before external call!</span>
-    <span class="nx">ERC20</span><span class="p">(</span><span class="nx">MKT_CONTRACT</span><span class="p">.</span><span class="nx">BASE_TOKEN_ADDRESS</span><span class="p">()).</span><span class="nx">safeTransfer</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span> <span class="nx">withdrawAmount</span><span class="p">);</span>
-    <span class="nx">UpdatedUserBalance</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span> <span class="nx">balanceAfterWithdrawal</span><span class="p">);</span>
+    <span class="nx">ERC20</span><span class="p">(</span><span class="nx">MKT_CONTRACT</span><span class="p">.</span><span class="nx">COLLATERAL_TOKEN_ADDRESS</span><span class="p">()).</span><span class="nx">safeTransfer</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span> <span class="nx">withdrawAmount</span><span class="p">);</span>
+    <span class="nx">emit</span> <span class="nx">UpdatedUserBalance</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span> <span class="nx">balanceAfterWithdrawal</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre>
 <p>At any time, tokens that are not allocated to an open position held by the user, are able to be withdrawn.</p>
@@ -925,16 +1003,18 @@ price of the contract and funds are then eligible for immediate withdraw.</p>
 <span class="p">)</span> <span class="kr">public</span> <span class="nx">pure</span> <span class="nx">returns</span> <span class="p">(</span><span class="nx">bytes32</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="nx">keccak256</span><span class="p">(</span>
-        <span class="nx">contractAddress</span><span class="p">,</span>
-        <span class="nx">orderAddresses</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-        <span class="nx">orderAddresses</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-        <span class="nx">orderAddresses</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
-        <span class="nx">unsignedOrderValues</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-        <span class="nx">unsignedOrderValues</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-        <span class="nx">unsignedOrderValues</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
-        <span class="nx">unsignedOrderValues</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
-        <span class="nx">unsignedOrderValues</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
-        <span class="nx">orderQty</span>
+        <span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span>
+            <span class="nx">contractAddress</span><span class="p">,</span>
+            <span class="nx">orderAddresses</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="nx">orderAddresses</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="nx">orderAddresses</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+            <span class="nx">unsignedOrderValues</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="nx">unsignedOrderValues</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="nx">unsignedOrderValues</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+            <span class="nx">unsignedOrderValues</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+            <span class="nx">unsignedOrderValues</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+            <span class="nx">orderQty</span>
+        <span class="p">)</span>
     <span class="p">);</span>
 <span class="p">}</span>
 
@@ -953,7 +1033,7 @@ price of the contract and funds are then eligible for immediate withdraw.</p>
 <span class="p">)</span> <span class="kr">public</span> <span class="nx">pure</span> <span class="nx">returns</span> <span class="p">(</span><span class="nx">bool</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="nx">signerAddress</span> <span class="o">==</span> <span class="nx">ecrecover</span><span class="p">(</span>
-        <span class="nx">keccak256</span><span class="p">(</span><span class="s2">"\x19Ethereum Signed Message:\n32"</span><span class="p">,</span> <span class="nx">hash</span><span class="p">),</span>
+        <span class="nx">keccak256</span><span class="p">(</span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="s2">"\x19Ethereum Signed Message:\n32"</span><span class="p">,</span> <span class="nx">hash</span><span class="p">)),</span>
         <span class="nx">v</span><span class="p">,</span>
         <span class="nx">r</span><span class="p">,</span>
         <span class="nx">s</span>
@@ -1018,8 +1098,7 @@ signer&#39;s address if all parameters of the order are valid.</p>
 <p>Makers may cancel an order at any time, unfortunately this transaction happens on chain and will require gas to complete.
 Alternatively, an <code>Order</code> can be created with an <code>expirationTimeStamp</code> expiring the order automatically without the
 additional gas cost. </p>
-<h2 id='trading'>Trading</h2><pre class="highlight javascript tab-javascript"><code>
-<span class="c1">// @notice called by a participant wanting to trade a specific order</span>
+<h2 id='trading'>Trading</h2><pre class="highlight javascript tab-javascript"><code><span class="c1">// @notice called by a participant wanting to trade a specific order</span>
 <span class="c1">/// @param orderAddresses - maker, taker and feeRecipient addresses</span>
 <span class="c1">/// @param unsignedOrderValues makerFee, takerFree, price, expirationTimeStamp, and salt (for hashing)</span>
 <span class="c1">/// @param orderQty quantity of the order</span>
@@ -1046,7 +1125,7 @@ additional gas cost. </p>
     <span class="c1">// taker can be anyone, or specifically the caller!</span>
     <span class="nx">require</span><span class="p">(</span><span class="nx">order</span><span class="p">.</span><span class="nx">taker</span> <span class="o">==</span> <span class="nx">address</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">||</span> <span class="nx">order</span><span class="p">.</span><span class="nx">taker</span> <span class="o">==</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span>
     <span class="c1">// do not allow self trade</span>
-    <span class="nx">require</span><span class="p">(</span><span class="nx">order</span><span class="p">.</span><span class="nx">maker</span> <span class="o">!=</span> <span class="nx">address</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">order</span><span class="p">.</span><span class="nx">maker</span> <span class="o">!=</span> <span class="nx">order</span><span class="p">.</span><span class="nx">taker</span><span class="p">);</span>
+    <span class="nx">require</span><span class="p">(</span><span class="nx">order</span><span class="p">.</span><span class="nx">maker</span> <span class="o">!=</span> <span class="nx">address</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">order</span><span class="p">.</span><span class="nx">maker</span> <span class="o">!=</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span>
     <span class="nx">require</span><span class="p">(</span>
         <span class="nx">order</span><span class="p">.</span><span class="nx">maker</span><span class="p">.</span><span class="nx">isValidSignature</span><span class="p">(</span>
             <span class="nx">order</span><span class="p">.</span><span class="nx">orderHash</span><span class="p">,</span>
@@ -1055,14 +1134,15 @@ additional gas cost. </p>
             <span class="nx">s</span>
     <span class="p">));</span>
 
+
     <span class="k">if</span> <span class="p">(</span><span class="nx">now</span> <span class="o">&gt;=</span> <span class="nx">order</span><span class="p">.</span><span class="nx">expirationTimeStamp</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nb">Error</span><span class="p">(</span><span class="nx">ErrorCodes</span><span class="p">.</span><span class="nx">ORDER_EXPIRED</span><span class="p">,</span> <span class="nx">order</span><span class="p">.</span><span class="nx">orderHash</span><span class="p">);</span>
+        <span class="nx">emit</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">ErrorCodes</span><span class="p">.</span><span class="nx">ORDER_EXPIRED</span><span class="p">,</span> <span class="nx">order</span><span class="p">.</span><span class="nx">orderHash</span><span class="p">);</span>
         <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
     <span class="p">}</span>
 
     <span class="kr">int</span> <span class="nx">remainingQty</span> <span class="o">=</span> <span class="nx">orderQty</span><span class="p">.</span><span class="nx">subtract</span><span class="p">(</span><span class="nx">getQtyFilledOrCancelledFromOrder</span><span class="p">(</span><span class="nx">order</span><span class="p">.</span><span class="nx">orderHash</span><span class="p">));</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">remainingQty</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// there is no qty remaining  - cannot fill!</span>
-        <span class="nb">Error</span><span class="p">(</span><span class="nx">ErrorCodes</span><span class="p">.</span><span class="nx">ORDER_DEAD</span><span class="p">,</span> <span class="nx">order</span><span class="p">.</span><span class="nx">orderHash</span><span class="p">);</span>
+        <span class="nx">emit</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">ErrorCodes</span><span class="p">.</span><span class="nx">ORDER_DEAD</span><span class="p">,</span> <span class="nx">order</span><span class="p">.</span><span class="nx">orderHash</span><span class="p">);</span>
         <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
     <span class="p">}</span>
 
@@ -1101,7 +1181,7 @@ additional gas cost. </p>
         <span class="p">}</span>
     <span class="p">}</span>
 
-    <span class="nx">OrderFilled</span><span class="p">(</span>
+    <span class="nx">emit</span> <span class="nx">OrderFilled</span><span class="p">(</span>
         <span class="nx">order</span><span class="p">.</span><span class="nx">maker</span><span class="p">,</span>
         <span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span>
         <span class="nx">order</span><span class="p">.</span><span class="nx">feeRecipient</span><span class="p">,</span>
@@ -1298,8 +1378,8 @@ on an issue, and there isn&#39;t one yet, please reach out on <a href="https://m
 <li>Once you have create a PR, please <code>submit work</code> on Gitcoin so we are able to pay you out once we have accepted the work</li>
 </ol>
 <h2 id='coding-style'>Coding Style</h2>
-<p>We use a variety of programming languages in our repositories. When contributing, please follow existing coding conventions
-and refer to the CONTRIBUTING.md file in the repository, if one exists.</p>
+<p>We use a variety of programming languages in our repositories. When contributing, please follow the existing coding conventions
+according to the <code>CONTRIBUTING.md</code> file of each repository.   </p>
 
 <p>[comment]: TODO: update style
 For JavaScript, we use <a href="https://docs.npmjs.com/misc/coding-style">NPM&#39;s style</a>, which is automatically enforced via <a href="https://prettier.io/">prettier</a>.</p>
