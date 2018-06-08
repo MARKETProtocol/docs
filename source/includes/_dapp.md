@@ -41,7 +41,7 @@ to deploy a contract to the Ethereum Blockchain
    Something like `ETH/BTC-Kraken_YYYY-MM-DD` may help others understand the underlying asset, the data source, and 
    expiration date in a nice human readable and searchable way.
    In the future, MARKET will implement a standardized naming convention and guidelines to formalize this process
-2. `Base Token` - every contract should be backed by an ERC20 Token that will be used a collateral for the contract. Traders 
+2. `Collateral Token` - every contract should be backed by an ERC20 Token that will be used a collateral for the contract. Traders 
    must deposit tokens to the smart contract prior to trading, and upon execution of a trade, the appropriate amount of 
    collateral becomes locked until that position is exited. In this fashion, all open positions always remain 100% 
    collateralized removing counter party risk from the traders. Please specify a ERC20 Token address for this contract.
@@ -78,7 +78,7 @@ to deploying.
 Parameter | Description
 --------- |  -----------
 Name | Viewable name of this contract, in the future we will implement suggested naming conventions 
-Base Token Address | address of the ERC20 token that will be used for collateral
+Collateral Token Address | address of the ERC20 token that will be used for collateral
 Price Floor | minimum tradeable price of this contract
 Price Cap | maximum tradeable price of this contract
 Price Decimal Places | Since all numbers must be represented as integers on the Ethereum blockchain, this is how many decimal places one needs to move the decimal in order to go from the oracle query price to an integer. For instance if the oracle query results returned a value such as 190.22, we need to move the decimal two (2) places to convert to an integer value of 19022.
