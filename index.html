@@ -522,7 +522,7 @@ to deploy a contract to the Ethereum Blockchain</p>
 Something like <code>ETH/BTC-Kraken_YYYY-MM-DD</code> may help others understand the underlying asset, the data source, and 
 expiration date in a nice human readable and searchable way.
 In the future, MARKET will implement a standardized naming convention and guidelines to formalize this process</li>
-<li><code>Base Token</code> - every contract should be backed by an ERC20 Token that will be used a collateral for the contract. Traders 
+<li><code>Collateral Token</code> - every contract should be backed by an ERC20 Token that will be used a collateral for the contract. Traders 
 must deposit tokens to the smart contract prior to trading, and upon execution of a trade, the appropriate amount of 
 collateral becomes locked until that position is exited. In this fashion, all open positions always remain 100% 
 collateralized removing counter party risk from the traders. Please specify a ERC20 Token address for this contract.
@@ -565,7 +565,7 @@ to deploying.</p>
 <td>Viewable name of this contract, in the future we will implement suggested naming conventions</td>
 </tr>
 <tr>
-<td>Base Token Address</td>
+<td>Collateral Token Address</td>
 <td>address of the ERC20 token that will be used for collateral</td>
 </tr>
 <tr>
