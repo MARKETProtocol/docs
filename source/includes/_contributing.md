@@ -61,8 +61,92 @@ There are a few guidelines when using Gitcoin that are worth mentioning
 We use a variety of programming languages in our repositories. When contributing, please follow the existing coding conventions
 according to the `CONTRIBUTING.md` file of each repository.   
 
-[comment]: TODO: update style
-For JavaScript, we use [NPM's style](https://docs.npmjs.com/misc/coding-style), which is automatically enforced via [prettier](https://prettier.io/).
+Project | Link
+--------- |  -----------
+website | [website](https://github.com/MARKETProtocol/website/blob/develop/.github/CONTRIBUTING.md) 
+dApp | [dApp](https://github.com/MARKETProtocol/dApp/blob/develop/.github/CONTRIBUTING.md)
+MARKETProtocol | [MARKETProtocol](https://github.com/MARKETProtocol/MARKETProtocol/blob/develop/.github/CONTRIBUTING.md) 
+MARKET.js | [MARKET.js](https://github.com/MARKETProtocol/MARKET.js/blob/develop/.github/CONTRIBUTING.md) 
+
+## Git Flow
+
+We are implementing [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) for our branching model.
+
+[![Git Branching](images/git-branching-model.png)](https://nvie.com/posts/a-successful-git-branching-model/)
+
+### Branching
+
+```
+$ git checkout -b feature/my-feature develop
+and hotfix branches (prefixed with hotfix/ by convention) off of master:
+
+# hotfix the latest version of master
+$ git checkout -b hotfix/hotfix-version-number master
+
+# or hotfix from a specific version
+$ git checkout -b hotfix/hotfix-version-number <starting-tag-name>
+```
+
+The main trunks which are persistent are `develop` and `master`; `Master` holds the latest release and `develop` 
+holds the latest stable development copy.
+
+Contributors create feature branches (prefixed with `feature/` by convention) off of `develop`. 
+
+These new branches are disposable, meaning they have a short lifespan before they are merged back to the main trunks. 
+They are meant to encapsulate small pieces of functionality.
+
+### Finishing Branches
+ 
+ ```
+ $ git checkout develop
+ $ git merge --no-ff feature/my-feature
+ $ git branch -d feature/my-feature
+ ```
+ When a contributor is done with a feature branch, they merge it back into develop, or create a pull request in order
+ to have MARKET Protocol core team do so.
+
+ For a hotfix branch, it is merged back into both master and develop so the hotfix carries forward
+ 
+ ```
+ $ git checkout master
+ $ git merge --no-ff hotfix/hotfix-version-number
+ $ git checkout develop
+ $ git merge --no-ff hotfix/hotfix-version-number
+ $ git branch -d hotfix/hotfix-version-number
+ ```
+ 
+### Releases
+
+A `release` branch is created from the stable `develop` branch with a tag.
+
+Using a separate `release` branch allows us to continue developing new features on develop while we fix bugs and add 
+finishing touches to a `release` branch.
+
+When we are ready to finish the release, we merge the `release` branch into both `master` and `develop` 
+(just like a hotfix) so that all changes carry forward. The `master` branch is tagged at this point as well to mark
+the released code.
+
+### Merging
+
+```
+$ git merge --no-ff <branch-name>
+```
+
+Git flow encourages merging of branches with `--no-ff`
+
+The `--no-ff` option allows you to maintain all of your branch history without leaving a bunch of branches lying around in the current commit of the repository.
+
+```
+$ git pull --rebase
+```
+
+Similarly, best practice is to pull with `--rebase` to avoid lots of useless merge commits.
+
+You can configure git to do both of these things by default in your .gitconfig 
+
+### git-flow extension
+
+Using the [git-flow extension](http://danielkummer.github.io/git-flow-cheatsheet/) can greatly simplify your life and is recommended 
 
 ## Community Guidelines
 
