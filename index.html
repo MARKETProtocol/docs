@@ -420,6 +420,9 @@
                     <a href="#coding-style" class="toc-h2 toc-link" data-title="coding-style">Coding Style</a>
                   </li>
                   <li>
+                    <a href="#git-flow" class="toc-h2 toc-link" data-title="git-flow">Git Flow</a>
+                  </li>
+                  <li>
                     <a href="#community-guidelines" class="toc-h2 toc-link" data-title="community-guidelines">Community Guidelines</a>
                   </li>
                   <li>
@@ -1381,8 +1384,83 @@ on an issue, and there isn&#39;t one yet, please reach out on <a href="https://m
 <p>We use a variety of programming languages in our repositories. When contributing, please follow the existing coding conventions
 according to the <code>CONTRIBUTING.md</code> file of each repository.   </p>
 
-<p>[comment]: TODO: update style
-For JavaScript, we use <a href="https://docs.npmjs.com/misc/coding-style">NPM&#39;s style</a>, which is automatically enforced via <a href="https://prettier.io/">prettier</a>.</p>
+<table><thead>
+<tr>
+<th>Project</th>
+<th>Link</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>website</td>
+<td><a href="https://github.com/MARKETProtocol/website/blob/develop/.github/CONTRIBUTING.md">website</a></td>
+</tr>
+<tr>
+<td>dApp</td>
+<td><a href="https://github.com/MARKETProtocol/dApp/blob/develop/.github/CONTRIBUTING.md">dApp</a></td>
+</tr>
+<tr>
+<td>MARKETProtocol</td>
+<td><a href="https://github.com/MARKETProtocol/MARKETProtocol/blob/develop/.github/CONTRIBUTING.md">MARKETProtocol</a></td>
+</tr>
+<tr>
+<td>MARKET.js</td>
+<td><a href="https://github.com/MARKETProtocol/MARKET.js/blob/develop/.github/CONTRIBUTING.md">MARKET.js</a></td>
+</tr>
+</tbody></table>
+<h2 id='git-flow'>Git Flow</h2>
+<p>We are implementing <a href="https://nvie.com/posts/a-successful-git-branching-model/">Git Flow</a> for our branching model.</p>
+
+<p><a href="https://nvie.com/posts/a-successful-git-branching-model/"><img src="images/git-branching-model.png" alt="Git Branching" /></a></p>
+<h3 id='branching'>Branching</h3><pre class="highlight plaintext"><code>$ git checkout -b feature/my-feature develop
+and hotfix branches (prefixed with hotfix/ by convention) off of master:
+
+# hotfix the latest version of master
+$ git checkout -b hotfix/hotfix-version-number master
+
+# or hotfix from a specific version
+$ git checkout -b hotfix/hotfix-version-number &lt;starting-tag-name&gt;
+</code></pre>
+<p>The main trunks which are persistent are <code>develop</code> and <code>master</code>; <code>Master</code> holds the latest release and <code>develop</code> 
+holds the latest stable development copy.</p>
+
+<p>Contributors create feature branches (prefixed with <code>feature/</code> by convention) off of <code>develop</code>. </p>
+
+<p>These new branches are disposable, meaning they have a short lifespan before they are merged back to the main trunks. 
+They are meant to encapsulate small pieces of functionality.</p>
+<h3 id='finishing-branches'>Finishing Branches</h3><pre class="highlight plaintext"><code> $ git checkout develop
+ $ git merge --no-ff feature/my-feature
+ $ git branch -d feature/my-feature
+</code></pre>
+<p>When a contributor is done with a feature branch, they merge it back into develop, or create a pull request in order
+ to have MARKET Protocol core team do so.</p>
+
+<p>For a hotfix branch, it is merged back into both master and develop so the hotfix carries forward</p>
+<pre class="highlight plaintext"><code> $ git checkout master
+ $ git merge --no-ff hotfix/hotfix-version-number
+ $ git checkout develop
+ $ git merge --no-ff hotfix/hotfix-version-number
+ $ git branch -d hotfix/hotfix-version-number
+</code></pre><h3 id='releases'>Releases</h3>
+<p>A <code>release</code> branch is created from the stable <code>develop</code> branch with a tag.</p>
+
+<p>Using a separate <code>release</code> branch allows us to continue developing new features on develop while we fix bugs and add 
+finishing touches to a <code>release</code> branch.</p>
+
+<p>When we are ready to finish the release, we merge the <code>release</code> branch into both <code>master</code> and <code>develop</code> 
+(just like a hotfix) so that all changes carry forward. The <code>master</code> branch is tagged at this point as well to mark
+the released code.</p>
+<h3 id='merging'>Merging</h3><pre class="highlight plaintext"><code>$ git merge --no-ff &lt;branch-name&gt;
+</code></pre>
+<p>Git flow encourages merging of branches with <code>--no-ff</code></p>
+
+<p>The <code>--no-ff</code> option allows you to maintain all of your branch history without leaving a bunch of branches lying around in the current commit of the repository.</p>
+<pre class="highlight plaintext"><code>$ git pull --rebase
+</code></pre>
+<p>Similarly, best practice is to pull with <code>--rebase</code> to avoid lots of useless merge commits.</p>
+
+<p>You can configure git to do both of these things by default in your .gitconfig </p>
+<h3 id='git-flow-extension'>git-flow extension</h3>
+<p>Using the <a href="http://danielkummer.github.io/git-flow-cheatsheet/">git-flow extension</a> can greatly simplify your life and is recommended </p>
 <h2 id='community-guidelines'>Community Guidelines</h2>
 <p>We want to keep the MARKET Protocol community awesome, growing and collaborative.
 We need your help to keep it that way. To help with this we&#39;ve come up with some general guidelines for the community as a whole:</p>
