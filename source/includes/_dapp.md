@@ -34,7 +34,7 @@ condensed process with the [Quick Deploy](https://dapp.marketprotocol.io/contrac
 
 ### Guided Deploy
 
-MARKET Protocol Quick Deploy provides a step by step guide to first time deployment.  Below are the needed variables
+MARKET Protocol Guided Deploy provides a step by step guide to first time deployment.  Below are the needed variables
 to deploy a contract to the Ethereum Blockchain
 
 1. `Name` - the contract name should be as descriptive as possible capturing the underlying asset relationship as well as possibly the expiration. 
