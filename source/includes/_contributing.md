@@ -14,7 +14,7 @@ Please, start reading about our:
 
 ## Dive Right In
 
-If you're ready to start helping us to build the decentralized future right now and you just need an issue to focus on, check out [this list of open issues](https://github.com/orgs/MARKETProtocol/projects/1?card_filter_query=label%3A%22help+wanted%22+no%3Aassignee+is%3Aopen).
+If you're ready to start helping us to build the decentralized future right now and you just need an issue to focus on, check out [this list of open issues](https://app.zenhub.com/workspace/o/marketprotocol/market.js/boards?repos=140627375,128025988,130496585,117898415,119072718,116695875,130494562,131598556,108304540,127038994,141709662,135627327,129016888&labels=help%20wanted&assignees=issues%20with%20no%20assignees&showPRs=false&showClosed=false).
 
 There are three main repositories that are considered as core components of the MARKET Protocol:
 
