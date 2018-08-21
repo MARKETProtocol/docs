@@ -15,3 +15,6 @@ deploy:
   bucket: $AWS_BUCKET
   skip_cleanup: true
   local_dir: build
+  on:
+    branch: master
+    tags: true
