@@ -70,11 +70,44 @@ If you see an error similiar to `Error: VM Exception while processing transactio
 Check the logging output in that console, and attempt to rerun the migrations.
 </aside>
 
-If you have followed along this along, congratulations, you have a working local MARKET Protocol environment to work against. If your struggling
+If you have followed along this along, congratulations, you have a working local MARKET Protocol environment to work against. We can now 
+move on to our tutorial. 
+
+If your struggling
 to get the environment set up please come find us in [Discord](https://marketprotocol.io/discord), there are several
 core dev team members in #engineering that will be happy to help!
 
+## Essential packages
 
-## Running the Orders Tutorial
+> Import the needed packages:
 
+```javascript
+
+import * as Web3 from 'web3';
+import { Market, MARKETProtocolConfig, Utils } from '@marketprotocol/marketjs';
+
+```
+
+There are a few essential packages for interacting with our protocol, and the ethereum blockchain. `Web3` provides
+the needed functionality for us to connect with our local truffle node, and marketjs is our MARKET.js library
+designed to simplify your interactions with the underlying MARKET Protocol Smart Contracts.
+
+## Instantiation
+
+> Creating a web3 instance and the Market object:
+
+```javascript
+
+const web3Instance = new Web3(new Web3.providers.HttpProvider('http://localhost:9545'));
+const config: MARKETProtocolConfig = {
+    networkId: TRUFFLE_NETWORK_ID
+};
+
+const market: Market = new Market(web3Instance.currentProvider, config);
+
+```
+
+Once we have imported these packages, we can now create an instance of web3, connected to our local truffle node
+as the provider.  Using this provider, we can create a new `Market` object, which is the main entry point for
+all functionality contained in MARKET.js
 
