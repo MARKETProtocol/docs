@@ -73,7 +73,7 @@ Check the logging output in that console, and attempt to rerun the migrations.
 If you have followed along this along, congratulations, you have a working local MARKET Protocol environment to work against. We can now 
 move on to our tutorial. 
 
-If your struggling
+If you are unable
 to get the environment set up please come find us in [Discord](https://marketprotocol.io/discord), there are several
 core dev team members in #engineering that will be happy to help!
 
