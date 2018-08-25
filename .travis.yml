@@ -10,7 +10,7 @@ cache: bundler
 script: bundle exec middleman build
 deploy:
   provider: s3
-  access_key_id:$AWS_ACCESS_KEY
+  access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET
   bucket: $AWS_BUCKET
   skip_cleanup: true
