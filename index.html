@@ -203,7 +203,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;solidity&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -212,9 +212,6 @@
     </a>
     <div class="toc-wrapper">
       <img src="images/market-logo.png" class="logo" alt="Market logo" />
-        <div class="lang-selector">
-              <a href="#" data-language-name="solidity">solidity</a>
-        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -297,6 +294,41 @@
                   </li>
                   <li>
                     <a href="#requirements-for-a-successful-traderorder-call" class="toc-h2 toc-link" data-title="requirements-for-a-successful-code-traderorder-code-call">Requirements for a successful <code>traderOrder</code> call</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#tutorial-1-orders" class="toc-h1 toc-link" data-title="tutorial-1-orders">Tutorial #1 - Orders</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#installation" class="toc-h2 toc-link" data-title="installation">Installation</a>
+                  </li>
+                  <li>
+                    <a href="#setting-up-the-develop-environment" class="toc-h2 toc-link" data-title="setting-up-the-develop-environment">Setting up the develop environment</a>
+                  </li>
+                  <li>
+                    <a href="#essential-packages" class="toc-h2 toc-link" data-title="essential-packages">Essential packages</a>
+                  </li>
+                  <li>
+                    <a href="#instantiation" class="toc-h2 toc-link" data-title="instantiation">Instantiation</a>
+                  </li>
+                  <li>
+                    <a href="#contract-specifications" class="toc-h2 toc-link" data-title="contract-specifications">Contract Specifications</a>
+                  </li>
+                  <li>
+                    <a href="#collateral" class="toc-h2 toc-link" data-title="collateral">Collateral</a>
+                  </li>
+                  <li>
+                    <a href="#order-creation" class="toc-h2 toc-link" data-title="order-creation">Order Creation</a>
+                  </li>
+                  <li>
+                    <a href="#filling-an-order" class="toc-h2 toc-link" data-title="filling-an-order">Filling an Order</a>
+                  </li>
+                  <li>
+                    <a href="#open-positions" class="toc-h2 toc-link" data-title="open-positions">Open Positions</a>
+                  </li>
+                  <li>
+                    <a href="#remaining-balances" class="toc-h2 toc-link" data-title="remaining-balances">Remaining Balances</a>
                   </li>
               </ul>
           </li>
@@ -1257,6 +1289,207 @@ This can be verified by calling <code>isUserEnabledForContract</code> in the <co
 <li>the order has not expired, been cancelled, nor been completely filled</li>
 <li>both <code>maker</code> and <code>taker</code> have sufficient balances to lock collateral for attempted trade<br></li>
 </ol>
+<h1 id='tutorial-1-orders'>Tutorial #1 - Orders</h1>
+<p>This tutorial will go over creating, validating and filling an order using our library MARKET.js.  This tutorial utilizes
+a local development environment in which we had MARKET Protocol Smart Contracts deployed to and trading accounts created
+that are already pre-funded with the needed tokens for trading.</p>
+<h2 id='installation'>Installation</h2>
+<blockquote>
+<p>Clone needed repos:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+<span class="c"># 1. clone our demo-project</span>
+git clone https://github.com/MARKETProtocol/demo-projects.git
+
+<span class="c"># 2. clone the ethereum-bridge to allow deployment of our contracts connect to Oraclize.it</span>
+git clone https://github.com/MARKETProtocol/ethereum-bridge.git
+
+<span class="c"># 3. install needed dependencies</span>
+npm install -g truffle
+<span class="nb">cd</span> ~/demo-projects
+npm install
+<span class="nb">cd</span> ~/ethereum-bridge
+npm install
+
+</code></pre>
+<p>In order to simplify developers interaction with our underlying smart contracts and the ethereum
+blockchain, we have created the MARKET.js library. It provides a standardized and simplified API to interact
+with MARKET Protocol. In order to create a development environment, you will need to have
+a local instance of the blockchain to interact with.  For this we recommend using <a href="https://truffleframework.com/">Truffle</a></p>
+
+<p>We have also created a demo starter project to help with these tutorials available on <a href="https://github.com/MARKETProtocol/demo-projects">github</a>.</p>
+
+<p>You can clone the repo locally to run the tutorial and being working with MARKET Protocol.  You will also need to clone
+the <code>ethereum-bridge</code> which allows for our contracts to interact with Oraclize.it for demonstration purposes</p>
+<h2 id='setting-up-the-develop-environment'>Setting up the develop environment</h2>
+<blockquote>
+<p>Start truffle:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="nb">cd</span> ~/demo-projects
+truffle develop
+</code></pre>
+<blockquote>
+<p>Start the ethereum bridge (in a separate console) :</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="nb">cd</span> ~/ethereum-bridge
+node bridge -H localhost:9545 -a 9 --dev
+</code></pre>
+<blockquote>
+<p>Deploy contracts to the local truffle instance</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="c"># inside truffle console, </span>
+<span class="gp">truffle(develop)&gt; </span>migrate --reset
+
+</code></pre>
+<p>After you have installed these projects and the needed dependencies, you can begin to create the needed development environment.</p>
+
+<ol>
+<li>Start truffle</li>
+<li>Start the ethereum bridge (in a separate console)</li>
+<li>Once the ethereum bridge has initialized, you will see a log message similiar to <code>[2018-08-22T18:49:30.289Z] INFO Listening @ 0xf7e3e47e06f1bddecb1b2f3a7f60b6b25fd2e233 (Oraclize Connector)
+</code> you can now run the migrations to deploy our contracts to the local truffle instance.</li>
+</ol>
+
+<aside class="notice">
+If you see an error similiar to `Error: VM Exception while processing transaction: revert` the ethereum-bridge probably isn't intialized yet.
+Check the logging output in that console, and attempt to rerun the migrations.
+</aside>
+
+<p>If you have followed along this along, congratulations, you have a working local MARKET Protocol environment to work against. We can now 
+move on to our tutorial. </p>
+
+<p>If you are unable to get the environment set up please come find us in <a href="https://marketprotocol.io/discord">Discord</a>, 
+there are several core dev team members in #engineering that will be happy to help!</p>
+<h2 id='essential-packages'>Essential packages</h2>
+<blockquote>
+<p>Import the needed packages:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code>
+<span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">Web3</span> <span class="nx">from</span> <span class="s1">'web3'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Market</span><span class="p">,</span> <span class="nx">MARKETProtocolConfig</span><span class="p">,</span> <span class="nx">Utils</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'@marketprotocol/marketjs'</span><span class="p">;</span>
+
+</code></pre>
+<p>There are a few essential packages for interacting with our protocol, and the ethereum blockchain. <code>Web3</code> provides
+the needed functionality for us to connect with our local truffle node, and marketjs is our MARKET.js library
+designed to simplify your interactions with the underlying MARKET Protocol Smart Contracts.</p>
+<h2 id='instantiation'>Instantiation</h2>
+<blockquote>
+<p>Creating a web3 instance and the Market object:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code>
+<span class="kr">const</span> <span class="nx">web3Instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Web3</span><span class="p">(</span><span class="k">new</span> <span class="nx">Web3</span><span class="p">.</span><span class="nx">providers</span><span class="p">.</span><span class="nx">HttpProvider</span><span class="p">(</span><span class="s1">'http://localhost:9545'</span><span class="p">));</span>
+<span class="kr">const</span> <span class="nx">config</span><span class="p">:</span> <span class="nx">MARKETProtocolConfig</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">networkId</span><span class="p">:</span> <span class="nx">TRUFFLE_NETWORK_ID</span>
+<span class="p">};</span>
+
+<span class="kr">const</span> <span class="nx">market</span><span class="p">:</span> <span class="nx">Market</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Market</span><span class="p">(</span><span class="nx">web3Instance</span><span class="p">.</span><span class="nx">currentProvider</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+
+</code></pre>
+<p>Once we have imported these packages, we can now create an instance of web3, connected to our local truffle node
+as the provider.  Using this provider, we can create a new <code>Market</code> object, which is the main entry point for
+all functionality contained in MARKET.js</p>
+<h2 id='contract-specifications'>Contract Specifications</h2>
+<blockquote>
+<p>Getting whitelisted addresses and contract specs:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code>
+<span class="kr">const</span> <span class="nx">marketContractAddress</span><span class="p">:</span> <span class="nx">string</span><span class="p">[]</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">market</span><span class="p">.</span><span class="nx">getAddressWhiteListAsync</span><span class="p">();</span>
+<span class="kr">const</span> <span class="nx">demoContractAddress</span><span class="p">:</span> <span class="nx">string</span> <span class="o">=</span> <span class="nx">marketContractAddress</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="kr">const</span> <span class="nx">contractMetaData</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">market</span><span class="p">.</span><span class="nx">getContractMetaDataAsync</span><span class="p">(</span><span class="nx">demoContractAddress</span><span class="p">);</span>
+
+</code></pre>
+<p>The <code>Market</code> class provide methods for getting the current collection of white listed MARKET Protocol Smart Contract
+addresses and well as meta data bout those deployed contracts.  It is also important to note, that there is 
+an off chain API that can provide this information to users who need higher level functionality such as queries.</p>
+<h2 id='collateral'>Collateral</h2>
+<blockquote>
+<p>Approving collateral transfer and deposit to the smart contract:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code>
+<span class="kr">const</span> <span class="nx">traderA</span> <span class="o">=</span> <span class="nx">web3Instance</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">accounts</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="kr">const</span> <span class="nx">traderB</span> <span class="o">=</span> <span class="nx">web3Instance</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">accounts</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+
+<span class="nx">await</span> <span class="nx">market</span><span class="p">.</span><span class="nx">approveCollateralDepositAsync</span><span class="p">(</span><span class="nx">demoContractAddress</span><span class="p">,</span> <span class="mi">1</span><span class="nx">e25</span><span class="p">,</span> <span class="p">{</span><span class="na">from</span><span class="p">:</span> <span class="nx">traderA</span><span class="p">});</span>
+<span class="nx">await</span> <span class="nx">market</span><span class="p">.</span><span class="nx">approveCollateralDepositAsync</span><span class="p">(</span><span class="nx">demoContractAddress</span><span class="p">,</span> <span class="mi">1</span><span class="nx">e25</span><span class="p">,</span> <span class="p">{</span><span class="na">from</span><span class="p">:</span> <span class="nx">traderB</span><span class="p">});</span>
+
+<span class="nx">await</span> <span class="nx">market</span><span class="p">.</span><span class="nx">depositCollateralAsync</span><span class="p">(</span><span class="nx">demoContractAddress</span><span class="p">,</span> <span class="mi">1</span><span class="nx">e25</span><span class="p">,</span> <span class="p">{</span><span class="na">from</span><span class="p">:</span> <span class="nx">traderA</span><span class="p">});</span>
+<span class="nx">await</span> <span class="nx">market</span><span class="p">.</span><span class="nx">depositCollateralAsync</span><span class="p">(</span><span class="nx">demoContractAddress</span><span class="p">,</span> <span class="mi">1</span><span class="nx">e25</span><span class="p">,</span> <span class="p">{</span><span class="na">from</span><span class="p">:</span> <span class="nx">traderB</span><span class="p">});</span>
+
+</code></pre>
+<p>Each MARKET Protocol Smart Contract has a unique collateral pool.  In order to enable trading, a user must first
+approve the transfer of funds (an ERC20 token, as defined by the contract) and then call the <code>depositCollateralAsync</code>
+method.  This will allow for ERC20 tokens to be moved from a user&#39;s address to the smart contract for trading. 
+Deposited funds, that have not been committed to a trade, may be withdrawn at any time by the user.  Upon executing a
+trader, the users maximum loss will become locked into the collateral pool, and that amount is no longer able to be
+withdrawn until the trade is exited, or the contract settled.</p>
+<h2 id='order-creation'>Order Creation</h2>
+<blockquote>
+<p>Creating a signed order:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code>
+<span class="kr">const</span> <span class="nx">orderExpirationTimeStamp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BigNumber</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">);</span> <span class="c1">// expires in 1 hour</span>
+<span class="kr">const</span> <span class="nx">fees</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BigNumber</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">orderQty</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BigNumber</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">orderPrice</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BigNumber</span><span class="p">(</span><span class="mi">7500000</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">feeRecipient</span> <span class="o">=</span> <span class="nx">Constants</span><span class="p">.</span><span class="nx">NULL_ADDRESS</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">signedOrder</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">market</span><span class="p">.</span><span class="nx">createSignedOrderAsync</span><span class="p">(</span>
+  <span class="nx">demoContractAddress</span><span class="p">,</span>
+  <span class="nx">orderExpirationTimeStamp</span><span class="p">,</span>
+  <span class="nx">feeRecipient</span><span class="p">,</span>
+  <span class="nx">traderA</span><span class="p">,</span>
+  <span class="nx">fees</span><span class="p">,</span>
+  <span class="nx">traderB</span><span class="p">,</span>
+  <span class="nx">fees</span><span class="p">,</span>
+  <span class="nx">orderQty</span><span class="p">,</span>
+  <span class="nx">orderPrice</span><span class="p">,</span>
+  <span class="nx">Utils</span><span class="p">.</span><span class="nx">generatePseudoRandomSalt</span><span class="p">(),</span>
+  <span class="kc">false</span>
+<span class="p">);</span>
+
+</code></pre>
+<p>After collateral funds have been deposited, a user is able to create a valid order for trading.  This order is signed
+by the user in order to ensure its origin.  Market.js provides several methods for validation of the order
+that can be used in order for proper pruning of order books by exchanges.</p>
+<h2 id='filling-an-order'>Filling an Order</h2>
+<blockquote>
+<p>trading against a signed order:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code>
+<span class="kr">const</span> <span class="nx">orderTransactionInfo</span><span class="p">:</span> <span class="nx">OrderTransactionInfo</span> <span class="o">=</span>
+    <span class="nx">await</span> <span class="nx">market</span><span class="p">.</span><span class="nx">tradeOrderAsync</span><span class="p">(</span><span class="nx">signedOrder</span><span class="p">,</span> <span class="nx">orderQty</span><span class="p">,</span> <span class="p">{</span> <span class="na">from</span><span class="p">:</span> <span class="nx">traderB</span><span class="p">,</span> <span class="na">gas</span><span class="p">:</span> <span class="mi">400000</span> <span class="p">});</span>
+
+<span class="c1">// we can now display the information about this filled transaction</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">orderTransactionInfo</span><span class="p">.</span><span class="nx">txHash</span><span class="p">,</span> <span class="nx">await</span> <span class="nx">orderTransactionInfo</span><span class="p">.</span><span class="nx">filledQtyAsync</span><span class="p">);</span>
+</code></pre>
+<p>By calling <code>traderOrderAsync</code> against a validated <code>SignedOrder</code>, a user may fill all or a portion of an order.  In order to 
+avoid wasting gas, by a call to <code>traderOrderAsync</code> that will ultimately fail, Market.js provides as much verification as 
+is possible prior to a call to the on-chain transaction.</p>
+
+<p>If the trade is successfully executed, both counter-parties (TraderA and TraderB) will have their collateral locked,
+and a newly recorded open position.</p>
+<h2 id='open-positions'>Open Positions</h2>
+<blockquote>
+<p>Querying open positions:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Trader A - Open Positions ='</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">await</span> <span class="nx">market</span><span class="p">.</span><span class="nx">getUserPositionsAsync</span><span class="p">(</span><span class="nx">demoContractAddress</span><span class="p">,</span> <span class="nx">traderA</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">));</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Trader B - Open Positions ='</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">await</span> <span class="nx">market</span><span class="p">.</span><span class="nx">getUserPositionsAsync</span><span class="p">(</span><span class="nx">demoContractAddress</span><span class="p">,</span> <span class="nx">traderB</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">));</span>
+</code></pre>
+<p>A trader&#39;s open positions are recorded onto the blockchain and can be accessed with the <code>getUserPositionsAsync</code> function.
+Additional functionality is provided for sorting and consolidating the reporting of these positions.</p>
+<h2 id='remaining-balances'>Remaining Balances</h2>
+<blockquote>
+<p>Retrieving remaining balances:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'\n Trader A Collateral Balance Remaining ='</span><span class="p">,</span>
+    <span class="p">(</span><span class="nx">await</span> <span class="nx">market</span><span class="p">.</span><span class="nx">getUserUnallocatedCollateralBalanceAsync</span><span class="p">(</span><span class="nx">demoContractAddress</span><span class="p">,</span> <span class="nx">traderA</span><span class="p">)).</span><span class="nx">toString</span><span class="p">());</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'\n Trader B Collateral Balance Remaining ='</span><span class="p">,</span>
+    <span class="p">(</span><span class="nx">await</span> <span class="nx">market</span><span class="p">.</span><span class="nx">getUserUnallocatedCollateralBalanceAsync</span><span class="p">(</span><span class="nx">demoContractAddress</span><span class="p">,</span> <span class="nx">traderB</span><span class="p">)).</span><span class="nx">toString</span><span class="p">());</span>
+</code></pre>
+<p>The remaining collateral that is available for trading in the smart contract can be accessed via a call to 
+<code>getUserUnallocatedCollateralBalanceAsync</code>.</p>
 <h1 id='faq-general'>FAQ - General</h1><h2 id='what-blockchain-is-used'>What blockchain is used?</h2>
 <p>MARKET Protocol has chosen to build on top of Ethereum.</p>
 <h2 id='what-is-the-token-name'>What is the token name?</h2>
@@ -1564,9 +1797,6 @@ please bring it to our attention right away!</p>
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="solidity">solidity</a>
-          </div>
       </div>
     </div>
   </body>
