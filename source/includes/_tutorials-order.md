@@ -84,7 +84,7 @@ there are several core dev team members in #engineering that will be happy to he
 ```javascript
 
 import * as Web3 from 'web3';
-import { Market, MARKETProtocolConfig, Utils } from '@marketprotocol/marketjs';
+import { Constants, Market, MARKETProtocolConfig, Utils } from '@marketprotocol/marketjs';
 
 ```
 
@@ -100,11 +100,10 @@ designed to simplify your interactions with the underlying MARKET Protocol Smart
 
 const web3Instance = new Web3(new Web3.providers.HttpProvider('http://localhost:9545'));
 const config: MARKETProtocolConfig = {
-    networkId: TRUFFLE_NETWORK_ID
+  networkId: Constants.NETWORK_ID_TRUFFLE
 };
 
 const market: Market = new Market(web3Instance.currentProvider, config);
-
 ```
 
 Once we have imported these packages, we can now create an instance of web3, connected to our local truffle node
