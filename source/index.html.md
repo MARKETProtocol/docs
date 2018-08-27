@@ -1,9 +1,6 @@
 ---
 title: MARKET Protocol
 
-language_tabs: # must be one of https://git.io/vQNgJ
-  - solidity
-
 toc_footers:
   - <a href='https://marketprotocol.io/'>Home</a>
   - <a href='https://dapp.marketprotocol.io/'>dApp</a>
@@ -14,6 +11,7 @@ includes:
   - dapp
   - smart-contracts
   - market-js
+  - tutorials-order
   - faq-general
   - faq-market-protocol
   - faq-solidity
