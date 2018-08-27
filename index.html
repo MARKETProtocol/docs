@@ -1246,7 +1246,7 @@ there are several core dev team members in #engineering that will be happy to he
 </blockquote>
 <pre class="highlight javascript tab-javascript"><code>
 <span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">Web3</span> <span class="nx">from</span> <span class="s1">'web3'</span><span class="p">;</span>
-<span class="kr">import</span> <span class="p">{</span> <span class="nx">Market</span><span class="p">,</span> <span class="nx">MARKETProtocolConfig</span><span class="p">,</span> <span class="nx">Utils</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'@marketprotocol/marketjs'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Constants</span><span class="p">,</span> <span class="nx">Market</span><span class="p">,</span> <span class="nx">MARKETProtocolConfig</span><span class="p">,</span> <span class="nx">Utils</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'@marketprotocol/marketjs'</span><span class="p">;</span>
 
 </code></pre>
 <p>There are a few essential packages for interacting with our protocol, and the ethereum blockchain. <code>Web3</code> provides
@@ -1259,11 +1259,10 @@ designed to simplify your interactions with the underlying MARKET Protocol Smart
 <pre class="highlight javascript tab-javascript"><code>
 <span class="kr">const</span> <span class="nx">web3Instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Web3</span><span class="p">(</span><span class="k">new</span> <span class="nx">Web3</span><span class="p">.</span><span class="nx">providers</span><span class="p">.</span><span class="nx">HttpProvider</span><span class="p">(</span><span class="s1">'http://localhost:9545'</span><span class="p">));</span>
 <span class="kr">const</span> <span class="nx">config</span><span class="p">:</span> <span class="nx">MARKETProtocolConfig</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">networkId</span><span class="p">:</span> <span class="nx">TRUFFLE_NETWORK_ID</span>
+  <span class="na">networkId</span><span class="p">:</span> <span class="nx">Constants</span><span class="p">.</span><span class="nx">NETWORK_ID_TRUFFLE</span>
 <span class="p">};</span>
 
 <span class="kr">const</span> <span class="nx">market</span><span class="p">:</span> <span class="nx">Market</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Market</span><span class="p">(</span><span class="nx">web3Instance</span><span class="p">.</span><span class="nx">currentProvider</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-
 </code></pre>
 <p>Once we have imported these packages, we can now create an instance of web3, connected to our local truffle node
 as the provider.  Using this provider, we can create a new <code>Market</code> object, which is the main entry point for
