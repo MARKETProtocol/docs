@@ -35,7 +35,7 @@ We have also created a demo starter project to help with these tutorials availab
 You can clone the repo locally to run the tutorial and being working with MARKET Protocol.  You will also need to clone
 the `ethereum-bridge` which allows for our contracts to interact with Oraclize.it for demonstration purposes
 
-## Setting up the develop environment
+## Development Environment
 
 > Start truffle:
 

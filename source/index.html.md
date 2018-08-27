@@ -8,10 +8,10 @@ toc_footers:
   - <a href='https://github.com/MARKETProtocol/'>GitHub</a>
 
 includes:
-  - dapp
-  - smart-contracts
+  - smart-contracts  
   - market-js
   - tutorials-order
+  - dapp
   - faq-general
   - faq-market-protocol
   - faq-solidity
