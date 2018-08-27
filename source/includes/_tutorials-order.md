@@ -1,7 +1,7 @@
 # Tutorial #1 - Orders
 
 This tutorial will go over creating, validating and filling an order using our library MARKET.js.  This tutorial utilizes
-a local development environment in which we had MARKET Protocol Smart Contracts deployed to and trading accounts created
+a local development environment in which we have MARKET Protocol Smart Contracts deployed to and trading accounts created
 that are already pre-funded with the needed tokens for trading.
 
 ## Installation
