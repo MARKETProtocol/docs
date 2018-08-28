@@ -126,7 +126,7 @@ The `Market` class provide methods for getting the current collection of white l
 addresses and well as meta data about those deployed contracts.  It is also important to note, that there is 
 an off chain API that can provide this information to users who need higher level functionality such as queries.
 
-## Collateral
+## Deposit Collateral
 
 > Approving collateral transfer and deposit to the smart contract:
 
