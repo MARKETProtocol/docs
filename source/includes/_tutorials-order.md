@@ -32,7 +32,7 @@ a local instance of the blockchain to interact with.  For this we recommend usin
 
 We have also created a demo starter project to help with these tutorials available on [github](https://github.com/MARKETProtocol/demo-projects).
  
-You can clone the repo locally to run the tutorial and being working with MARKET Protocol.  You will also need to clone
+You can clone the repo locally to run the tutorial and begin working with MARKET Protocol.  You will also need to clone
 the `ethereum-bridge` which allows for our contracts to interact with Oraclize.it for demonstration purposes
 
 ## Development Environment
@@ -233,5 +233,5 @@ console.log('\n Trader A Collateral Balance Remaining =',
 console.log('\n Trader B Collateral Balance Remaining =',
     (await market.getUserUnallocatedCollateralBalanceAsync(demoContractAddress, traderB)).toString());
  ```
-The remaining collateral that is available for trading in the smart contract can be accessed via a call to 
+The remaining collateral available for trading in the smart contract can be accessed via a call to 
 `getUserUnallocatedCollateralBalanceAsync`.
