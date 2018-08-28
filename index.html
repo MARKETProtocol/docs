@@ -290,7 +290,7 @@
                     <a href="#contract-specifications" class="toc-h2 toc-link" data-title="contract-specifications">Contract Specifications</a>
                   </li>
                   <li>
-                    <a href="#collateral" class="toc-h2 toc-link" data-title="collateral">Collateral</a>
+                    <a href="#deposit-collateral" class="toc-h2 toc-link" data-title="deposit-collateral">Deposit Collateral</a>
                   </li>
                   <li>
                     <a href="#order-creation" class="toc-h2 toc-link" data-title="order-creation">Order Creation</a>
@@ -1199,7 +1199,7 @@ a local instance of the blockchain to interact with.  For this we recommend usin
 
 <p>We have also created a demo starter project to help with these tutorials available on <a href="https://github.com/MARKETProtocol/demo-projects">github</a>.</p>
 
-<p>You can clone the repo locally to run the tutorial and being working with MARKET Protocol.  You will also need to clone
+<p>You can clone the repo locally to run the tutorial and begin working with MARKET Protocol.  You will also need to clone
 the <code>ethereum-bridge</code> which allows for our contracts to interact with Oraclize.it for demonstration purposes</p>
 <h2 id='development-environment'>Development Environment</h2>
 <blockquote>
@@ -1280,7 +1280,7 @@ all functionality contained in MARKET.js</p>
 <p>The <code>Market</code> class provide methods for getting the current collection of white listed MARKET Protocol Smart Contract
 addresses and well as meta data about those deployed contracts.  It is also important to note, that there is 
 an off chain API that can provide this information to users who need higher level functionality such as queries.</p>
-<h2 id='collateral'>Collateral</h2>
+<h2 id='deposit-collateral'>Deposit Collateral</h2>
 <blockquote>
 <p>Approving collateral transfer and deposit to the smart contract:</p>
 </blockquote>
@@ -1373,7 +1373,7 @@ Additional functionality is provided for sorting and consolidating the reporting
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'\n Trader B Collateral Balance Remaining ='</span><span class="p">,</span>
     <span class="p">(</span><span class="nx">await</span> <span class="nx">market</span><span class="p">.</span><span class="nx">getUserUnallocatedCollateralBalanceAsync</span><span class="p">(</span><span class="nx">demoContractAddress</span><span class="p">,</span> <span class="nx">traderB</span><span class="p">)).</span><span class="nx">toString</span><span class="p">());</span>
 </code></pre>
-<p>The remaining collateral that is available for trading in the smart contract can be accessed via a call to 
+<p>The remaining collateral available for trading in the smart contract can be accessed via a call to 
 <code>getUserUnallocatedCollateralBalanceAsync</code>.</p>
 <h1 id='dapp'>dApp</h1>
 <p>The MARKET Protocol dApp provides tools for contract creation, oracle testing and deployment. 
