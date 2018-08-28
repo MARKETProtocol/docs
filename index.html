@@ -1341,7 +1341,7 @@ that can be used for proper pruning of order books by exchanges.</p>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">orderTransactionInfo</span><span class="p">.</span><span class="nx">txHash</span><span class="p">,</span> <span class="nx">await</span> <span class="nx">orderTransactionInfo</span><span class="p">.</span><span class="nx">filledQtyAsync</span><span class="p">);</span>
 </code></pre>
 <p>By calling <code>traderOrderAsync</code> against a validated <code>SignedOrder</code>, a user may fill a portion or all of an order.  To 
-avoid wasting gas, by a call to <code>traderOrderAsync</code> that will ultimately fail, Market.js provides as much verification as 
+avoid wasting gas by a call to <code>traderOrderAsync</code> that will ultimately fail, MARKET.js provides as much verification as 
 is possible prior to calling the on-chain transaction.</p>
 
 <p>If a trade is successfully executed, both counter-parties (TraderA and TraderB) will have their collateral locked,
