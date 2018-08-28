@@ -77,7 +77,7 @@ move on to our tutorial.
 If you are unable to get the environment set up please come find us in [Discord](https://marketprotocol.io/discord), 
 there are several core dev team members in #engineering that will be happy to help!
 
-## Essential packages
+## Essential Packages
 
 > Import the needed packages:
 
