@@ -88,7 +88,7 @@ import { Constants, Market, MARKETProtocolConfig, Utils } from '@marketprotocol/
 
 ```
 
-There are a few essential packages for interacting with our protocol, and the ethereum blockchain. `Web3` provides
+There are a few essential packages for interacting with our protocol, and the ethereum blockchain. Web3 provides
 the needed functionality for us to connect with our local truffle node, and marketjs is our MARKET.js library
 designed to simplify your interactions with the underlying MARKET Protocol Smart Contracts.
 
@@ -123,7 +123,7 @@ const contractMetaData = await market.getContractMetaDataAsync(demoContractAddre
 ```
 
 The `Market` class provide methods for getting the current collection of white listed MARKET Protocol Smart Contract
-addresses and well as meta data bout those deployed contracts.  It is also important to note, that there is 
+addresses and well as meta data about those deployed contracts.  It is also important to note, that there is 
 an off chain API that can provide this information to users who need higher level functionality such as queries.
 
 ## Collateral
@@ -147,7 +147,7 @@ Each MARKET Protocol Smart Contract has a unique collateral pool.  In order to e
 approve the transfer of funds (an ERC20 token, as defined by the contract) and then call the `depositCollateralAsync`
 method.  This will allow for ERC20 tokens to be moved from a user's address to the smart contract for trading. 
 Deposited funds, that have not been committed to a trade, may be withdrawn at any time by the user.  Upon executing a
-trader, the users maximum loss will become locked into the collateral pool, and that amount is no longer able to be
+trade, the users maximum loss will become locked into the collateral pool, and that amount is no longer able to be
 withdrawn until the trade is exited, or the contract settled.
 
 ## Order Creation
@@ -177,9 +177,9 @@ const signedOrder = await market.createSignedOrderAsync(
 
 ```
 
-After collateral funds have been deposited, a user is able to create a valid order for trading.  This order is signed
-by the user in order to ensure its origin.  Market.js provides several methods for validation of the order
-that can be used in order for proper pruning of order books by exchanges.
+After collateral has been deposited, a user is able to create a valid order for trading.  This order is signed
+by the user in order to ensure its origin.  Market.js provides several methods for validation of orders
+that can be used for proper pruning of order books by exchanges.
 
 
 ## Filling an Order
@@ -195,11 +195,11 @@ const orderTransactionInfo: OrderTransactionInfo =
 console.log(orderTransactionInfo.txHash, await orderTransactionInfo.filledQtyAsync);
 ```
 
-By calling `traderOrderAsync` against a validated `SignedOrder`, a user may fill all or a portion of an order.  In order to 
+By calling `traderOrderAsync` against a validated `SignedOrder`, a user may fill a portion or all of an order.  To 
 avoid wasting gas, by a call to `traderOrderAsync` that will ultimately fail, Market.js provides as much verification as 
-is possible prior to a call to the on-chain transaction.
+is possible prior to calling the on-chain transaction.
 
-If the trade is successfully executed, both counter-parties (TraderA and TraderB) will have their collateral locked,
+If a trade is successfully executed, both counter-parties (TraderA and TraderB) will have their collateral locked,
 and a newly recorded open position.
 
 ## Open Positions
