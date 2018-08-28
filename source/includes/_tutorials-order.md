@@ -196,7 +196,7 @@ console.log(orderTransactionInfo.txHash, await orderTransactionInfo.filledQtyAsy
 ```
 
 By calling `traderOrderAsync` against a validated `SignedOrder`, a user may fill a portion or all of an order.  To 
-avoid wasting gas, by a call to `traderOrderAsync` that will ultimately fail, Market.js provides as much verification as 
+avoid wasting gas by a call to `traderOrderAsync` that will ultimately fail, MARKET.js provides as much verification as 
 is possible prior to calling the on-chain transaction.
 
 If a trade is successfully executed, both counter-parties (TraderA and TraderB) will have their collateral locked,
