@@ -206,13 +206,19 @@ and a newly recorded open position.
 
 > Querying open positions:
  
- ```javascript
-console.log('Trader A - Open Positions =');
-console.log(await market.getUserPositionsAsync(demoContractAddress, traderA, true, true));
+```javascript
+const isConsolidatePositions: boolean = true;   // consolidate positions from the same price
+const isSortPositions: boolean = true;          // positions sorted by price
 
-console.log('Trader B - Open Positions =');
-console.log(await market.getUserPositionsAsync(demoContractAddress, traderB, true, true));
- ```
+console.log('\n Trader A - Open Positions =');
+console.log(await market.getUserPositionsAsync(
+    demoContractAddress, traderA, isSortPositions, isConsolidatePositions));
+
+console.log('\n Trader B - Open Positions =');
+console.log(await market.getUserPositionsAsync(
+    demoContractAddress, traderB, isSortPositions, isConsolidatePositions));
+
+```
 
 A trader's open positions are recorded onto the blockchain and can be accessed with the `getUserPositionsAsync` function.
 Additional functionality is provided for sorting and consolidating the reporting of these positions.
