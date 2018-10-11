@@ -7,7 +7,7 @@ MARKET Protocol Token
 ## What is the token ticker symbol?
 MKT
 ## How can I receive updates from MARKET Protocol?
-Check out our [telegram room](htttps://marketprotocol.io/telegram) and join our [newsletter!](https://marketprotocol.io/#subscribe) 
+Check out our [telegram room](https://marketprotocol.io/telegram) and join our [newsletter!](https://marketprotocol.io/#subscribe) 
 ## What's the total supply of the token?
 600 million MKT tokens (600,000,000) 
 ## Can extra MKT Tokens be added to the total supply?
