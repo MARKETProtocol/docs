@@ -1,17 +1,13 @@
-# dApp
+# MPX
 
-The MARKET Protocol dApp provides tools for contract creation, oracle testing and deployment. 
-Additionally, users are able to easily search previously deployed MARKET contracts they would 
-like to trade.
+The MARKET Protocol decentralized exchange, MPX, provides a simulated trading environment allows user to place 
+test trades and participate in beta releases of the protocol.
 
-A simulated trading environment allows user to place test trades and participate in beta
-releases of the protocol.
-
-Our beta dApp is currently running on the `Rinkeby testnet` [here](https://dapp.marketprotocol.io/).
+Our MPX beta is currently running on the `Rinkeby testnet` [here](https://dapp.marketprotocol.io/).
 
 ## Using an Ethereum-enabled browser
 
-For testing and interacting with our dApp, you will need to use a browser that supports Web3. 
+For testing and interacting with MPX, you will need to use a browser that supports Web3. 
 We recommend using the [Metamask Chrome Browser Extension](https://metamask.io/). This will enable you to connect to the 
 Ethereum network from your browser. Metamask allows you to run Ethereum dApps right in your browser without running a full Ethereum node.
 
@@ -21,7 +17,7 @@ Our smart contracts are currently deployed on the `Rinkeby testnet`. You will ne
 You can request test funds from the [Rinkeby faucet](https://faucet.rinkeby.io/). 
 
 <aside class="notice">
-Always confirm that you are on Rinkeby testnet when testing our dApp.
+Always confirm that you are on Rinkeby testnet when testing the MPX.
 </aside>
 
 ## Contract Deployment
@@ -90,14 +86,14 @@ Oraclize.it Query |  Properly structured Oraclize.it query, please use the [test
 
 ## Explore Contracts
 
-MARKET Protocol's dApp provides the needed functionality to easily search, filter, and sort already deployed
+MARKET Protocol's dApp, MPX, provides the needed functionality to easily search, filter, and sort already deployed
 MARKET Smart Contracts.  
 
 ## Find Contracts
 
 The [Find Contracts](https://dapp.marketprotocol.io/contract/find) screen allows for a reverse lookup
 for MARKET Contracts using the ethereum address of the deployed contract.  Users can enter
-a known address, if valid, the dApp will display the current specifications of the MARKET Contract
+a known address, if valid, MPX will display the current specifications of the MARKET Contract
 deployed to this address.
 
 ## Test Query 

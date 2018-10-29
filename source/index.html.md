@@ -3,20 +3,16 @@ title: MARKET Protocol
 
 toc_footers:
   - <a href='https://marketprotocol.io/'>Home</a>
-  - <a href='https://dapp.marketprotocol.io/'>dApp</a>
+  - <a href='https://dapp.marketprotocol.io/'>MPX</a>
   - <a href='https://marketprotocol.io/assets/MARKET_Protocol-Whitepaper.pdf'>Whitepaper</a>
   - <a href='https://github.com/MARKETProtocol/'>GitHub</a>
 
 includes:
   - smart-contracts  
-  - market-js
-  - tutorials-order
-  - dapp
+  - MPX
   - faq-general
   - faq-market-protocol
   - faq-solidity
-  - faq-api
-  - faq-dapp
   - getting-help
   - contributing
   - bug-reporting
@@ -34,17 +30,13 @@ clearing and collateral pool infrastructure, enabling third parties to build app
 
 > Visit our Github: [https://github.com/MARKETProtocol](https://github.com/MARKETProtocol)
 
-[![Trade Flow](https://raw.githubusercontent.com/MARKETProtocol/assets/master/Schematics/MARKET_Protocol-TradeFlow.png)]
-(https://raw.githubusercontent.com/MARKETProtocol/assets/master/Schematics/MARKET_Protocol-TradeFlow.png)
+![Trade Flow](/images/MARKET_Protocol-TradeFlow.png)
 
 ## Documentation
 * [Smart Contracts](#solidity-smart-contracts): The underlying MARKET Protocol smart contracts
-* [MARKET.js](#market-js): Typescript ibrary to interact with MARKET Protocol
-* [dApp](#dapp): Decentralized application allowing for easy MARKET Protocol contract deployment and exploration
+* [MPX](#mpx): Decentralized exchange built on MARKET Protocol
 
 ## Frequently Asked Questions
 * [General FAQ](#faq-general)
 * [MARKET Protocol FAQ](#faq-market-protocol)
 * [Smart Contract FAQ](#faq-solidity-smart-contracts)
-* [API FAQ](#faq-api)
-* [dApp FAQ](#faq-dapp)

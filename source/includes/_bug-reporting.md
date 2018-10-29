@@ -1,12 +1,9 @@
 # Bug Reporting
 
 If you find bugs, mistakes or inconsistencies, please let us know by filing an issue on 
-[GitHub](https://github.com/MARKETProtocol/dapp/issues) (see details bellow). We highly appreciate 
+[GitHub](https://github.com/MARKETProtocol/MARKETProtocol/issues) (see details bellow). We highly appreciate 
 you taking the time to contributing to MARKET Protocol.
 
-<aside class="notice">
-No bug is too small. Help us fix our tpyos!
-</aside>
 
 We use [GitHub](https://github.com/MARKETProtocol/) for many aspects of project management, 
 including recording meeting notes, outstanding decisions, documenting requests, and filing bugs. 
@@ -29,21 +26,18 @@ Please, see: [Signing up for a new GitHub account](https://help.github.com/artic
 
 ## Creating a Bug Report
 
-To report a bug related to MARKET Protocol applications, please [create an issue in our GitHub](https://github.com/MARKETProtocol/dapp/issues).
+To report a bug related to MARKET Protocol applications, please [create an issue in our GitHub](https://github.com/MARKETProtocol/MARKETProtocol/issues).
 
 In our GitHub repositories, issues can be created by anyone and are then moderated by our core collaborators.
 
-To create a new issue in our GitHub [click on this link](https://github.com/MARKETProtocol/dapp/issues/new), 
-or you [view existing issues](https://github.com/MARKETProtocol/dapp/issues/) and click on the `New Issue` 
+To create a new issue in our GitHub [click on this link](https://github.com/MARKETProtocol/MARKETProtocol/issues/new), 
+or you [view existing issues](https://github.com/MARKETProtocol/MARKETPotocol/issues/) and click on the `New Issue` 
 button to add yours.
 
 If you are able, please help us by creating the issue in the correct sub project, using the links below.
 
 - [Docs issues](https://github.com/MARKETProtocol/docs/issues)
 - [MARKET Protocol issues (Solidity)](https://github.com/MARKETProtocol/MARKETProtocol/issues)
-- [MARKET.js](https://github.com/MARKETProtocol/MARKET.js/issues)
-- [dApp issues](https://github.com/MARKETProtocol/dApp/issues)
-- [Main website issues](https://github.com/MARKETProtocol/website/issues)
 
 ### When filing a new bug, please include:
 

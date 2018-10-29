@@ -53,8 +53,7 @@ combining needed functionality for trading, settlement and position management. 
 must be paired with a unique `MarketCollateralPool` ([see below](#collateral-pool)) after instantiation in order to allow trading to become
 enabled.
 
-[![Contract Diagram](https://raw.githubusercontent.com/MARKETProtocol/assets/master/Schematics/MARKET_Protocol-SmartContracts.png)]
-(https://raw.githubusercontent.com/MARKETProtocol/assets/master/Schematics/MARKET_Protocol-SmartContracts.png)
+![Contract Diagram](/images/MARKET_Protocol-SmartContracts.png)
 
 `MarketContract` is an abstract contract that will allow for implementing 
 classes such as `MarketContractOraclize` to complete the needed top level functionality around oracle solutions.
@@ -138,7 +137,7 @@ constructor(
 More information on forming correct queries can 
 be found in their [documentation](http://docs.oraclize.it/#ethereum-quick-start-simple-query).
 
-Our [dApp](https://app.marketprotocol.io) additionally has some help in formatting your queries correctly
+[MPX](https://dapp.marketprotocol.io) additionally has some help in formatting your queries correctly
 and a test environment to ensure the queries are correct prior to contract deployment.
 
 ### Additional parameters 
@@ -560,8 +559,8 @@ such matters.
 
 ## MKT Tokens
 
-![alt text](https://raw.githubusercontent.com/MARKETProtocol/assets/master/Art/MARKET_Protocol-MKT-small.png 
-"MKT Token")
+![MKT Tokens](/images/MARKET_Protocol-MKT-small.png)
+
 
 MKT Tokens are the lifeblood of the MARKET ecosystem.  All fees charged by nodes will be transacted in MKT and additionally
 anyone who wishes to create a new `MarketContract` will be forced to have some minimum balance of MKT. Finally, for every
