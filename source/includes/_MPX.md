@@ -1,17 +1,13 @@
-# dApp
+# MPX
 
-The MARKET Protocol dApp provides tools for contract creation, oracle testing and deployment. 
-Additionally, users are able to easily search previously deployed MARKET contracts they would 
-like to trade.
+The MARKET Protocol decentralized exchange, MPX, provides a simulated trading environment allows user to place 
+test trades and participate in beta releases of the protocol.
 
-A simulated trading environment allows user to place test trades and participate in beta
-releases of the protocol.
-
-Our beta dApp is currently running on the `Rinkeby testnet` [here](https://dapp.marketprotocol.io/).
+Our MPX beta is currently running on the `Rinkeby testnet` [here](https://mpexchange.io/).
 
 ## Using an Ethereum-enabled browser
 
-For testing and interacting with our dApp, you will need to use a browser that supports Web3. 
+For testing and interacting with MPX, you will need to use a browser that supports Web3. 
 We recommend using the [Metamask Chrome Browser Extension](https://metamask.io/). This will enable you to connect to the 
 Ethereum network from your browser. Metamask allows you to run Ethereum dApps right in your browser without running a full Ethereum node.
 
@@ -21,16 +17,19 @@ Our smart contracts are currently deployed on the `Rinkeby testnet`. You will ne
 You can request test funds from the [Rinkeby faucet](https://faucet.rinkeby.io/). 
 
 <aside class="notice">
-Always confirm that you are on Rinkeby testnet when testing our dApp.
+Always confirm that you are on Rinkeby testnet when testing the MPX.
 </aside>
+
+## Exchange
+Experience the power of blockchain derivatives trading with [MPX](https://mpexchange.io), our decentralized exchange (DEX) built on top of MARKET Protocol.
 
 ## Contract Deployment
 
 MARKET Protocol creates a flexible contract specification which allows users to easily implement
 their desired contract prior to trading.  First time users, can use our 
-[Guided Deploy](https://dapp.marketprotocol.io/contract/deploy?mode=guided) process
+[Guided Deploy](https://mpexchange.io/contract/deploy?mode=guided) process
 walking them through the step by step process to deployment.  Expert users, can opt for a more
-condensed process with the [Quick Deploy](https://dapp.marketprotocol.io/contract/deploy?mode=quick) 
+condensed process with the [Quick Deploy](https://mpexchange.io/contract/deploy?mode=quick) 
 
 ### Guided Deploy
 
@@ -85,23 +84,21 @@ Price Decimal Places | Since all numbers must be represented as integers on the 
 Qty Multiplier | The qty multiplier allows the user to specify how many base units (for ethereum, this would be wei) each integer price movement changes the value of the contract. If our integerized price was 19022 with a qty multiplier of 1, and the price moved to 19023, then the value will have change by 1 wei. If however the multiplier was set at 1,000,000,000 the price movement of 1 unit would now correspond to a value of 1 gwei (not wei)
 Expiration Time |  Expiration timestamp for all open positions to settle.
 Oraclize.it data source |  Available data sources from Oraclize.it
-Oraclize.it Query |  Properly structured Oraclize.it query, please use the [test query](http://dapp.marketprotocol.io/test) page for clarification
+Oraclize.it Query |  Properly structured Oraclize.it query, please use the [test query](http://mpexchange.io/test) page for clarification
 
 
 ## Explore Contracts
 
-MARKET Protocol's dApp provides the needed functionality to easily search, filter, and sort already deployed
+MARKET Protocol's dApp, MPX, provides the needed functionality to easily search, filter, and sort already deployed
 MARKET Smart Contracts.  
 
 ## Find Contracts
 
-The [Find Contracts](https://dapp.marketprotocol.io/contract/find) screen allows for a reverse lookup
+The [Find Contracts](https://mpexchange.io/contract/find) screen allows for a reverse lookup
 for MARKET Contracts using the ethereum address of the deployed contract.  Users can enter
-a known address, if valid, the dApp will display the current specifications of the MARKET Contract
+a known address, if valid, MPX will display the current specifications of the MARKET Contract
 deployed to this address.
 
 ## Test Query 
 
-## Simulated Exchange
 
-Coming soon...

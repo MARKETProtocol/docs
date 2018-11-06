@@ -10,23 +10,6 @@ Please, start reading about our:
 - [Development process](#development-process)
 - [Community guidelines](#community-guidelines)
 - [Coding style](https://docs.marketprotocol.io/#coding-style)
-- [Project board and GitHub labels](https://github.com/MARKETProtocol/community/blob/master/docs/project-management.md)
-
-## Dive Right In
-
-If you're ready to start helping us to build the decentralized future right now and you just need an issue to focus on, check out [this list of open issues](https://app.zenhub.com/workspace/o/marketprotocol/market.js/boards?repos=140627375,128025988,130496585,117898415,119072718,116695875,130494562,131598556,108304540,127038994,141709662,135627327,129016888&labels=help%20wanted&assignees=issues%20with%20no%20assignees&showPRs=false&showClosed=false).
-
-There are three main repositories that are considered as core components of the MARKET Protocol:
-
-- [MARKETProtocol](https://github.com/MARKETProtocol/MARKETProtocol) - the core protocol of solidity smart contracts
-- [MARKET.js](https://github.com/MARKETProtocol/MARKET.js) - library of tools to interact with the protocol
-- [dApp](https://github.com/MARKETProtocol/dApp) - React based dApp for contract creation, exploration, and simulated trading.
-
-Note that the `README` file of each one of these repositories has a helpful `Getting Started` section. Plus, you will find a `CONTRIBUTING.md` file with additional details in all of them as well.
-
-Remember to join our [Discord Community](https://marketprotocol.io/discord) to get in touch with our dev staff and other contributors. We will love to see you there.
-
-We appreciate your contribution and we hope you have lots of fun while working on MARKET Protocol!
 
 ## Development Process
 
@@ -63,10 +46,7 @@ according to the `CONTRIBUTING.md` file of each repository.
 
 Project | Link
 --------- |  -----------
-website | [website](https://github.com/MARKETProtocol/website/blob/develop/.github/CONTRIBUTING.md) 
-dApp | [dApp](https://github.com/MARKETProtocol/dApp/blob/develop/.github/CONTRIBUTING.md)
 MARKETProtocol | [MARKETProtocol](https://github.com/MARKETProtocol/MARKETProtocol/blob/develop/.github/CONTRIBUTING.md) 
-MARKET.js | [MARKET.js](https://github.com/MARKETProtocol/MARKET.js/blob/develop/.github/CONTRIBUTING.md) 
 
 ## Git Flow
 
@@ -167,16 +147,6 @@ Remember when you update an issue or respond to an email you are potentially sen
 Please consider this before you update. Also remember that nobody likes spam.
 
 Full code of conduct is posted available [here](https://github.com/MARKETProtocol/community/blob/master/guidelines/code-of-conduct.md).
-
-## Engineering Weekly
-
-Once a week, we all get together to talk about the project.
-
-In the Engineering Weekly meeting, the core engineering team and contributors check in to discuss the progress of the project, to call attention to particular items, to make announcements, or to seek discussion of a topic.
-
-Everyone is welcome! Check [details here](https://github.com/MARKETProtocol/community/blob/master/docs/engineering-weekly.md).
-
-And you can find the [notes from previous meetings here](https://github.com/MARKETProtocol/community/tree/master/meeting-notes).
 
 ## Community Improvement
 
