@@ -137,7 +137,7 @@ constructor(
 More information on forming correct queries can 
 be found in their [documentation](http://docs.oraclize.it/#ethereum-quick-start-simple-query).
 
-[MPX](https://dapp.marketprotocol.io) additionally has some help in formatting your queries correctly
+[MPX](https://mpexchange.io) additionally has some help in formatting your queries correctly
 and a test environment to ensure the queries are correct prior to contract deployment.
 
 ### Additional parameters 

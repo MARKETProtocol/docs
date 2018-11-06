@@ -3,7 +3,7 @@ title: MARKET Protocol
 
 toc_footers:
   - <a href='https://marketprotocol.io/'>Home</a>
-  - <a href='https://dapp.marketprotocol.io/'>MPX</a>
+  - <a href='https://mpexchange.io/'>MPX</a>
   - <a href='https://marketprotocol.io/assets/MARKET_Protocol-Whitepaper.pdf'>Whitepaper</a>
   - <a href='https://github.com/MARKETProtocol/'>GitHub</a>
 

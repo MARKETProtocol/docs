@@ -3,7 +3,7 @@
 The MARKET Protocol decentralized exchange, MPX, provides a simulated trading environment allows user to place 
 test trades and participate in beta releases of the protocol.
 
-Our MPX beta is currently running on the `Rinkeby testnet` [here](https://dapp.marketprotocol.io/).
+Our MPX beta is currently running on the `Rinkeby testnet` [here](https://mpexchange.io/).
 
 ## Using an Ethereum-enabled browser
 
@@ -20,13 +20,16 @@ You can request test funds from the [Rinkeby faucet](https://faucet.rinkeby.io/)
 Always confirm that you are on Rinkeby testnet when testing the MPX.
 </aside>
 
+## Exchange
+Experience the power of blockchain derivatives trading with [MPX](https://mpexchange.io), our decentralized exchange (DEX) built on top of MARKET Protocol.
+
 ## Contract Deployment
 
 MARKET Protocol creates a flexible contract specification which allows users to easily implement
 their desired contract prior to trading.  First time users, can use our 
-[Guided Deploy](https://dapp.marketprotocol.io/contract/deploy?mode=guided) process
+[Guided Deploy](https://mpexchange.io/contract/deploy?mode=guided) process
 walking them through the step by step process to deployment.  Expert users, can opt for a more
-condensed process with the [Quick Deploy](https://dapp.marketprotocol.io/contract/deploy?mode=quick) 
+condensed process with the [Quick Deploy](https://mpexchange.io/contract/deploy?mode=quick) 
 
 ### Guided Deploy
 
@@ -81,7 +84,7 @@ Price Decimal Places | Since all numbers must be represented as integers on the 
 Qty Multiplier | The qty multiplier allows the user to specify how many base units (for ethereum, this would be wei) each integer price movement changes the value of the contract. If our integerized price was 19022 with a qty multiplier of 1, and the price moved to 19023, then the value will have change by 1 wei. If however the multiplier was set at 1,000,000,000 the price movement of 1 unit would now correspond to a value of 1 gwei (not wei)
 Expiration Time |  Expiration timestamp for all open positions to settle.
 Oraclize.it data source |  Available data sources from Oraclize.it
-Oraclize.it Query |  Properly structured Oraclize.it query, please use the [test query](http://dapp.marketprotocol.io/test) page for clarification
+Oraclize.it Query |  Properly structured Oraclize.it query, please use the [test query](http://mpexchange.io/test) page for clarification
 
 
 ## Explore Contracts
@@ -91,13 +94,11 @@ MARKET Smart Contracts.
 
 ## Find Contracts
 
-The [Find Contracts](https://dapp.marketprotocol.io/contract/find) screen allows for a reverse lookup
+The [Find Contracts](https://mpexchange.io/contract/find) screen allows for a reverse lookup
 for MARKET Contracts using the ethereum address of the deployed contract.  Users can enter
 a known address, if valid, MPX will display the current specifications of the MARKET Contract
 deployed to this address.
 
 ## Test Query 
 
-## Simulated Exchange
 
-Coming soon...
