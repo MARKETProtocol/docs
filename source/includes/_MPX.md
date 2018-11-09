@@ -1,9 +1,9 @@
 # MPX
 
-The MARKET Protocol decentralized exchange, MPX, provides a simulated trading environment allows user to place 
+The MARKET Protocol decentralized exchange (MPX) provides a simulated trading environment that allows user to place 
 test trades and participate in beta releases of the protocol.
 
-Our MPX beta is currently running on the `Rinkeby testnet` [here](https://mpexchange.io/).
+MPX is currently running on the `Rinkeby testnet` [here](https://mpexchange.io/).
 
 ## Using an Ethereum-enabled browser
 
