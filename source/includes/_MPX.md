@@ -93,14 +93,3 @@ Oraclize.it Query |  Properly structured Oraclize.it query, please use the [test
 
 MARKET Protocol's dApp, MPX, provides the needed functionality to easily search, filter, and sort already deployed
 MARKET Smart Contracts.  
-
-## Find Contracts
-
-The [Find Contracts](https://mpexchange.io/contract/find) screen allows for a reverse lookup
-for MARKET Contracts using the ethereum address of the deployed contract.  Users can enter
-a known address, if valid, MPX will display the current specifications of the MARKET Contract
-deployed to this address.
-
-## Test Query 
-
-
