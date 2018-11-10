@@ -27,11 +27,12 @@ Experience the power of blockchain derivatives trading with [MPX](https://mpexch
 
 MARKET Protocol creates a flexible contract specification which allows users to easily implement
 their desired contract prior to trading.  First time users, can use our 
-[Guided Deploy](https://mpexchange.io/contract/deploy?mode=guided) process
-walking them through the step by step process to deployment.  Expert users, can opt for a more
-condensed process with the [Quick Deploy](https://mpexchange.io/contract/deploy?mode=quick) 
+[Simplified Deploy](https://mpexchange.io/contract/deploy?mode=simplified) process
+walking them through the step by step process to deployment. 
 
-### Guided Deploy
+<!--
+
+### Simplified Deploy
 
 MARKET Protocol Guided Deploy provides a step by step guide to first time deployment.  Below are the needed variables
 to deploy a contract to the Ethereum Blockchain
@@ -85,20 +86,10 @@ Qty Multiplier | The qty multiplier allows the user to specify how many base uni
 Expiration Time |  Expiration timestamp for all open positions to settle.
 Oraclize.it data source |  Available data sources from Oraclize.it
 Oraclize.it Query |  Properly structured Oraclize.it query, please use the [test query](http://mpexchange.io/test) page for clarification
+-->
 
 
 ## Explore Contracts
 
 MARKET Protocol's dApp, MPX, provides the needed functionality to easily search, filter, and sort already deployed
 MARKET Smart Contracts.  
-
-## Find Contracts
-
-The [Find Contracts](https://mpexchange.io/contract/find) screen allows for a reverse lookup
-for MARKET Contracts using the ethereum address of the deployed contract.  Users can enter
-a known address, if valid, MPX will display the current specifications of the MARKET Contract
-deployed to this address.
-
-## Test Query 
-
-

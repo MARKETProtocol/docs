@@ -3,11 +3,11 @@
 ## What is a derivative?
 A derivative represents a contract between a buyer and a seller. The value is derived from on an underlying asset or assets. Common derivatives use stocks, commodities, currencies, bonds, or interest rates as the underlying asset for the contract.
 ## Are you a decentralized exchange?
-No, MARKET is a protocol to enable the trading of decentralized derivative like contracts.  Third parties will write the application layers on top of the protocol and we hope to create an API layer to facilitate this as well. 
+MARKET Protocol is a protocol to enable the trading of decentralized derivatives.  MPX is the first decentralized exchange being built on top of the protocol.
 ## Who will host MARKET's order books?
 Third party order book hosts, called nodes will be provided with an API that easy allows them to host an order book.  Nodes, in turn may charge fees for the services they provide.  These fee's are not determined by MARKET and are set directly by the node.
-## Does MARKET charge a fee to use the protocol?
-MARKET doesn't charge any fees.  Nodes however may set a fee for their services of hosting order books.
+## Does MARKET Protocol charge a fee to use the protocol?
+MARKET Protocol doesn't charge any fees.  Exchanges built on top of the protocol may charge fees for their services.
 ## How is the needed collateral for an open position calculated?
 All positions are always fully collateralized, meaning the maximum possible loss for a position is the required amount of collateral to open that position. For a buyer, the maximum possible loss is calculated as the price of the trade minus the `PRICE_FLOOR` times the qty transacted.  Conversely, if you are opening a short position the maximum loss is calculated as `PRICE_CAP` minus the price of the trade, multiplied by the qty transacted.  Upon filling an order both parties commit their respective maximum loss to the collateral pool.
 ## If I want to open a short position do I need to borrow the asset?
