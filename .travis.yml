@@ -5,6 +5,9 @@ language: ruby
 rvm:
   - 2.3.3
 
+before_deploy:
+  - ./scripts/clean_bucket.sh
+
 cache: bundler
 script: bundle exec middleman build
 deploy:
