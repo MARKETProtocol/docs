@@ -13,6 +13,7 @@ includes:
   - faq-general
   - faq-market-protocol
   - faq-solidity
+  - faq-mpx
   - getting-help
   - contributing
   - bug-reporting
@@ -40,3 +41,4 @@ clearing and collateral pool infrastructure, enabling third parties to build app
 * [General FAQ](#faq-general)
 * [MARKET Protocol FAQ](#faq-market-protocol)
 * [Smart Contract FAQ](#faq-solidity-smart-contracts)
+* [MPX FAQ](#faq-mpx)

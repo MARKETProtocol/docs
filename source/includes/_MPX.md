@@ -23,6 +23,8 @@ Always confirm that you are on Rinkeby testnet when testing the MPX.
 ## Exchange
 Experience the power of blockchain derivatives trading with [MPX](https://mpexchange.io), our decentralized exchange (DEX) built on top of MARKET Protocol.
 
+[![MPX Walkthrough Video](https://img.youtube.com/vi/FrPh1H8tRsQ/0.jpg)](https://youtu.be/FrPh1H8tRsQ)
+
 ## Contract Deployment
 
 MARKET Protocol creates a flexible contract specification which allows users to easily implement
