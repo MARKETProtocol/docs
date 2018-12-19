@@ -36,6 +36,7 @@ Example: BTC_USD_BIN_1546293599_BETA
 
 ### How do I know when a contract expires?
 At the top of MPX, you will see the current selected contract. To the far right of the contract, you can view the expiration of that contract, as in the image below. The expiration of a contract can also be viewed in the contract explorer by searching for the contract.
+<img src="https://github.com/MARKETProtocol/docs/blob/master/source/images/exchange-navbar.png?raw=true" align="middle">
 
 ### How do I view the price floor and cap of a contract?
 At the top of MPX, you will see the current selected contract. To the right of the contract, you will see the price floor and cap of that contract, as in the image above. The price bounds of a contract can also be viewed in the contract explorer by searching for the contract.
