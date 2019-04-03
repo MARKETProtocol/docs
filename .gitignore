@@ -23,3 +23,5 @@ ignore_*.*
 _yardoc
 doc/
 .idea/
+
+.tool-versions

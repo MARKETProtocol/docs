@@ -7,8 +7,13 @@ toc_footers:
   - <a href='https://github.com/MARKETProtocol/'>GitHub</a>
 
 includes:
-  - smart-contracts  
+  - smart-contracts
   - MPX
+  - API
+  - API-authentication
+  - API-user
+  - API-endpoints
+  - API-data-types
   - faq-general
   - faq-market-protocol
   - faq-solidity
@@ -35,6 +40,7 @@ clearing and collateral pool infrastructure, enabling third parties to build app
 ## Documentation
 * [Smart Contracts](#solidity-smart-contracts): The underlying MARKET Protocol smart contracts
 * [MPX](#mpx): Decentralized exchange built on MARKET Protocol
+* [API](#api): Public JSON:API
 
 ## Frequently Asked Questions
 * [General FAQ](#faq-general)
