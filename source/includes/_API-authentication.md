@@ -4,7 +4,7 @@
 curl -X GET -k -H 'Authorization: Bearer [TOKEN]' -i 'https://api.mpexchange.io'
 ```
 
-The MARKETProtocol API uses JWT bearer tokens sent in the Authorization header for authenticating
+The MPX API uses JWT bearer tokens sent in the Authorization header for authenticating
 requests. Any ETH address can obtain a valid JWT without further registration.
 
 ## Obtain an unsigned token and nonce.
@@ -80,6 +80,6 @@ be used as a bearer token.
 
 Though it is possible to sign in and access the read only sections of the API with any ETH address,
 basic user information must be provided in order to create orders or otherwise trade. Please visit
-the [MARKETProtocol Exchange](https://mpexchange.io) and sign up for a user account using the ETH
+[MPX](https://mpexchange.io) and sign up for a user account using the ETH
 address you intend to use with the API. Until you do so, several of the endpoints described later
 in this documentation will return an unauthorized response.
