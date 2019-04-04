@@ -229,10 +229,10 @@ function mintPositionTokens(
 }
 ```
 
-At any time prior to expiration of the `Market Contract` a user may mint Position Tokens.  The minting process
+At any time prior to expiration of the `MarketContract` a user may mint Position Tokens.  The minting process
 requires users to create tokens in pairs, minting both a Long Position Token and a Short Position Token in equal 
 quantities.  The Position Tokens are ERC20 tokens are able to be transferred and traded on centralized or decentralized
-exchanges freely.  The required amount of collateral to mint a pair of tokens is always constant for given `Market Contract`.
+exchanges freely.  The required amount of collateral to mint a pair of tokens is always constant for given `MarketContract`.
 
 ### Calculating collateral per pair of tokens 
 
@@ -252,7 +252,7 @@ function calculateTotalCollateral(
 
 The amount of ERC20 collateral that is required to mint a pair of Position Tokens can be calculated by the taking the 
 difference of `priceCap` from the `priceFloor` multiplied by a `qtyMultiplier`.  All three of these variables are defined
-upon the deployment of a new `Market Contract`. This amount represents the entire possible range of trading outcomes at 
+upon the deployment of a new `MarketContract`. This amount represents the entire possible range of trading outcomes at 
 settlement.  A pair of Long and Short Position Tokens will always be worth this amount, and in fact can be redeemed
 for that amount at any time.  For every unit of collateral that the Long Position Token may gain, the Short Position
 Token by definition will lose.  In this way the pair of tokens is always zero-sum and a holder of both of these tokens 
