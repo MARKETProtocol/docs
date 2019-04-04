@@ -204,7 +204,7 @@ Authenticated users can also create new orders and delete (cancel) their own ord
 cancellation must also take place on chain to ensure an order is no longer able to be filled, but a
 call to here will remove it from our orderbooks.
 
-_NOTE: To create a user, please visit the [MARKETProtocol Exchange](https://mpexchange.io) and
+_NOTE: To create a user, please visit [MPX](https://mpexchange.io) and
 follow the registration process._
 
 ## /settings

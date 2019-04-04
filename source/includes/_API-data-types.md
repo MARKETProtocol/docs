@@ -22,7 +22,7 @@ A string value representing a number. These values should be in quotation marks.
 ## string
 
 ```javacript
-"Thank you for using MARKETProtocol"
+"Thank you for using MARKET Protocol"
 ```
 
 Any non-numeric string value. Any character in the UTF-8 character set is acceptable. These values
