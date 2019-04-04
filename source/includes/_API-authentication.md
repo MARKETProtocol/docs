@@ -76,3 +76,10 @@ The resulting response will include your valid JWT bearer token in at the JSON p
 valid for use as an Authorization bearer token. Only the token returned from the second request can
 be used as a bearer token.
 
+## First time authentication
+
+Though it is possible to sign in and access the read only sections of the API with any ETH address,
+basic user information must be provided in order to create orders or otherwise trade. Please visit
+the [MARKETProtocol Exchange](https://mpexchange.io) and sign up for a user account using the ETH
+address you intend to use with the API. Until you do so, several of the endpoints described later
+in this documentation will return an unauthorized response.

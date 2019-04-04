@@ -92,54 +92,6 @@ Provides a list of fills. Individual fills can be queried via the show endpoint.
 Allows for the creation of JWT tokens. See more in the [Authentication](#api-authentication)
 section of this documentation.
 
-## /me
-
-```json
-    ,
-    "me": {
-      "href": "http://api.mpexchange.io/me",
-      "meta": {
-        "actions": ["create", "show"],
-        "description": "...",
-        "methods": ["GET", "POST"],
-        "template": {
-          "email-address": {
-            "required": true,
-            "type": "string"
-          },
-          "first-name": {
-            "required": true,
-            "type": "string"
-          },
-          "last-name": {
-            "required": true,
-            "type": "string"
-          },
-          "has-accepted-terms-and-conditions": {
-            "required": true,
-            "type": "boolean"
-          },
-          "has-confirmed-not-sanctioned": {
-            "required": true,
-            "type": "boolean"
-          },
-          "has-confirmed-not-us-citizen": {
-            "required": true,
-            "type": "boolean"
-          },
-          "terms-and-condition-hash": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-```
-
-Returns the current user or allows one to be created. For more information view the
-[User Accounts](#api-user-accounts) section of this documentation.
-
-
 ## /orderbooks
 
 ```json
@@ -251,6 +203,9 @@ Returns a list of all orders. Individual orders can be retrieved via the show en
 Authenticated users can also create new orders and delete (cancel) their own orders. The
 cancellation must also take place on chain to ensure an order is no longer able to be filled, but a
 call to here will remove it from our orderbooks.
+
+_NOTE: To create a user, please visit the [MARKETProtocol Exchange](https://mpexchange.io) and
+follow the registration process._
 
 ## /settings
 

@@ -11,7 +11,6 @@ includes:
   - MPX
   - API
   - API-authentication
-  - API-user
   - API-endpoints
   - API-data-types
   - faq-general
