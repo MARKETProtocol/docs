@@ -248,6 +248,33 @@ Returns a list of system wide settings.
 
 Provides a list of all Token Pairs being traded on the platform.
 
+## /user_settings
+
+```json
+    "user_settings": {
+      "href": "http://localhost:5001/user_settings",
+      "meta": {
+        "actions": [
+          "show",
+          "update"
+        ],
+        "description": "...",
+        "methods": [
+          "GET",
+          "PATCH",
+          "PUT"
+        ]
+      },
+      "template": {
+        "default-gas": {
+          "required": true,
+          "type": "string"
+        }
+      }
+    },
+```
+
+User configurable settings
 
 ```json
     "self": {
