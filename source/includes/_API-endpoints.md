@@ -268,7 +268,7 @@ Provides a list of all Token Pairs being traded on the platform.
       "template": {
         "default-gas": {
           "required": true,
-          "type": "string"
+          "type": "slow|average|fast"
         }
       }
     },
