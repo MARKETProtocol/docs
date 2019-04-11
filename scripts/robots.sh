@@ -4,11 +4,11 @@
 set -euo pipefail;
 IFS=$'\n\t';
 
-echo "NODE_ENV_DOC: $NODE_ENV_DOC";
+echo "ENV_DOC: $ENV_DOC";
 
 ## create the robots file
 # http://www.robotstxt.org/robotstxt.html
-if [ "$NODE_ENV_DOC" = 'production' ]; then
+if [ "$ENV_DOC" = 'production' ]; then
 # configure production, all access
 tee ./build/robots.txt >/dev/null <<-'ENDOFTXT'
   User-agent: *
