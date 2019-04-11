@@ -5,7 +5,16 @@ language: ruby
 rvm:
   - 2.3.3
 
+before_install:
+  - |
+    export NODE_ENV_DOC=development;
+    if [ "$TRAVIS_BRANCH" = "master" ]; then
+      export NODE_ENV_DOC=production;
+    fi
+    echo "NODE_ENV_DOC: $NODE_ENV_DOC";
+
 before_deploy:
+  - ./scripts/robots.sh
   - pip install --user awscli  
   - ./scripts/clean_bucket.sh
 
