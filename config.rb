@@ -41,11 +41,11 @@ activate :relative_assets
 set :relative_links, true
 
 # Generate robots.txt
-activate :robots,
-  rules: [
-    { user_agent: '*', disallow: %w() }
-  ],
-  sitemap: 'https://marketprotocol.io/docs_sitemap.xml'
+#activate :robots,
+#  rules: [
+#    { user_agent: '*', disallow: %w() }
+#  ],
+#  sitemap: 'https://marketprotocol.io/docs_sitemap.xml'
 
 # Build Configuration
 configure :build do

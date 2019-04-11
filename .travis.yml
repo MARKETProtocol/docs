@@ -7,11 +7,11 @@ rvm:
 
 before_install:
   - |
-    export NODE_ENV_DOC=development;
-    if [ "$TRAVIS_BRANCH" = "master" ]; then
-      export NODE_ENV_DOC=production;
+    export ENV_DOC=development;
+    if [ "$TRAVIS_BRANCH" = "master" ] || [ -n "$TRAVIS_TAG" ]; then
+      export ENV_DOC=production;
     fi
-    echo "NODE_ENV_DOC: $NODE_ENV_DOC";
+    echo "ENV_DOC: $ENV_DOC";
 
 before_deploy:
   - ./scripts/robots.sh
