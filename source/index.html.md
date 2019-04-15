@@ -22,7 +22,7 @@ search: true
 
 # Introduction
 
-Welcome to MARKET Protocol documentation here you will find documentation for our smart contracts and APIs.
+Welcome to the MARKET Protocol documentation! Here you will find documentation for our smart contracts and APIs.
 
 MARKET Protocol has been created to provide a secure, flexible, open source foundation for decentralized trading on the
 Ethereum blockchain. We provide the pieces necessary to create a decentralized exchange, including the requisite
@@ -38,7 +38,6 @@ clearing and collateral pool infrastructure, enabling third parties to build app
 * [API](#api): Public JSON:API
 
 ## Frequently Asked Questions
-* [General FAQ](#faq-general)
-* [MARKET Protocol FAQ](#faq-market-protocol)
-* [Smart Contract FAQ](#faq-solidity-smart-contracts)
-* [MPX FAQ](#faq-mpx)
+* [General FAQ](#frequently-asked-questions)
+* [Smart Contract FAQ](#solidity-smart-contracts)
+* [MPX FAQ](#mpx)

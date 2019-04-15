@@ -3,9 +3,9 @@
 Want to hack on MARKET Protocol? Awesome!
 
 MARKET Protocol is an Open Source project and we welcome contributions of all sorts.
-There are many ways to help, from reporting issues, contributing code, and helping us improve our community.
+There are many ways to help, from reporting issues, contributing code, to helping us improve our community.
 
-Please, start reading about our:
+Please start by reading about our:
 
 - [Development process](#development-process)
 - [Community guidelines](#community-guidelines)
@@ -16,7 +16,7 @@ Please, start reading about our:
 We follow the [GitFlow](http://nvie.com/posts/a-successful-git-branching-model/) branching model for development.
 The latest merged code generally lives in the `develop` branch of each repository. Your development flow should look like:
 
-1. Find an interesting issue and communicate! Please let the #engineering Discord channel know what you want to work on
+1. Find an interesting issue and communicate! Please let the `#engineering` Discord channel know what you want to work on
 1. Add a comment to the issue so we don't have multiple contributors unintentionally working on the same task.
 1. Please include your intended solution and a time frame for completion in the issue.
 1. Start with the `develop` branch and create a new feature branch
@@ -33,11 +33,11 @@ on an issue, and there isn't one yet, please reach out on [Discord](https://mark
 
 There are a few guidelines when using Gitcoin that are worth mentioning
 
-1. Please only `start work` on an issue when your actually planning on working on it. Don't call dibs before you can allocate time to the issue
+1. Please only `start work` on an issue when you are actually planning on working on it. Don't call dibs before you can allocate time to the issue
 1. Please make sure to comment in the issue immediately after starting work so we know your plans for implementation and a timeline.
 1. We politely ask that users only have open work on a single bounty at a time, if you have an open bounty that has a PR submitted and would like to tackle another issue, please ask in [Discord](https://marketprotocol.io/discord) before proceeding
 1. We will do our best to scope out the issue, but please anticipate some revision requested after you have submitted a PR, we are happy to tip you if these end up well beyond the initial scope
-1. Once you have create a PR, please `submit work` on Gitcoin so we are able to pay you out once we have accepted the work
+1. Once you have created a PR, please `submit work` on Gitcoin so we are able to pay you out once we have accepted the work
 
 ## Coding Style
 
@@ -155,7 +155,7 @@ MARKET Protocol is just as much about community as it is about our technology.
 We need constant help in improving our documentation, building new tools to interface with our platform,
 spreading the word to new users, helping new users getting setup and much more.
 
-Please get in touch if you would like to help out. Our `general` channel on [Discord](https://marketprotocol.io/discord) is a great place to
+Please get in touch if you would like to help out. Our `#general` channel on [Discord](https://marketprotocol.io/discord) is a great place to
 share ideas and volunteer to help.
 
 ## Full Time Positions
