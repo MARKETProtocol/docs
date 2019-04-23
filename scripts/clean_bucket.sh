@@ -8,7 +8,7 @@ then
   eval export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_DEV
   eval export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_DEV
   aws s3 rm s3://dev.docs.marketprotocol.io --recursive
-elif [[ -v TRAVIS_TAG ]]
+elif [ -n "$TRAVIS_TAG" ]
 then
   echo "Invalidating CloudFront Cache"
   aws configure set preview.cloudfront true
