@@ -10,13 +10,13 @@ requests. Any ETH address can obtain a valid JWT without further registration.
 ## Obtain an unsigned token and nonce.
 
 ```bash
-curl -X GET -k -i 'https://api.mpexchange.io/json_web_tokens/0x2846A3E4c616F652DEA0140Cfda189363E64f07f'
+curl -X GET -k -i 'https://api.mpexchange.io/json_web_tokens/0x2846a3e4c616f652cda0140ceda189363e64e55e'
 ```
 ```json
 {
   "data": {
     "type": "json-web-tokens",
-    "id": "0x2846a3e4c616f652dea0140cfda189363e64f07f",
+    "id": "0x2846a3e4c616f652cda0140ceda189363e64e55e",
     "attributes": {
       "nonce": "5c45b580-b1a1-4d42-89c3-34b164c4c242",
       "signature": null,
@@ -34,10 +34,10 @@ Begin by requesting an unsigned token and nonce from the `GET /json_web_tokens/:
 ## Sign the nonce
 
 ```bash
-curl -X PUT -k -i 'https://api.mpexchange.io/json_web_tokens/0x2846A3E4c616F652DEA0140Cfda189363E64f07f' --data '{
+curl -X PUT -k -i 'https://api.mpexchange.io/json_web_tokens/0x2846a3e4c616f652cda0140ceda189363e64e55e' --data '{
   "data": {
     "type": "json-web-tokens",
-    "id": "0x2846a3e4c616f652dea0140cfda189363e64f07f",
+    "id": "0x2846a3e4c616f652cda0140ceda189363e64e55e",
     "attributes": {
       "nonce": "5c45b580-b1a1-4d42-89c3-34b164c4c242",
       "signature": "0x9c8df72254b38f8a6ab5107b5e977...",
@@ -51,7 +51,7 @@ curl -X PUT -k -i 'https://api.mpexchange.io/json_web_tokens/0x2846A3E4c616F652D
 {
   "data": {
     "type": "json-web-tokens",
-    "id": "0x2846a3e4c616f652dea0140cfda189363e64f07f",
+    "id": "0x2846a3e4c616f652cda0140ceda189363e64e55e",
     "attributes": {
       "nonce": "5c45b580-b1a1-4d42-89c3-34b164c4c242",
       "signature": "0x9c8df72254b38f8a6ab5107b5e977...",
