@@ -13,6 +13,7 @@ includes:
   - API-authentication
   - API-endpoints
   - API-data-types
+  - faq
   - getting-help
   - contributing
   - bug-reporting
@@ -36,8 +37,3 @@ clearing and collateral pool infrastructure, enabling third parties to build app
 * [Smart Contracts](#solidity-smart-contracts): The underlying MARKET Protocol smart contracts
 * [MPX](#mpx): Decentralized exchange built on MARKET Protocol
 * [API](#api): Public JSON:API
-
-## Frequently Asked Questions
-* [General FAQ](#frequently-asked-questions)
-* [Smart Contract FAQ](#solidity-smart-contracts)
-* [MPX FAQ](#mpx)

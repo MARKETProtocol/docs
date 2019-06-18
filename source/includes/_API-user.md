@@ -38,10 +38,6 @@ curl -X GET -k -H 'Authorization: Bearer [TOKEN]' -i 'https://api.mpexchange.io/
         "required": true,
         "type": "string"
       },
-      "has-accepted-terms-and-conditions": {
-        "required": true,
-        "type": "boolean"
-      },
       "has-confirmed-not-sanctioned": {
         "required": true,
         "type": "boolean"
@@ -78,9 +74,8 @@ curl -X POST -k -H 'Authorization: Bearer [TOKEN]' -i 'https://api.mpexchange.io
       "first-name": "First",
       "last-name": "Last",
       "has-accepted-terms-and-conditions": true,
-      "has-confirmed-not-sanctioned": true,
       "has-confirmed-not-us-citizen": true,
-      "terms-and-conditions-hash": "1.0"
+      "terms-and-condition-hash": "1.0"
     }
   }
 }'
@@ -98,13 +93,16 @@ as the request body.
 {
   "data": {
     "type": "users",
-    "id": "0x2846a3e4c616f652dea0140cfda189363e64f07f",
+    "id": "0x2846a3e4c616f652cda0140ceda189363e64e55e",
     "attributes": {
       "email-address": "user@marketprotocol.io",
-      "eth-address": "0x2846a3e4c616f652dea0140cfda189363e64f07f",
+      "eth-address": "0x2846a3e4c616f652cda0140ceda189363e64e55e",
       "first-name": "First",
       "last-name": "Last",
-      "is-admin": false
+      "is-admin": false,
+      "is-email-confirmed": false,
+      "is-ky-ced": false,
+      "remaining-minting-limit": "18000"
     }
   },
   "jsonapi": {
